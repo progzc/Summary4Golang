@@ -1,4 +1,4 @@
-package go_bible
+package go_core_36
 
 import (
 	"fmt"
