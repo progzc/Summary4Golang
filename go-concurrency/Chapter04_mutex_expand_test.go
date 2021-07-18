@@ -85,8 +85,7 @@ func TestGetGoroutineCount(t *testing.T) {
 // Count 获取当前持有和等待这把锁的 goroutine 的总数
 func (m *Mutex) Count() int {
 	v := atomic.LoadInt32((*int32)(unsafe.Pointer(&m.Mutex))) // 获取state字段的值
-	v = v >> mutexWaiterShift                                 //得到等待者的数值
-	v = v + (v & mutexLocked)                                 //再加上锁持有者的数量，0或者1
+	v = v>>mutexWaiterShift + (v & mutexLocked)               //得到等待者的数值,再加上锁持有者的数量(0或者1)
 	return int(v)
 }
 
