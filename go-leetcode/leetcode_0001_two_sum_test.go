@@ -1,7 +1,6 @@
 package go_leetcode
 
 import (
-	"github.com/progzc/Summary4Golang/go-leetcode/util"
 	"reflect"
 	"testing"
 )
@@ -32,7 +31,7 @@ func TestTwoSum(t *testing.T) {
 	for _, test := range tests {
 		fact := twoSum(test.nums, test.target)
 		// util.SameIntSlice是无序的
-		if !util.SameIntSlice(fact, test.want) {
+		if !sameIntSlice(fact, test.want) {
 			t.Errorf("nums=%v,target=%d,want=%v,fact=%v",
 				test.nums, test.target, test.want, fact)
 		}
@@ -65,7 +64,7 @@ func TestTwoSum2(t *testing.T) {
 		fact := twoSum(test.nums, test.target)
 		// reflect.DeepEqual是有序的
 		if !reflect.DeepEqual(fact, test.want) {
-			t.Errorf("nums=%v,target=%d,want=%v,fact=%v",
+			t.Errorf("nums=%v,target=%d,want=%v,fact=%v\n",
 				test.nums, test.target, test.want, fact)
 		}
 	}
