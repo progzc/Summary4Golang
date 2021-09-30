@@ -1,7 +1,7 @@
-package util
+package go_leetcode
 
 // link:https://stackoverflow.com/questions/36000487/check-for-equality-on-slices-without-order
-func SameIntSlice(x, y []int) bool {
+func sameIntSlice(x, y []int) bool {
 	if len(x) != len(y) {
 		return false
 	}
