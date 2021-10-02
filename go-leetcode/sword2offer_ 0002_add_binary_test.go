@@ -32,7 +32,7 @@ func Test_sword2offer_0002_addBinary(t *testing.T) {
 	for _, test := range tests {
 		fact := sword2offer_0002_addBinaryMethod1(test.p.a, test.p.b)
 		if fact != test.want {
-			t.Errorf("params=%v,want=%T,fact=%T",
+			t.Errorf("params=%v,want=%v,fact=%v",
 				test.p, test.want, fact)
 		}
 	}
