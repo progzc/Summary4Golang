@@ -28,6 +28,12 @@ func Test_leetcode_0137_single_number_ii(t *testing.T) {
 			},
 			want: 99,
 		},
+		{
+			p: params{
+				nums: []int{-2, -2, 1, 1, 4, 1, 4, 4, -4, -2},
+			},
+			want: -4,
+		},
 	}
 	for _, test := range tests {
 		fact := leetcode_0137_single_number_ii_method4(test.p.nums)
@@ -88,16 +94,19 @@ func leetcode_0137_single_number_ii_method3(nums []int) int {
 // leetcode_0137_single_number_ii_method4 依次确定每一个二进制位
 // 时间复杂度: O(nlogC)
 // 空间复杂度: O(1)
+// 注意事项：使用int类型会导致部分用例不会通过
+// why?
+// res/total/num应该使用同一种数据类型int32或int64,但是不能使用int
 func leetcode_0137_single_number_ii_method4(nums []int) int {
-	res := 0
-	for i := 0; i < 32; i++ {
-		total := 0
+	res := int32(0)
+	for i := 0; i < 64; i++ {
+		total := int32(0)
 		for _, num := range nums {
-			total += num >> i & 1
+			total += int32(num) >> i & 1
 		}
 		if total%3 > 0 {
 			res |= 1 << i
 		}
 	}
-	return res
+	return int(res)
 }
