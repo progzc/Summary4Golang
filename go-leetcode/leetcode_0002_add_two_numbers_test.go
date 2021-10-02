@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestAddTwoNumbers(t *testing.T) {
+func Test_leetcode_0002_addTwoNumbers(t *testing.T) {
 	type params struct {
 		l1 []int
 		l2 []int
@@ -39,7 +39,7 @@ func TestAddTwoNumbers(t *testing.T) {
 	for _, test := range tests {
 		l1 := initListNode(test.p.l1)
 		l2 := initListNode(test.p.l2)
-		fact := listNode2Slice(addTwoNumbers(l1, l2))
+		fact := listNode2Slice(leetcode_0002_addTwoNumbers(l1, l2))
 		if !reflect.DeepEqual(fact, test.want) {
 			t.Errorf("params=%v,want=%v,fact=%v",
 				test.p, test.want, fact)
@@ -47,7 +47,7 @@ func TestAddTwoNumbers(t *testing.T) {
 	}
 }
 
-func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
+func leetcode_0002_addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	var tail, head *ListNode
 	carry := 0
 	for l1 != nil || l2 != nil {
