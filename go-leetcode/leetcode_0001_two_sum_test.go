@@ -6,7 +6,7 @@ import (
 )
 
 // go test -v -run=TwoSum$ leetcode_0001_two_sum_test.go
-func TestTwoSum(t *testing.T) {
+func Test_leetcode_0001_twoSum(t *testing.T) {
 	tests := []struct {
 		nums   []int
 		target int
@@ -29,7 +29,7 @@ func TestTwoSum(t *testing.T) {
 		},
 	}
 	for _, test := range tests {
-		fact := twoSum(test.nums, test.target)
+		fact := leetcode_0001_twoSum(test.nums, test.target)
 		// util.SameIntSlice是无序的
 		if !sameIntSlice(fact, test.want) {
 			t.Errorf("nums=%v,target=%d,want=%v,fact=%v",
@@ -38,7 +38,7 @@ func TestTwoSum(t *testing.T) {
 	}
 }
 
-func TestTwoSum2(t *testing.T) {
+func Test_leetcode_0001_twoSum2(t *testing.T) {
 	tests := []struct {
 		nums   []int
 		target int
@@ -61,7 +61,7 @@ func TestTwoSum2(t *testing.T) {
 		},
 	}
 	for _, test := range tests {
-		fact := twoSum(test.nums, test.target)
+		fact := leetcode_0001_twoSum(test.nums, test.target)
 		// reflect.DeepEqual是有序的
 		if !reflect.DeepEqual(fact, test.want) {
 			t.Errorf("nums=%v,target=%d,want=%v,fact=%v\n",
@@ -70,7 +70,7 @@ func TestTwoSum2(t *testing.T) {
 	}
 }
 
-func twoSum(nums []int, target int) []int {
+func leetcode_0001_twoSum(nums []int, target int) []int {
 	hashTable := map[int]int{}
 	for i, num := range nums {
 		if p, ok := hashTable[target-num]; ok {
