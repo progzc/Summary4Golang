@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestCountBits(t *testing.T) {
+func Test_sword2offer_0003_countBits(t *testing.T) {
 	type params struct {
 		n int
 	}
@@ -28,7 +28,7 @@ func TestCountBits(t *testing.T) {
 		},
 	}
 	for _, test := range tests {
-		fact := countBitsMethod3(test.p.n)
+		fact := sword2offer_0003_countBitsMethod3(test.p.n)
 		if !reflect.DeepEqual(test.want, fact) {
 			t.Errorf("params=%v,want=%v,fact=%v",
 				test.p, test.want, fact)
@@ -36,10 +36,10 @@ func TestCountBits(t *testing.T) {
 	}
 }
 
-// countBitsMethod4 位运算
+// sword2offer_0003_countBitsMethod4 位运算
 // 时间复杂度: O(n)
 // 空间复杂度: O(n)
-func countBitsMethod4(n int) []int {
+func sword2offer_0003_countBitsMethod4(n int) []int {
 	res := make([]int, n+1)
 	// 注意迭代从1开始
 	for i := 1; i <= n; i++ {
@@ -50,10 +50,10 @@ func countBitsMethod4(n int) []int {
 	return res
 }
 
-// countBitsMethod3 分奇偶讨论
+// sword2offer_0003_countBitsMethod3 分奇偶讨论
 // 时间复杂度: O(n)
 // 空间复杂度: O(n)
-func countBitsMethod3(n int) []int {
+func sword2offer_0003_countBitsMethod3(n int) []int {
 	res := make([]int, n+1)
 	for i := 0; i <= n; i++ {
 		if i%2 == 0 {
@@ -67,10 +67,10 @@ func countBitsMethod3(n int) []int {
 	return res
 }
 
-// countBitsMethod2 标准库调用
+// sword2offer_0003_countBitsMethod2 标准库调用
 // 时间复杂度: O(n)
 // 空间复杂度: O(n)
-func countBitsMethod2(n int) []int {
+func sword2offer_0003_countBitsMethod2(n int) []int {
 	res := make([]int, n+1)
 	for i := 0; i <= n; i++ {
 		res[i] = bits.OnesCount(uint(i))
@@ -78,10 +78,10 @@ func countBitsMethod2(n int) []int {
 	return res
 }
 
-// countBitsMethod1 常规计算方法
+// sword2offer_0003_countBitsMethod1 常规计算方法
 // 时间复杂度: O(n*31)
 // 空间复杂度: O(n)
-func countBitsMethod1(n int) []int {
+func sword2offer_0003_countBitsMethod1(n int) []int {
 	var res []int
 	for i := 0; i <= n; i++ {
 		c := 0
