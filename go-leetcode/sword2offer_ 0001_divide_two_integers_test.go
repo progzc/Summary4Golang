@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestDivide(t *testing.T) {
+func Test_sword2offer_0001_divide(t *testing.T) {
 	type params struct {
 		a int
 		b int
@@ -44,7 +44,7 @@ func TestDivide(t *testing.T) {
 		},
 	}
 	for _, test := range tests {
-		fact := divide(test.p.a, test.p.b)
+		fact := sword2offer_0001_divide(test.p.a, test.p.b)
 		if fact != test.want {
 			t.Errorf("params=%v,want=%d,fact=%d",
 				test.p, test.want, fact)
@@ -52,7 +52,7 @@ func TestDivide(t *testing.T) {
 	}
 }
 
-func divide(a int, b int) int {
+func sword2offer_0001_divide(a int, b int) int {
 	if a == math.MinInt32 && b == -1 {
 		return math.MaxInt32
 	}
