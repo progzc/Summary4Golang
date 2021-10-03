@@ -29,7 +29,7 @@ func Test_leetcode_0136_singleNumber(t *testing.T) {
 	for _, test := range tests {
 		fact := leetcode_0136_singleNumber(test.p.nums)
 		if fact != test.want {
-			t.Errorf("params=%v,want=%T,fact=%T",
+			t.Errorf("params=%v,want=%v,fact=%v",
 				test.p, test.want, fact)
 		}
 	}
