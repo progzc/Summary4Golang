@@ -51,7 +51,7 @@ func sword2offer_0002_addBinaryMethod1(a string, b string) string {
 			carry += int(a[lenA-i-1] - '0')
 		}
 		if i < lenB {
-			carry += int(b[lenA-i-1] - '0')
+			carry += int(b[lenB-i-1] - '0')
 		}
 		ans = strconv.Itoa(carry%2) + ans
 		carry /= 2
