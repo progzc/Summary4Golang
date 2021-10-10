@@ -8,6 +8,8 @@ import (
 func TestMistake_051(t *testing.T) {
 	wrong051()
 	right051_1()
+	right051_2()
+	right051_3()
 }
 
 func wrong051() {
