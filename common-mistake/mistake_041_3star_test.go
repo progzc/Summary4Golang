@@ -10,6 +10,8 @@ import (
 func TestMistake_041(t *testing.T) {
 	wrong041()
 	right041_1()
+	right041_2()
+	right041_3()
 }
 
 func wrong041() {
