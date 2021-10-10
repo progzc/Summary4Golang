@@ -14,9 +14,12 @@
 - 《Concurrency-in-Go》：https://s1.phpcasts.org/Concurrency-in-Go_Tools-and-Techniques-for-Developers.pdf
 - 池化技术syn.Pool：github.com/fatih/pool
 
-## 编码规范
+## 4.编码规范
 - Go Code Review Comments：https://github.com/golang/go/wiki/CodeReviewComments
 - Uber Go Style Guide：https://github.com/uber-go/guide/blob/master/style.md
 - CommonMistakes：https://github.com/golang/go/wiki/CommonMistakes
 - Effective go：https://golang.google.cn/doc/effective_go
 - 专有名词：https://github.com/golang/lint/blob/738671d3881b9731cc63024d5d88cf28db875626/lint.go#L770
+
+## 5.经验总结
+- golang开发中的常见错误：http://devs.cloudimmunity.com/gotchas-and-common-mistakes-in-go-golang/
