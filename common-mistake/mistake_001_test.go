@@ -5,6 +5,8 @@ import (
 	"testing"
 )
 
+// Golang中可能会踩的50个坑：https://segmentfault.com/a/1190000013739000
+
 // 左大括号 { 不能单独放一行
 // 在其他大多数语言中，{ 的位置你自行决定。
 // Go 比较特别，遵守分号注入规则（automatic semicolon injection）：
