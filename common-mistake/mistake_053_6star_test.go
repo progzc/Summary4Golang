@@ -14,6 +14,8 @@ import (
 func TestMistake_053(t *testing.T) {
 	wrong053_1()
 	right053_1()
+	right053_2()
+	right053_3()
 }
 
 // (1) 如果 map 一个字段的值是 struct 类型，则无法直接更新该 struct 的单个字段
