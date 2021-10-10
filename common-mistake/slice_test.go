@@ -17,3 +17,14 @@ func TestSlice(t *testing.T) {
 	fmt.Println(s2, s2 == nil, string(b2))
 	fmt.Println(s3, s3 == nil, string(b3))
 }
+
+func TestSlice2(t *testing.T) {
+	ss := []string{"a", "b", "c"}
+	for s := range ss {
+		fmt.Println(s) // 0 1 2
+	}
+
+	for _, s := range ss {
+		fmt.Println(s) // a b c
+	}
+}
