@@ -4,6 +4,8 @@ package leetcode_0046_permutations
 // link: https://leetcode-cn.com/problems/permutations/
 
 // permute 回溯
+// 时间复杂度 O(n*n!)
+// 空间复杂度 O(n*n!)
 func permute(nums []int) [][]int {
 	var ans [][]int
 	n := len(nums)
