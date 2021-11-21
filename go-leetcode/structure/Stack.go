@@ -22,6 +22,10 @@ func (s *Stack) Pop() int {
 	return res
 }
 
+func (s *Stack) Peek() int {
+	return s.nums[len(s.nums)-1]
+}
+
 // Len 返回 s 的长度
 func (s *Stack) Len() int {
 	return len(s.nums)
