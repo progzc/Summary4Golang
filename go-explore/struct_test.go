@@ -5,6 +5,9 @@ import (
 	"testing"
 )
 
+// https://eddycjy.com/posts/go/go-empty-struct/ 用 Go struct 不能犯的一个低级错误！
+// https://blog.csdn.net/EDDYCJY/article/details/115327544 手撕 Go 面试官：Go 结构体是否可以比较，为什么？
+
 type People struct{}
 
 func TestStruct_1(t *testing.T) {
