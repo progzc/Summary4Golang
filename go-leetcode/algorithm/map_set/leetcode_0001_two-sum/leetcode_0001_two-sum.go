@@ -9,8 +9,7 @@ package leetcode_0001_two_sum
 func twoSum(nums []int, target int) []int {
 	m := map[int]int{}
 	for i, num := range nums {
-		f := target - nums[i]
-		if v, ok := m[f]; ok {
+		if v, ok := m[target-num]; ok {
 			return []int{i, v}
 		}
 		m[num] = i
