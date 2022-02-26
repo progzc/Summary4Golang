@@ -18,7 +18,7 @@ func isValid(s string) bool {
 	}
 	stack := []byte{}
 	for i := 0; i < n; i++ {
-		if pairMap[s[i]] > 0 {
+		if _, ok := pairMap[s[i]]; ok {
 			if len(stack) == 0 || stack[len(stack)-1] != pairMap[s[i]] {
 				return false
 			}
