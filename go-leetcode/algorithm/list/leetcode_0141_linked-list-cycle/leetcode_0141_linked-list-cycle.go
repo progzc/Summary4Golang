@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-// 141. 环形链表
+// 141. 判断链表是否有环
 // https://leetcode-cn.com/problems/linked-list-cycle/
 
 type ListNode struct {
