@@ -11,6 +11,7 @@ type ListNode struct {
 // reverseList_1 迭代
 // 时间复杂度: O(n)
 // 空间复杂度: O(1)
+// 思路：使用 当前节点 及 前驱节点
 func reverseList_1(head *ListNode) *ListNode {
 	var pre *ListNode
 	cur := head
@@ -26,6 +27,7 @@ func reverseList_1(head *ListNode) *ListNode {
 // reverseList_2 递归
 // 时间复杂度: O(n)
 // 空间复杂度: O(n)
+// 思路：画图
 func reverseList_2(head *ListNode) *ListNode {
 	if head == nil || head.Next == nil {
 		return head
