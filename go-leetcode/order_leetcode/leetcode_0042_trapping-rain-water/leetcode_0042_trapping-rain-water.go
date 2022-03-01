@@ -1,6 +1,8 @@
 package leetcode_0042_trapping_rain_water
 
-import "github.com/progzc/Summary4Golang/go-leetcode/structures"
+import (
+	structures2 "github.com/progzc/Summary4Golang/go-leetcode/order_leetcode/structures"
+)
 
 // 42. 接雨水
 // link: https://leetcode-cn.com/problems/trapping-rain-water/
@@ -55,7 +57,7 @@ func trap2(height []int) int {
 // 空间复杂度 O(n)
 func trap3(height []int) int {
 	ans, current := 0, 0
-	stack := structures.NewStack()
+	stack := structures2.NewStack()
 	for current < len(height) {
 		for !stack.IsEmpty() && height[current] > height[stack.Peek()] {
 			top := stack.Pop()

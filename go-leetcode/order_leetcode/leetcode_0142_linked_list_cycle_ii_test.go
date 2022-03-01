@@ -1,4 +1,4 @@
-package go_leetcode
+package order_leetcode
 
 // leetcode_0142_detectCycle_method2 快慢指针
 // 时间复杂度: O(n)

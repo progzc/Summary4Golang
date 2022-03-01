@@ -1,4 +1,4 @@
-package go_leetcode
+package order_leetcode
 
 // link:https://stackoverflow.com/questions/36000487/check-for-equality-on-slices-without-order
 func sameIntSlice(x, y []int) bool {
