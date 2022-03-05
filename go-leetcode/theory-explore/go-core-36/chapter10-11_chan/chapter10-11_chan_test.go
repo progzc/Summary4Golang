@@ -246,7 +246,6 @@ func getChan(i int) chan int {
 // TestChan_6 思考题1
 // Q:如果在select语句中发现某个通道已关闭，那么应该怎样屏蔽掉它所在的分支？
 // A:发现某个channel被关闭后，为了防止再次进入这个分支，可以把这个channel重新赋值成为一个长度为0的非缓冲通道，这样这个case就一直被阻塞了
-// A：
 func TestChan_6(t *testing.T) {
 	ch1 := make(chan int, 1)
 	for {
