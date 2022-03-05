@@ -22,6 +22,8 @@ import (
 //	     又比如，动态任务池（多层的通道）+ 动态 goroutine 池（可由前述的那个令牌方案演化而来）。等等
 // (4)Q:怎么控制P的数量?
 //    A:runtime.GOMAXPROCS(maxProcs)
+// (5)Q:runtime包中提供了哪些与模型三要素 G、P 和 M 相关的函数?
+//    A:https://golang.google.cn/pkg/runtime/
 func TestExec_1(t *testing.T) {
 	for i := 0; i < 10; i++ {
 		// 会异步并发执行
