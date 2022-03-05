@@ -64,6 +64,9 @@ import (
 //	  A:go test命令可以接受-cover标记。该标记的作用就是开启测试覆盖度分析。
 //	    不过，由于覆盖度分析开启之后go test命令可能会在程序被编译之前注释掉一部分源代码，
 //	    所以，若程序编译或测试失败，那么错误报告可能会记录下与原始的源代码不对应的行号。
+//      示例:
+//			go test -coverprofile=xxxx.out 	输出覆盖率的out文件，
+//			go tool cover -html=xxxx.out 	该命令将out文件转换成Html形式
 func TestTest_1(t *testing.T) {
 
 }
