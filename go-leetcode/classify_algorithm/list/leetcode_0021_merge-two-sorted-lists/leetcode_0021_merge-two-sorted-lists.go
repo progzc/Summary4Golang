@@ -10,7 +10,7 @@ type ListNode struct {
 
 // mergeTwoLists_1 递归
 // 时间复杂度: O(n)
-// 空间复杂度: O(n)
+// 空间复杂度: O(1)
 func mergeTwoLists_1(list1 *ListNode, list2 *ListNode) *ListNode {
 	if list1 == nil {
 		return list2
@@ -23,4 +23,28 @@ func mergeTwoLists_1(list1 *ListNode, list2 *ListNode) *ListNode {
 		list2.Next = mergeTwoLists_1(list1, list2.Next)
 		return list2
 	}
+}
+
+// mergeTwoLists_2 迭代
+// 时间复杂度: O(n)
+// 空间复杂度: O(1)
+func mergeTwoLists_2(list1 *ListNode, list2 *ListNode) *ListNode {
+	prev := new(ListNode)
+	sentry := prev
+	for list1 != nil && list2 != nil {
+		if list1.Val < list2.Val {
+			prev.Next = list1
+			list1 = list1.Next
+		} else {
+			prev.Next = list2
+			list2 = list2.Next
+		}
+		prev = prev.Next
+	}
+	if list1 == nil {
+		prev.Next = list2
+	} else {
+		prev.Next = list1
+	}
+	return sentry.Next
 }
