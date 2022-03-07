@@ -8,6 +8,10 @@ import (
 	"time"
 )
 
+// 推荐的两篇博客:
+// https://blog.golang.org/pipelines
+// https://blog.golang.org/context
+
 // TestContext_1
 // (1)总结常见的几种并发模式:
 //	a.channel
