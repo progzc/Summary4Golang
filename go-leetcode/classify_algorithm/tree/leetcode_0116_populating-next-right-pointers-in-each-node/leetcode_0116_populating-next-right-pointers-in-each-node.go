@@ -44,3 +44,5 @@ func connect(root *Node) *Node {
 	}
 	return root
 }
+
+// TODO 尝试空间复杂度O(1)的解法
