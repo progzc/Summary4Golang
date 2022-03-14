@@ -7,6 +7,8 @@ import (
 	"unsafe"
 )
 
+// https://docs.hacknode.org/gopl-zh/ch13/ch13-01.html
+
 func TestUnsafePrint1_0(t *testing.T) {
 	type Number struct {
 		L bool
