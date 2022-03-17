@@ -23,3 +23,6 @@
 
 ## 5.经验总结
 - golang开发中的常见错误：http://devs.cloudimmunity.com/gotchas-and-common-mistakes-in-go-golang/
+
+## 6.优质的库
+- https://github.com/guonaihong/gout
