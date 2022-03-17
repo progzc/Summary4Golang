@@ -14,16 +14,21 @@ func subsetsWithDup(nums []int) [][]int {
 	sort.Ints(nums)
 	for mask := 0; mask < 1<<n; mask++ {
 		set := []int{}
+		flag := true
 		for i, num := range nums {
 			if mask&(1<<i) > 0 {
 				// 对于当前选择的数x，若前面有与其相同的数y，且没有选择y，此时包含x的子集，必然会出现在包含y的所有子集中
-				if i > 0 && (mask&(1<<i) == 0) && nums[i-1] == nums[i] {
-					continue
+				if i > 0 && (mask&(1<<(i-1)) == 0) && nums[i-1] == nums[i] {
+					flag = false
+					break
 				}
 				set = append(set, num)
 			}
 		}
-		ans = append(ans, set)
+		// 注意：这里要引入flag，不然会出错
+		if flag {
+			ans = append(ans, set)
+		}
 	}
 	return ans
 }
@@ -38,6 +43,7 @@ func subsetsWithDup_2(nums []int) [][]int {
 		dfs func(choosePre bool, cur int)
 	)
 	n := len(nums)
+	sort.Ints(nums)
 	dfs = func(choosePre bool, cur int) {
 		if cur == n {
 			ans = append(ans, append([]int(nil), set...))
