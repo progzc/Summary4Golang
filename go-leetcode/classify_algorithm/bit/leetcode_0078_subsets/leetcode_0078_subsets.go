@@ -21,7 +21,7 @@ func subsets(nums []int) [][]int {
 	return ans
 }
 
-// subsets_2 递归
+// subsets_2 递归解法
 // 时间复杂度: O(n*2^n)
 // 空间复杂度: O(2n)
 func subsets_2(nums []int) [][]int {
