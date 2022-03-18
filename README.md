@@ -36,4 +36,4 @@
   - https://github.com/uber-go/zap (trpc包装了其作为日志库)
 - 工具:
   - https://github.com/panjf2000/ants (协程池)
-  - github.com/ouqiang/timewheel (时间轮)
+  - https://github.com/ouqiang/timewheel (时间轮)
