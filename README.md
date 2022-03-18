@@ -25,8 +25,15 @@
 - golang开发中的常见错误：http://devs.cloudimmunity.com/gotchas-and-common-mistakes-in-go-golang/
 
 ## 6.优质的库
-- https://github.com/guonaihong/gout
-- https://github.com/syndtr/goleveldb
+- 网络:
+  - https://github.com/valyala/fasthttp (性能强大)
+  - https://github.com/guonaihong/gout (使用便捷)
+  - https://github.com/panjf2000/gnet (小巧，高性能、非阻塞的事件驱动Go网络框架)
+- 存储:
+  - https://github.com/syndtr/goleveldb (小巧,采用了LSM实现的K-V存储器,融合了其他常见数据库的设计思路)
 - 日志库:
-  - https://github.com/sirupsen/logrus (比较小巧，可以看看其设计实现）
+  - https://github.com/sirupsen/logrus (小巧，可以看看其设计实现）
   - https://github.com/uber-go/zap (trpc包装了其作为日志库)
+- 工具:
+  - https://github.com/panjf2000/ants (协程池)
+  - github.com/ouqiang/timewheel (时间轮)
