@@ -37,3 +37,7 @@
 - 工具:
   - https://github.com/panjf2000/ants (协程池)
   - https://github.com/ouqiang/timewheel (时间轮)
+- 常用客户端:
+  - https://github.com/go-gorm/gorm (操作mysql)
+  - https://github.com/gomodule/redigo (操作redis)
+  - https://github.com/Shopify/sarama (操作kafka)
