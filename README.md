@@ -28,5 +28,5 @@
 - https://github.com/guonaihong/gout
 - https://github.com/syndtr/goleveldb
 - 日志库:
-  - github.com/sirupsen/logrus (比较小巧，可以看看其设计实现）
-  - github.com/uber-go/zap (trpc包装了其作为日志库)
+  - https://github.com/sirupsen/logrus (比较小巧，可以看看其设计实现）
+  - https://github.com/uber-go/zap (trpc包装了其作为日志库)
