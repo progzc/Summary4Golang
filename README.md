@@ -24,8 +24,9 @@
 ## 2.Code Standards
 - Go Code Review Comments：
   - https://github.com/golang/go/wiki/CodeReviewComments
-- Uber Go Style Guide：
+- Style Guide：
   - https://github.com/uber-go/guide/blob/master/style.md
+  - https://github.com/Tencent/secguide
 - CommonMistakes：
   - https://github.com/golang/go/wiki/CommonMistakes
   - http://devs.cloudimmunity.com/gotchas-and-common-mistakes-in-go-golang/
