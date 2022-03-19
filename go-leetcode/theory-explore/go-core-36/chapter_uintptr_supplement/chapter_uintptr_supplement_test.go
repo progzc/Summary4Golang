@@ -8,6 +8,7 @@ import (
 )
 
 // https://docs.hacknode.org/gopl-zh/ch13/ch13-01.html
+// 关于内存对齐: 可以参考文章https://go101.org/optimizations/0.3-memory-allocations.html
 
 func TestUnsafePrint1_0(t *testing.T) {
 	type Number struct {
