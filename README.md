@@ -7,9 +7,9 @@
   - https://go101.org/
 
 ## 1.Courses From Geekbang
-  - go-core-36 《go语言核心36讲》 [100%]
+  - 《go语言核心36讲》 [100%]
     - 总结：https://github.com/progzc/Summary4Golang/tree/main/go-leetcode/theory-explore/go-core-36
-  - go-concurrency 《go并发编程实战》 [100%]
+  - 《go并发编程实战》 [100%]
     - 总结：https://github.com/progzc/Summary4Golang/tree/main/go-leetcode/theory-explore/go-concurrency-combat
   - 《分布式协议与算法实战》 [30%]
   - 《趣谈网络协议》 [60%]
