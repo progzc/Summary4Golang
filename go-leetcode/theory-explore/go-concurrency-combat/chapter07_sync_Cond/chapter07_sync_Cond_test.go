@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"math/rand"
+	"strings"
 	"sync"
 	"testing"
 	"time"
@@ -127,4 +128,71 @@ func consumer(in <-chan int, idx int, cond *sync.Cond) {
 		cond.Signal()                      // 唤醒 阻塞的 生产者
 		time.Sleep(time.Millisecond * 500) //消费完 休息一会，给其他go程执行机会
 	}
+}
+
+// TestCond_3
+// (10)使用sync.Cond实现一个容量有限的 queue
+func TestCond_3(t *testing.T) {
+	_ = NewQueue(10)
+}
+
+type Queue struct {
+	cond *sync.Cond
+	data []interface{}
+	cap  int
+	logs []string
+}
+
+func NewQueue(capacity int) *Queue {
+	return &Queue{
+		cond: &sync.Cond{L: &sync.Mutex{}},
+		data: make([]interface{}, 0),
+		cap:  capacity,
+		logs: make([]string, 0)}
+}
+
+func (q *Queue) Enqueue(d interface{}) {
+	q.cond.L.Lock()
+	defer q.cond.L.Unlock()
+
+	for len(q.data) == q.cap {
+		q.cond.Wait()
+	}
+	// FIFO入队
+	q.data = append(q.data, d)
+	// 记录操作日志
+	q.logs = append(q.logs, fmt.Sprintf("En %v\n", d))
+	// 通知其他waiter进行Dequeue或Enqueue操作
+	q.cond.Broadcast()
+}
+
+func (q *Queue) Dequeue() (d interface{}) {
+	q.cond.L.Lock()
+	defer q.cond.L.Unlock()
+
+	for len(q.data) == 0 {
+		q.cond.Wait()
+	}
+	// FIFO出队
+	d = q.data[0]
+	q.data = q.data[1:]
+	// 记录操作日志
+	q.logs = append(q.logs, fmt.Sprintf("De %v\n", d))
+	// 通知其他waiter进行Dequeue或Enqueue操作
+	q.cond.Broadcast()
+	return
+}
+
+func (q *Queue) Len() int {
+	q.cond.L.Lock()
+	defer q.cond.L.Unlock()
+	return len(q.data)
+}
+
+func (q *Queue) String() string {
+	var b strings.Builder
+	for _, l := range q.logs {
+		b.WriteString(l)
+	}
+	return b.String()
 }
