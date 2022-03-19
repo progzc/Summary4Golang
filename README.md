@@ -1,6 +1,6 @@
 # Summary4Golang
 
-## 0.Introduction
+## 0.Primer
 - web resource
   - https://gobyexample.com/
   - https://docs.microsoft.com/zh-cn/learn/paths/go-first-steps/
