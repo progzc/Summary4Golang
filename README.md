@@ -30,6 +30,7 @@
 - CommonMistakes：
   - https://github.com/golang/go/wiki/CommonMistakes
   - http://devs.cloudimmunity.com/gotchas-and-common-mistakes-in-go-golang/
+    - 总结：https://github.com/progzc/Summary4Golang/tree/main/common-mistake
 - Effective go：
   - https://golang.google.cn/doc/effective_go
 - proper noun：
