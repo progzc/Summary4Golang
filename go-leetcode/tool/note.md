@@ -11,6 +11,7 @@
     - 滑动时间窗口计数
     - 令牌桶
     - 漏斗
+- 跳表
 - 共识算法
     - MIT6.824 Distributed Systems：https://pdos.csail.mit.edu/6.824/
         - 视频：https://www.youtube.com/channel/UC_7WrbZTCODu1o_kfUMq88g
