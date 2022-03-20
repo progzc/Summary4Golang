@@ -40,8 +40,7 @@ import (
 //		通道的容量：cap函数
 //		通道中缓存的还未被取走的元素数量：len函数
 //		清空通道：
-//			for v := range ch {
-//				fmt.Println(v)
+//			for range ch {
 //			}
 //		读取通道中的值：
 //			for v := range ch {
