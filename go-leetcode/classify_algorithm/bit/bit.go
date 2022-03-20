@@ -1,6 +1,7 @@
 package bit
 
-// 常用的位操作: &、|、~、^
+// Go中的位操作总结：https://yourbasic.org/golang/bitwise-operator-cheat-sheet/
+// 常用的位操作: &、|、~(Java中的取反操作符，Go中没有此类操作符)、^(Go中作为一元操作符是取反,作为二元操作符是异或；Java中的取反操作符是~)
 
 // 1.异或的特性（力扣示例：136、268、389、421）
 // x ^ 0 = x
