@@ -37,6 +37,8 @@
   - https://github.com/golang/lint/blob/738671d3881b9731cc63024d5d88cf28db875626/lint.go#L770
 - book:
   - https://s1.phpcasts.org/Concurrency-in-Go_Tools-and-Techniques-for-Developers.pdf
+  - Concurrent in go：https://github.com/kat-co/concurrency-in-go-src
+  - Concurrent pattern：https://github.com/lotusirous/go-concurrency-patterns
 
 ## 3.High-Performance
 - 池化思想
