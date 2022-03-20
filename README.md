@@ -74,8 +74,6 @@
   - 顺序: https://github.com/progzc/Summary4Golang/tree/main/go-leetcode/order_leetcode
 - design mode
   - https://github.com/progzc/Summary4Golang/tree/main/go-leetcode/design_mode
-- tool realize
-  - https://github.com/progzc/Summary4Golang/tree/main/go-leetcode/tool
 - related blog
   - https://github.com/progzc/Summary4Golang/tree/main/go-leetcode/blog
   
