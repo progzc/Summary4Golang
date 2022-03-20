@@ -11,7 +11,11 @@ import (
 // unsafe.Pointer：通用的指针类型，可以转换成任意的指针类型。不能进行指针的运算，也不能读取存储的值。
 //				   如果要读取内存存储的值，需要转化为普通指针，再取值。
 // uintptr：可用于指针运算，并不是指针，可以将unsafe.Pointer指针转化为uintptr类型（是和当前指针相同的一个数字值），然后进行指针指针运算。
-// 总结：unsafe.Pointer 是 uintptr 和 普通指针 之间的桥梁。
+// 总结：unsafe.Pointer 是 uintptr 和 普通指针 之间的桥梁。下面这四句话来自于官网：
+//		1) 任意类型的指针可以转换为一个Pointer类型值
+//		2) 一个Pointer类型值可以转换为任意类型的指针
+//		3) 一个uintptr类型值可以转换为一个Pointer类型值
+//		4) 一个Pointer类型值可以转换为一个uintptr类型值
 
 // TestUintptrPointer_1
 // (1)使用unsafe.Pointer用于指针类型转换
@@ -39,9 +43,9 @@ func TestUintptrPointer_2(t *testing.T) {
 	var a = (*int8)(unsafe.Pointer(tA))
 	*a = 1
 	// Offsetof(x.y) y字段相对于x起始地址的偏移量，包括可能的空洞。
-	var b = (*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(tA)) + unsafe.Offsetof(tA.i)))
+	var b = (*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(tA)) + unsafe.Offsetof(tA.i))) // 这里有语法糖，相当于unsafe.Offsetof((*tA).i)
 	*b = 2
-	var c = (*int64)(unsafe.Pointer(uintptr(unsafe.Pointer(tA)) + unsafe.Offsetof(tA.j)))
+	var c = (*int64)(unsafe.Pointer(uintptr(unsafe.Pointer(tA)) + unsafe.Offsetof(tA.j))) // 这里有语法糖，相当于unsafe.Offsetof((*tA).j)
 	*c = 3
 	fmt.Println(tA) // &{1 2 3}
 }
@@ -67,6 +71,24 @@ func TestUintptrPointer_4(t *testing.T) {
 	// tA addr: 0xc000094300; tA unsafe.Pointer: 824634327808; tA uintptr: 824634327808
 	// 其中：十六进制0xc000094300 等价于 十进制824634327808
 	fmt.Printf("tA addr: %p; tA unsafe.Pointer: %d; tA uintptr: %d\n", tA, unsafe.Pointer(tA), uintptr(unsafe.Pointer(tA)))
+}
+
+// TestUintptrPointer_5
+// (5)三个方法：unsafe.Sizeof、unsafe.Alignof、unsafe.OffsetOf
+func TestUintptrPointer_5(t *testing.T) {
+	// 下面这种是误用：
+	// 注意事项：
+	// 	a.unsafe.Sizeof接受指针类型的话，返回永远是8，这是一种误用。要知道占用内存大小应该接收值类型。
+	//	b.unsafe.Offsetof(tA.i)这里相当于语法糖：unsafe.Offsetof((*tA).i)。
+	//	c.unsafe.Pointer必须接受指针类型。
+	var tA = &A{}
+	fmt.Println(unsafe.Sizeof(tA), unsafe.Alignof(tA), unsafe.Offsetof(tA.i)) // 8 8 4
+
+	// unsafe.Sizeof：返回占用内存大小
+	// unsafe.Alignof：返回对齐方大小
+	// unsafe.OffsetOf：返回
+	var tB = A{}
+	fmt.Println(unsafe.Sizeof(tB), unsafe.Alignof(tB), unsafe.Offsetof(tB.i)) // 16 8 4
 }
 
 type A struct {
