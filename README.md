@@ -78,7 +78,28 @@
   - https://github.com/progzc/Summary4Golang/tree/main/go-leetcode/tool
 - related blog
   - https://github.com/progzc/Summary4Golang/tree/main/go-leetcode/blog
+  
+## 6.Classic Arithmetic
+详见：https://github.com/progzc/Summary4Golang/tree/main/go-leetcode/tool
+- 时间轮
+- 协程池
+- LRU
+- LFU
+- Filter
+- 一致性Hash
+- 红黑树
+- 四种限流算法：
+  - 固定时间窗口计数
+  - 滑动时间窗口计数
+  - 令牌桶
+  - 漏斗
+- 共识算法
+  - MIT6.824 Distributed Systems：https://pdos.csail.mit.edu/6.824/
+    - 视频：https://www.youtube.com/channel/UC_7WrbZTCODu1o_kfUMq88g
+    - 翻译：https://www.bilibili.com/video/av91748150
+    - database（包括SQL优化器、执行器、向量化）：https://github.com/pingcap/awesome-database-learning
+    - paper：https://tidb.io/archived/events//paper-reading/
 
-## 6.About Work
+## 7.About Work
 - Git
   - https://marklodato.github.io/visual-git-guide/index-zh-cn.html?no-svg
