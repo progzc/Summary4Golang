@@ -37,7 +37,7 @@ func TestUintptrPointer_1(t *testing.T) {
 // (2)使用uintptr进行指针类型计算
 //	a.unsafe.Pointer可以用于指针类型转换，但是不能进行指针运算。
 //	b.如果像访问特定的内存，可以使用uintptr：
-//		将指针转换位unsafe.Pointer,再将unsafe.Pointer转化为uintptr，然后进行偏移量计算，这样就可以访问到特定的内存。
+//	  将指针转换位unsafe.Pointer,再将unsafe.Pointer转化为uintptr，然后进行偏移量计算，这样就可以访问到特定的内存。
 func TestUintptrPointer_2(t *testing.T) {
 	var tA = &A{}
 	var a = (*int8)(unsafe.Pointer(tA))
@@ -86,7 +86,7 @@ func TestUintptrPointer_5(t *testing.T) {
 
 	// unsafe.Sizeof：返回占用内存大小
 	// unsafe.Alignof：返回对齐方大小
-	// unsafe.OffsetOf：返回
+	// unsafe.OffsetOf：返回y字段相对于x类型起始地址的偏移量
 	var tB = A{}
 	fmt.Println(unsafe.Sizeof(tB), unsafe.Alignof(tB), unsafe.Offsetof(tB.i)) // 16 8 4
 }
