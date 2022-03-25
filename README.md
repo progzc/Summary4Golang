@@ -55,6 +55,7 @@
   - https://github.com/guonaihong/gout (使用便捷)
   - https://github.com/panjf2000/gnet (小巧，高性能、非阻塞的事件驱动Go网络框架)
   - https://github.com/alberliu/gim (IM系统)
+  - https://github.com/cloudwego/netpoll (字节网络框架netpoll)
 - 存储:
   - https://github.com/syndtr/goleveldb (小巧,采用了LSM实现的K-V存储器,融合了其他常见数据库的设计思路。使用到的思想：顺序写、Crash safe、布隆过滤器，版本控制，多编码压缩、缓存、快照、跳表、二分、归并、LSM)
 - 日志库:
