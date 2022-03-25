@@ -67,7 +67,7 @@
   - https://github.com/dtm-labs/dtf (分布式事务)
   - 文档书写
     - godoc：https://golang.org/x/tools/cmd/godoc (用来本地调试自己的GoDoc显示效果)
-    - pkgsite：https://github.com/golang/pkgsite (在无法科学上网的时候，用来本地搭建GoDoc服务器之用) 
+    - pkgsite：https://golang.org/x/pkgsite/cmd/pkgsite (在无法科学上网的时候，用来本地搭建GoDoc服务器之用) 
 - 常用客户端:
   - https://github.com/go-gorm/gorm (操作mysql)
   - https://github.com/gomodule/redigo (操作redis)
