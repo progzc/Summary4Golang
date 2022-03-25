@@ -65,6 +65,7 @@
   - https://github.com/ouqiang/timewheel (时间轮)
   - https://github.com/cweill/gotests (自动生成测试用例)
   - https://github.com/dtm-labs/dtf (分布式事务)
+  - https://github.com/golang/pkgsite (生成pkg.go.dev文档) 
 - 常用客户端:
   - https://github.com/go-gorm/gorm (操作mysql)
   - https://github.com/gomodule/redigo (操作redis)
