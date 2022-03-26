@@ -2,6 +2,7 @@ package lru
 
 // 0146.LRU缓存
 // https://leetcode-cn.com/problems/lru-cache/
+// LRU：Least Recently Used，最近最少使用
 
 // 时间复杂度: O(1)
 // 空间复杂度: O(n)
