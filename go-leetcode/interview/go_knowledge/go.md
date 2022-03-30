@@ -116,6 +116,48 @@ func TestQuestion_1_2(t *testing.T) {
 
 > 参考文章：[深度解密Go语言之关于 interface 的 10 个问题](https://mp.weixin.qq.com/s/EbxkBokYBajkCR-MazL0ZA)
 
+## 1.4 切片及切片指针
+
+切片与切片指针作为函数参数的区别：
+
+- 切片指针作为函数参数传入函数内部时，不论是修改还是追加都能保证函数内的操作影响到函数外部。
+- 切片作为函数参数传入函数内部，只有修改会影响外部，而追加则无法对外部造成影响。
+
+```go
+func TestQuestion_1_4(t *testing.T) {
+	var (
+		s1 = []int{1, 2, 3}
+		s2 = []int{11, 12, 13}
+	)
+	sliceOpt(s1)
+	slicePointerOpt(&s2)
+	fmt.Println(s1) // [0 2 3]
+	fmt.Println(s2) // [0 12 13 14]
+}
+
+func sliceOpt(s []int) {
+	if len(s) > 0 {
+		s[0] = 0
+	}
+	s = append(s, 4)
+}
+
+func slicePointerOpt(s *[]int) {
+	if len(*s) > 0 {
+		(*s)[0] = 0
+	}
+	*s = append(*s, 14)
+}
+
+```
+
+总结：
+
+- 数组传参只能改不能加且无法影响外部。
+- 切片传参改能影响外部，加无法影响外部。
+- 字典传参能改能加且均会影响外部。
+- 切片指针能改能加且均会影响外部。
+
 # 2. 网络及通信协议
 
 # 3. MySQL
@@ -262,16 +304,16 @@ MyIsam和InnoDB的索引区别：
     ```go
     // read view的组成：
     // 1.trx_ids：系统当前正在活跃的事务ID集合
-    // 2.low_limit_id（高水位）：活跃事务中最大的事务ID
-    // 3.up_limit_id（低水位）：活跃事务中最小的事务ID
+    // 2.up_limit_id（高水位）：活跃事务中最大的事务ID
+    // 3.low_limit_id（低水位）：活跃事务中最小的事务ID
     // 4.creator_trx_id：创建这个read view的事务ID
     // 注意事项：上述活跃指的是未提交的事务。
     
     // 根据Trx ID和read view判断可见性：
     // 1.若Trx ID==creator_trx_id：表示更新这个数据版本的事务是当前事务自己生成的，可见
-    // 2.若Trx ID<up_limit_id：表示更新这个数据版本的事务在当前事务启动之前就已提交，可见
-    // 3.若Trx ID>low_limit_id：表示更新这个数据版本的事务是在当前事务启动之后新开始的事务，不可见
-    // 4.若up_limit_id<=Trx ID<=low_limit_id，则分两种情况
+    // 2.若Trx ID<low_limit_id：表示更新这个数据版本的事务在当前事务启动之前就已提交，可见
+    // 3.若Trx ID>up_limit_id：表示更新这个数据版本的事务是在当前事务启动之后新开始的事务，不可见
+    // 4.若low_limit_id<=Trx ID<=up_limit_id，则分两种情况
     //	 4.1 若Trx ID in trx_ids：表示更新这个数据版本的事务还未提交，不可见
     //	 4.2 若Trx ID not in trx_ids：表示更新这个数据版本的事务已提交，可见
     ```

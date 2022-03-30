@@ -49,3 +49,28 @@ func TestQuestion_1_2(t *testing.T) {
 	b2, _ := json.Marshal(a2)
 	fmt.Println(string(b1), string(b2)) // null {}
 }
+
+func TestQuestion_1_4(t *testing.T) {
+	var (
+		s1 = []int{1, 2, 3}
+		s2 = []int{11, 12, 13}
+	)
+	sliceOpt(s1)
+	slicePointerOpt(&s2)
+	fmt.Println(s1) // [0 2 3]
+	fmt.Println(s2) // [0 12 13 14]
+}
+
+func sliceOpt(s []int) {
+	if len(s) > 0 {
+		s[0] = 0
+	}
+	s = append(s, 4)
+}
+
+func slicePointerOpt(s *[]int) {
+	if len(*s) > 0 {
+		(*s)[0] = 0
+	}
+	*s = append(*s, 14)
+}
