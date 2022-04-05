@@ -23,7 +23,7 @@ func subarraySum(nums []int, k int) int {
 }
 
 // subarraySum_2 前缀和+哈希表
-// 时间复杂度: O(n^2)
+// 时间复杂度: O(n)
 // 空间复杂度: O(1)
 // 思路：注意题目应该是和为K的连续子数组
 //		定义pre[i]为[0..i]里所有数的和，则以i结尾的和为k的连续子数组个数时只要统计有多少个前缀和为pre[i]-k的pre[j]即可。
