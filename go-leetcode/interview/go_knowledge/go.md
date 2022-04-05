@@ -231,7 +231,17 @@ http的请求头和boby用空行来分隔：
 
 不可以，HTTP请求头和响应头都是以ASCII文本方式传输的。通过请求体可以携带二进制数据。
 
+## 2.6 进程的通讯方式
 
+- 管道pipe：管道是一种半双工的通信方式，数据只能单向流动，而且只能在具有亲缘关系的进程间使用。进程的亲缘关系通常是指父子进程关系。
+- 命名管道FIFO：有名管道也是半双工的通信方式，但是它允许无亲缘关系进程间的通信。
+- 消息队列MessageQueue：消息队列是由消息的链表，存放在内核中并由消息队列标识符标识。消息队列克服了信号传递信息少、管道只能承载无格式字节流以及缓冲区大小受限等缺点。
+- 共享存储SharedMemory：共享内存就是映射一段能被其他进程所访问的内存，这段共享内存由一个进程创建，但多个进程都可以访问。共享内存是最快的 IPC 方式，它是针对其他进程间通信方式运行效率低而专门设计的。它往往与其他通信机制，如信号量，配合使用，来实现进程间的同步和通信。
+- 信号量Semaphore：信号量是一个计数器，可以用来控制多个进程对共享资源的访问。它常作为一种锁机制，防止某进程正在访问共享资源时，其他进程也访问该资源。因此，主要作为进程间以及同一进程内不同线程之间的同步手段。
+- 套接字Socket：套解口也是一种进程间通信机制，与其他通信机制不同的是，它可用于不同及其间的进程通信。
+- 信号 ( sinal ) ： 信号是一种比较复杂的通信方式，用于通知接收进程某个事件已经发生。
+
+> 参考文章：[进程间通讯的7种方式](https://blog.csdn.net/zhaohong_bo/article/details/89552188)、[进程间8种通信方式详解](https://blog.csdn.net/violet_echo_0908/article/details/51201278)、
 
 
 
@@ -528,6 +538,8 @@ SQL语句的执行过程：
 
 
 
+
+
 # 4. Redis
 
 ### 4.1 Redis数据类型及实现原理
@@ -575,11 +587,82 @@ redis底层数据结构整理如下：
 
 ### 4.4 redis集群批量获取key会有什么问题?
 
+redis集群批量获取key会有什么问题？
+
+- 集群批量操作时，当key的slot不同时，会报错：`No way to dispatch this command to Redis Cluster because keys have different slots`。
+
+解决方案：
+
+- 方案一：将批量操作换成单个操作+pipeline
+- 方案二：客户端根据key计算slot，然后根据key的slot范围将命令放入不同的pipeline中，**串行**执行不同的pipeline
+- 方案三：客户端根据key计算slot，然后根据key的slot范围将命令放入不同的pipeline中，**并行**执行不同的pipeline
+
+> 参考文章：[redis集群模式批量操作及优化方案](https://blog.csdn.net/zhaohongfei_358/article/details/100573769)
+
+### 4.5 redis集群种类？
+
+redis集群种类：
+
+- 主从复制
+- 哨兵模式
+- cluster集群（服务端sharding）
+- sharding集群（客户端sharding，jedis可以实现客户端sharding）
+- 利用中间件代理
+
+> 参考文章：[Redis集群模式](https://blog.csdn.net/wy0123/article/details/79583506)
+
+### 
+
 
 
 
 
 # 5. Kafka
+
+## 5.1 Kakfa消息队列积压
+
+Kakfa消息队列挤压的原因：
+
+- 消费者任务挂掉了，但是有没有写自动拉起任务的脚本进行重启
+  - 解决方法：监控消费者任务的运行情况、自动拉起任务。
+
+- 生产速度大于消费速度，消费者消费能力不足
+  - 解决办法：
+    - 增加分区数，增加消费者组的消费者数量，提升吞吐量
+    - 协程池
+    - 批量消费
+    - 异步
+    - 确定是否有频繁的发生重平衡
+    - 确定消费者端业务是否有很重的业务逻辑可以优化
+
+- 消息的key不均匀，导致分区间数据不均衡
+  - 解决办法：在生产端，给key增加随机后缀，使其均衡。
+
+> 参考文章：[Kafka集群消息积压问题及处理策略](https://www.cnblogs.com/bigdatalearnshare/p/14278093.html)
+
+## 5.2 Kafka重试达到次数之后怎么办?
+
+Kafka重试超过预设的阈值后，怎么办？
+
+- **继续重试**直到天荒地老，如果是网线断了这种方法非常低效。
+- 如果业务对丢失消息不敏感，可以直接**抛弃**这条信息
+- 如果业务对丢消息敏感，可以把错误记录下来，然后**告警让人工介入**处理
+
+> 参考文章：[关于Kafka重试达到次数之后的处理方案](https://segmentfault.com/q/1010000039326488)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # 6. ElasticSearch
 
@@ -589,11 +672,51 @@ redis底层数据结构整理如下：
 
 ## 8.1 levelDB的设计
 
+## 8.2 分布式id/雪花算法原理/数据库步长原理
+
+雪花算法原理：一个8字节(64位)的二进制数，从左到右依次为
+
+- 第1位：未使用
+- 第2~42位：41位为毫秒级时间(41位的长度可以使用69年)
+- 第43~52位：即工作机器id，5位Data Center Id和5位Worker Id(10位的长度最多支持部署1024个节点）
+- 第53~64位：最后12位是毫秒内的计数号（12位的计数顺序号支持每个节点每毫秒产生4096个ID序号）
+
+特点：
+
+- 整体上按照时间自增排序
+- 整个分布式系统内不会产生ID碰撞（由Data Center Id和Worker Id作区分）
+- 效率很高，经测试snowflake每秒能够产生26万个ID
+
+缺点：
+
+- 强依赖机器时钟，如果机器上时钟回拨，会导致发号重复或者服务会处于不可用状态。
+  - 改进：https://github.com/Meituan-Dianping/Leaf
+
+
+
+> 参考文章：[雪花算法原理](https://www.cnblogs.com/xues/p/13418856.html)、[分布式id 雪花算法原理 数据库步长原理](https://blog.csdn.net/m0_57116438/article/details/122928191)
+
+
+
+
+
 
 
 # 9. 系统设计
 
 ## 9.1 如何设计一个IM系统?
+
+## 9.2 设计一个类似微信发红包的算法?
+
+>参考文章：[微信红包的随机算法是怎样实现的](https://www.zhihu.com/question/22625187)、[社交软件红包技术解密](https://zhuanlan.zhihu.com/p/199148808)
+
+## 9.3 订单分表场景怎么按用户关联多个分表查?
+
+
+
+
+
+
 
 # 10. 算法
 
@@ -695,8 +818,6 @@ func heapify(arr []int, i int) {
 
 
 
-
-
 > 相关文章：[十大排序算法](https://www.cnblogs.com/onepixel/articles/7674659.html#!comments)、[十大经典排序算法](https://www.runoob.com/w3cnote/ten-sorting-algorithm.html)
 
 
@@ -711,7 +832,138 @@ https://leetcode-cn.com/problems/minimum-window-substring/
 
 https://leetcode-cn.com/problems/reverse-string/
 
+### 设计一个函数返回抽到的奖品
 
+题目：有三个奖品，每个有各自的概率，设计一个函数返回抽到的奖品。
+
+```go
+func GetThings() string {
+	t1 := 0.1 // 物品A抽到的概率为0.1
+	t2 := 0.2 // 物品B抽到的概率为0.2
+	t3 := 0.7 // 物品C抽到的概率为0.7
+
+	x := rand.Float64()
+	if x >= 0 && x < t1 {
+		return "A"
+	}
+	if x >= t1 && x < (t1+t2) {
+		return "B"
+	}
+	if x >= (t1+t2) && x < (t1+t2+t3) {
+		return "C"
+	}
+	return "A"
+}
+```
+
+### 二分查找及其变种
+
+```go
+// 关于二分搜索及其4个变种的总结:
+// 1.经典的二分搜索法
+// 2.4个基本变种:
+//	a.查找第一个与 target 相等的元素
+//	b.查找最后一个与 target 相等的元素
+//	c.查找第一个大于等于 target 的元素
+//	d.查找最后一个小于等于 target 的元素
+// 3.其他变种:
+//	a.在山峰数组中找山峰
+//	b.在旋转有序数组中找分界点
+// 4.力扣中的经典题目：33、81、153、154、162、852
+
+// binarySearchMatrix 经典的二分搜索法
+// 注意事项:
+//	a.二分搜索的前提是 有序(一般而言是升序)
+// 	b.循环退出条件，注意是 low <= high，而不是 low < high
+// 	c.mid 的取值，mid := low + (high-low)/2
+//	d.low 和 high 的更新，low = mid + 1，high = mid - 1
+func binarySearchMatrix(nums []int, target int) int {
+	low, high := 0, len(nums)-1
+	for low <= high {
+		mid := low + (high-low)>>1
+		if nums[mid] == target {
+			return mid
+		} else if nums[mid] > target {
+			high = mid - 1
+		} else {
+			low = mid + 1
+		}
+	}
+	return -1
+}
+
+// searchFirstEqualElement 变种1: 查找第一个与 target 相等的元素
+func searchFirstEqualElement(nums []int, target int) int {
+	low, high := 0, len(nums)-1
+	for low <= high {
+		mid := low + ((high - low) >> 1)
+		if nums[mid] > target {
+			high = mid - 1
+		} else if nums[mid] < target {
+			low = mid + 1
+		} else {
+			if (mid == 0) || (nums[mid-1] != target) { // 找到第一个与 target 相等的元素
+				return mid
+			}
+			high = mid - 1
+		}
+	}
+	return -1
+}
+
+// searchLastEqualElement 变种2: 查找最后一个与 target 相等的元素
+func searchLastEqualElement(nums []int, target int) int {
+	low, high := 0, len(nums)-1
+	for low <= high {
+		mid := low + ((high - low) >> 1)
+		if nums[mid] > target {
+			high = mid - 1
+		} else if nums[mid] < target {
+			low = mid + 1
+		} else {
+			if (mid == len(nums)-1) || (nums[mid+1] != target) { // 找到最后一个与 target 相等的元素
+				return mid
+			}
+			low = mid + 1
+		}
+	}
+	return -1
+}
+
+// searchFirstGreaterElement 变种3: 查找第一个大于等于 target 的元素
+func searchFirstGreaterElement(nums []int, target int) int {
+	low, high := 0, len(nums)-1
+	for low <= high {
+		mid := low + ((high - low) >> 1)
+		if nums[mid] >= target {
+			if (mid == 0) || (nums[mid-1] < target) { // 找到第一个大于等于 target 的元素
+				return mid
+			}
+			high = mid - 1
+		} else {
+			low = mid + 1
+		}
+	}
+	return -1
+}
+
+// searchLastLessElement 变种4: searchLastLessElement
+func searchLastLessElement(nums []int, target int) int {
+	low, high := 0, len(nums)-1
+	for low <= high {
+		mid := low + ((high - low) >> 1)
+		if nums[mid] <= target {
+			if (mid == len(nums)-1) || (nums[mid+1] > target) { // 找到最后一个小于等于 target 的元素
+				return mid
+			}
+			low = mid + 1
+		} else {
+			high = mid - 1
+		}
+	}
+	return -1
+}
+```
 
 
 
