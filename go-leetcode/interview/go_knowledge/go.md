@@ -158,7 +158,90 @@ func slicePointerOpt(s *[]int) {
 - 字典传参能改能加且均会影响外部。
 - 切片指针能改能加且均会影响外部。
 
+> 相关文章：[数组指针、切片指针与结构体指针](https://blog.csdn.net/u013792921/article/details/84565336)
+
 # 2. 网络及通信协议
+
+## 2.1 计算机网络的应用层协议有哪些?
+
+![image-20220405162447832](go.assets/image-20220405162447832.png)
+
+- Telnet：远程登陆协议
+- FTP：文本传输协议
+- HTTP：超文本传输协议
+- DNS：域名服务协议
+- SMTP：简单邮件传输协议
+
+注意事项：
+
+- ping工作在网络层，通信协议是ICMP（英特网报文控制协议）
+
+## 2.2 HTTP协议有哪些请求方法？
+
+| 方法    | 描述                                     | 是否包含主体 |
+| ------- | ---------------------------------------- | ------------ |
+| GET     | 从服务器获取一份文档                     | 否           |
+| HEAD    | 服务器在响应中只返回首部                 | 否           |
+| POST    | 向服务器发送带要处理的数据               | 是           |
+| PUT     | 向服务器写入文档                         | 是           |
+| TRACE   | 对报文进行追踪，确认经过了哪些代理服务器 | 否           |
+| OPTIONS | 诮求Web服务器告知其支持的各种功能        | 否           |
+| DELETE  | 请服务器删除请求URL所指定的资源          | 否           |
+
+> 参考文章：[HTTP请求方法](https://blog.csdn.net/sphinx1122/article/details/104608388)
+
+## 2.3 GET和POST的区别?
+
+GET和POST请求的区别：
+
+- 可发送数据量不同：由于浏览器对URL的长度有限制，所以GET请求能发送的数据量少于POST请求。
+- 安全性不同：GET请求参数是URL的一部分，而POST请求参数封装在请求体中，POST请求更加安全。
+- 支持的数据格式不同：GET请求只允许ASCII字符；而POST请求没有限制，也允许二进制数据。
+
+- 编码类型不同：GET请求为`application/x-www-form-urlencoded`，POST请求为`application/x-www-form-urlencoded`或`multipart/form-data`
+
+  - 关于`application/x-www-form-urlencoded`或`multipart/form-data`的区别：
+
+    - application/x-www-form-urlencoded：只能上传键值对，并且键值对都是间隔分开的。
+
+    - multipart/form-data：既可以上传文件等二进制数据（可以用来上传文件），也可以上传表单键值对。
+
+
+
+- 报文上的区别：
+  - 请求行方法名不同
+  - 请求url不同：GET请求参数在url中；POST请求参数在请求体中
+
+- 书签：GET请求可收藏为书签；POST请求不能收藏为书签。
+
+- 缓存：GET请求能被缓存；而POST请求不能被缓存。
+- 历史：GET请求参数会保留在浏览器历史中；POST请求参数不会保存在浏览器历史中。
+
+> 参靠文章：[GET和POST请求的区别](https://blog.csdn.net/qq_43588129/article/details/115218995)、[multipart/form-data 和 x-www-form-urlencoded的区别](https://blog.csdn.net/yamadeee/article/details/84250297)
+
+## 2.4 HTTP的请求头和请求体用什么来区分？
+
+http的请求头和boby用空行来分隔：
+
+![image-20220405195015425](go.assets/image-20220405195015425.png)
+
+> 参考文章：[HTTP请求头与请求体](https://www.cnblogs.com/gxz-sw/p/6761984.html)
+
+## 2.5 HTTP请求头可以携带二进制数据吗?
+
+不可以，HTTP请求头和响应头都是以ASCII文本方式传输的。通过请求体可以携带二进制数据。
+
+
+
+
+
+
+
+
+
+
+
+> 相关文章：[计算机网络总结](https://blog.csdn.net/sinat_40770656/article/details/122814377?utm_medium=distribute.pc_feed_v2.none-task-blog-expert_recommend-1.pc_personrecdepth_1-utm_source=distribute.pc_feed_v2.none-task-blog-expert_recommend-1.pc_personrec)
 
 # 3. MySQL
 
@@ -435,9 +518,66 @@ InnoDB层：
 
 
 
+## 3.8 SQL的执行过程
+
+SQL语句的执行过程：
+
+![image-20220405200451378](go.assets/image-20220405200451378.png)
+
+
+
 
 
 # 4. Redis
+
+### 4.1 Redis数据类型及实现原理
+
+redis底层数据结构整理如下：
+
+| 数据结构 | 底层实现                                                   | 特点                                                         |
+| -------- | ---------------------------------------------------------- | ------------------------------------------------------------ |
+| string   | 字节数组<br />len字段<br />free字段                        | a.常数复杂度获取字符串长度：因为有len字段<br />b.修改时**杜绝缓冲区溢出**：首先根据len检查，若不够就会先扩容，再进行修改<br />c.减少修改字符串的内存重新分配次数：因为有free和len字段，实现了**空间预分配**和**惰性空间释放**<br />d.二进制安全：因为没有以空格作为结束标识符<br />e.兼容部分C字符串函数: |
+| list     | 数据量少时：压缩列表<br />数据量多时：双向链表（不可循环） | a.常数复杂度获取链表长度：因为有len字段                      |
+| hash     | 数据量少时：压缩列表<br />数据量多时：散列表               | a.解决哈希冲突的方法：链地址法<br />b.动态扩容和缩容<br />c.渐进式哈希：扩容和缩容不是一次性、集中式完成的，而是分多次、渐进式完成的。<br />原理时使用两个哈希表，在进行渐进式rehash期间，字典的删除查找更新等操作可能会在两个哈希表上进行，<br />第一个哈希表没有找到，就会去第二个哈希表上进行查找。但是进行 增加操作，一定是在新的哈希表上进行的。 |
+| set      | 数据量少时：有序数组<br />数据量多时：散列表               | a.数据量少的条件：存储的数据都是整数，且存储的数据元素个数不超过512个 |
+| zset     | 数据量少时：压缩列表<br />数据量多时：跳跃表               | a.数据量少的条件：保存的数据小于64字节，且元素个数小于128个<br />**自己实现一个跳表?** |
+|          | 压缩列表                                                   | a.连续内存块，主要是为了节省内存。<br />b.压缩列表和数组的区别：压缩列表是数组的变种，允许存储的数据大小不同。 |
+
+> 参考文章：[redis底层数据结构](https://www.cnblogs.com/ysocean/p/9080942.html)、[redis常用数据类型对应的数据结构](https://www.cnblogs.com/wjh123/p/11439705.html)
+
+### 4.2 如何实现一个跳表?
+
+
+
+### 4.3 Redis实现分布式锁？
+
+采用SETNX key value EX 获取锁 + lua脚本 释放锁
+
+需要考虑的问题：
+
+- 必要的超时机制：获取锁的客户端一旦崩溃，一定要有过期机制，否则其他客户端都降无法获取锁，造成死锁问题。
+- 释放锁时的校验机制：不能释放掉别人的锁，释放锁的时候要对value进行校验，若是自己设置的value，则可以删除对应key。
+- 释放锁应该是原子的：通过校验value、删除key来释放锁要保证这两个操作的原子性，可以通过lua脚本实现。
+- 锁续期问题：业务逻辑代码执行的时间可能会超过锁的有效时间（**锁的有效时间需要做好业务评估**），可以在客户端执行长业务时，每隔一段时间对锁做续命操作。
+
+以上几个问题解决之后，只能在单redis节点上实现分布式锁，针对多redis节点master宕机后，由于主从复制是异步的(有延时)，这可能会丧失锁的安全性，解决方法：
+
+- 采用readlock算法基于redis集群实现可靠的分布式锁：基于N个完全独立的节点(N通常可设置为5)
+  - 获取当前时间(毫秒数)
+  - 按顺序意思向N个redis节点执行获取锁的操作
+  - 计算整个获取锁的过程消耗了多长时间，计算方式是用当前时间减去第1步记录的时间。如果客户端从**大多数redis节点**(>=N/2+1)成功获取到了锁，并且获取锁总共消耗的时间没有超过锁的**有效时间**，那么这时客户端才认为最终获取锁成功；否则认为获取锁失败。
+  - 若最终获取锁成功了，那么锁的有效时间应该重新计算，其等于最初锁的有效时间减去第3步获取锁消耗的时间。
+  - 若最终获取锁失败了，那么客户端应该立即向所有redis节点发起释放锁的操作（lua操作）。
+
+- 对应支持redis单点与集群的库（实现了readlock）：https://github.com/bsm/redislock，在redislock.New时传client或clusterClient即可。
+
+> 参考文章：[How to do distributed locking](https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html)、[readlock](https://redis.io/docs/reference/patterns/distributed-locks/)、[基于Redis的分布式锁真的安全吗？（上）](https://mp.weixin.qq.com/s?__biz=MzkwOTIxNDQ3OA==&mid=2247533661&idx=1&sn=a2fab12fb929f2de08c645e112d71550&source=41#wechat_redirect)
+
+### 4.4 redis集群批量获取key会有什么问题?
+
+
+
+
 
 # 5. Kafka
 
@@ -455,9 +595,121 @@ InnoDB层：
 
 ## 9.1 如何设计一个IM系统?
 
+# 10. 算法
+
+## 10.1 排序算法
+
+排序算法的总结：
+
+![image-20220405182721171](go.assets/image-20220405182721171.png)
+
+![image-20220405182736229](go.assets/image-20220405182736229.png)
+
+### 10.1.1 快速排序
+
+```go
+// quickSort 快速排序
+// 时间复杂度(平均): O(n*log(n))
+// 时间复杂度(最坏): O(n^2)
+// 时间复杂度(最好): O(n*log(n))
+// 空间复杂度: O(n*log(n))
+// 稳定性: 不稳定
+// 思路：通过一趟排序将待排记录分隔成独立的两部分，其中一部分记录的关键字均比另一部分的关键字小，则可分别对这两部分记录继续进行排序，以达到整个序列有序。
+//	a.挑选基准：从数列中挑出一个元素，称为"基准"(pivot)
+//	b.分治：重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。
+// 	  在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作。
+//	c.递归：把小于基准值元素的子数列和大于基准值元素的子数列排序。
+func quickSort(arr []int, left, right int) {
+	if len(arr) < 2 || left < 0 || right >= len(arr) || left >= right {
+		return
+	}
+
+	pdx := partition(arr, left, right)
+	quickSort(arr, left, pdx-1)
+	quickSort(arr, pdx+1, right)
+}
+
+func partition(arr []int, left, right int) int {
+	var (
+		pivot = left
+		index = pivot + 1
+	)
+	for i := index; i <= right; i++ {
+		if arr[i] < arr[pivot] {
+			arr[i], arr[index] = arr[index], arr[i]
+			index++
+		}
+	}
+	arr[pivot], arr[index-1] = arr[index-1], arr[pivot]
+	return index - 1
+}
+```
+
+### 10.1.2 堆排序
+
+```go
+// heapSort 大顶堆排序
+// 时间复杂度(平均): O(n*log(n))
+// 时间复杂度(最坏): O(n*log(n))
+// 时间复杂度(最好): O(n*log(n))
+// 空间复杂度: O(1): O(1)
+// 稳定性: 不稳定
+// 思路：利用堆这种数据结构所设计的一种排序算法。堆积是一个近似完全二叉树的结构，并同时满足堆积的性质：即子结点的键值或索引总是小于（或者大于）它的父节点。
+//	a.构建大顶堆
+//	b.调整堆
+func heapSort(arr []int) {
+	arrLen := len(arr)
+	buildMaxHeap(arr)
+	for i := arrLen - 1; i >= 0; i-- {
+		heapify(arr, i)
+	}
+}
+
+// buildMaxHeap 建堆
+func buildMaxHeap(arr []int) {
+	arrLen := len(arr)
+	for i := arrLen / 2; i >= 0; i-- {
+		heapify(arr, i)
+	}
+}
+
+// heapify 调整堆
+func heapify(arr []int, i int) {
+	left := 2*i + 1
+	right := 2*i + 2
+	largest := i
+	arrLen := len(arr)
+	if left < arrLen && arr[left] > arr[largest] {
+		largest = left
+	}
+	if right < arrLen && arr[right] > arr[largest] {
+		largest = right
+	}
+	if largest != i {
+		arr[i], arr[largest] = arr[largest], arr[i]
+		heapify(arr, largest)
+	}
+}
+
+```
 
 
 
+
+
+> 相关文章：[十大排序算法](https://www.cnblogs.com/onepixel/articles/7674659.html#!comments)、[十大经典排序算法](https://www.runoob.com/w3cnote/ten-sorting-algorithm.html)
+
+
+
+## 10.2 力扣
+
+### 0076 最小覆盖字串
+
+https://leetcode-cn.com/problems/minimum-window-substring/
+
+### 0344 反转字符串
+
+https://leetcode-cn.com/problems/reverse-string/
 
 
 
