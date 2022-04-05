@@ -24,8 +24,8 @@ func TestStruct_2(t *testing.T) {
 	fmt.Println(a, b, a == b) // &{} &{} true
 }
 
-// go run -gcflags="-m -l": 可以分析内存逃逸
-// go run -gcflags="-N -l"： 可以禁用内存逃逸
+// go_knowledge run -gcflags="-m -l": 可以分析内存逃逸
+// go_knowledge run -gcflags="-N -l"： 可以禁用内存逃逸
 func TestStruct_3(t *testing.T) {
 	a := new(struct{})
 	b := new(struct{})
