@@ -20,6 +20,7 @@ func findFrequentTreeSum(root *TreeNode) []int {
 		ans        []int
 		calTreeSum func(root *TreeNode) int
 	)
+	// calTreeSum 计算树的元素和
 	calTreeSum = func(root *TreeNode) int {
 		sum := root.Val
 		if root.Left != nil {
@@ -58,6 +59,7 @@ func findFrequentTreeSum_2(root *TreeNode) []int {
 		ans        []int
 		calTreeSum func(root *TreeNode) int
 	)
+	// calTreeSum 计算树的元素和
 	calTreeSum = func(root *TreeNode) int {
 		sum := root.Val
 		if root.Left != nil {
@@ -74,7 +76,6 @@ func findFrequentTreeSum_2(root *TreeNode) []int {
 		} else if value == maxCount {
 			ans = append(ans, sum)
 		}
-
 		return sum
 	}
 	if root == nil {
