@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-// go test -v -run=TwoSum$ leetcode_0001_two_sum_test.go
+// go_knowledge test -v -run=TwoSum$ leetcode_0001_two_sum_test.go_knowledge
 func Test_leetcode_0001_twoSum(t *testing.T) {
 	tests := []struct {
 		nums   []int
