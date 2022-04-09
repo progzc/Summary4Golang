@@ -46,8 +46,8 @@ func mergeKLists(lists []*ListNode) *ListNode {
 }
 
 // mergeKLists_2 二分+分治
-// 时间复杂度: O(n*log(n))
-// 空间复杂度: O(log(n))
+// 时间复杂度: O(k*n*log(n))
+// 空间复杂度: O(log(k))
 // 思路：由合并两个链表==拓展想到使用分治
 func mergeKLists_2(lists []*ListNode) *ListNode {
 	if len(lists) == 0 {
