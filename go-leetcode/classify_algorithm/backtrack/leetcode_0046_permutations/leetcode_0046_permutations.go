@@ -45,7 +45,7 @@ func permute(nums []int) [][]int {
 
 // permute_2 深度优先遍历
 // 时间复杂度: O(n*n!)
-// 空间复杂度: O(n*n!)
+// 空间复杂度: O(2n)
 // 优点：这样生成的全排列是按照字典序存储的
 // 缺点：需要耗费额外的空间来标记已选择哪些数
 func permute_2(nums []int) [][]int {
