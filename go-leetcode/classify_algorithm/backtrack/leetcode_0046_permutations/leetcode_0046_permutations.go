@@ -67,17 +67,18 @@ func permute_2(nums []int) [][]int {
 			ans = append(ans, append([]int(nil), output...))
 		}
 		for i := 0; i < len(nums); i++ {
-			// 前提：只可以选择未选择过的数
-			if !used[i] {
-				// 选择：选择第i个位置作为第idx个数
-				output = append(output, nums[i])
-				used[i] = true
-				// 递归：填下一个位置
-				dfs(idx+1, output)
-				// 回溯：在下一次选择之前，必须回撤销上一次的选择
-				used[i] = false
-				output = output[:len(output)-1]
+			// 剪枝：只可以选择未选择过的数
+			if used[i] {
+				continue
 			}
+			// 选择：选择第i个位置作为第idx个数
+			output = append(output, nums[i])
+			used[i] = true
+			// 递归：填下一个位置
+			dfs(idx+1, output)
+			// 回溯：在下一次选择之前，必须回撤销上一次的选择
+			used[i] = false
+			output = output[:len(output)-1]
 		}
 	}
 	dfs(0, output)
