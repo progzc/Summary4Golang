@@ -22,6 +22,7 @@ func exist(board [][]byte, word string) bool {
 		if i < 0 || i >= m || j < 0 || j >= n || visit[i][j] {
 			return false
 		}
+		// 仔细思考这里：不可能先出现索引k越界，不然前面的i,j就先越界了
 		if board[i][j] != word[k] {
 			return false
 		}
