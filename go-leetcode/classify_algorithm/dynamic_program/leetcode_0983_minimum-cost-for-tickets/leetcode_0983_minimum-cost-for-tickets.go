@@ -44,13 +44,13 @@ func mincostTickets(days []int, costs []int) int {
 }
 
 // mincostTickets_2 回溯法（优化）
-// 时间复杂度：O(3*W)
-// 空间复杂度: O(W)
+// 时间复杂度：O(N)，N为days的长度
+// 空间复杂度: O(N)
 // 思路：
 //	定义：dp(i)：能够完成从第days[i]天到最后的旅行计划的最小花费；j_1：满足days[j_1]>=days[i]+1的最小下标；
 //		 j_7：满足days[j_7]>=days[i]+7的最小下标；j_30：满足days[j_30]>=days[i]+30的最小下标。
 //	那么：dp(i)=min(dp(j_1)+costs[0],dp(j_7)+costs[1],dp(j_30)+costs[2])
-// 技巧：思路是动态规划，但是写法是递归回溯
+// 技巧：思路是动态规划，但是写法是递归回溯。本质原因是要从后向前动态规划
 func mincostTickets_2(days []int, costs []int) int {
 	mMap := [366]int{}
 	durations := []int{1, 7, 30}
