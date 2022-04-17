@@ -11,7 +11,7 @@ import (
 // TestContainer_1 List的设计原理
 // container包中的List:
 // (1) 底层数据结构: 双向链表（内部具体实现其实是双向循环链表）
-// (2) 常用api: 参见https://pkg.go.dev/container/list
+// (2) 常用api: 参见https://pkg.go_knowledge.dev/container/list
 //  a.修改方法: MoveBefore/MoveAfter/MoveToFront/MoveToBack针对形参中的e *Element(给的的元素)只能是链表中已存在的元素,而不是自己生成的元素（否则不会对链表做出任何改动）
 // 	b.插入方法: InsertBefore/InsertAfter（没有延迟初始化,但是会判断指定节点是不是在所属链表上,通过在Element中嵌入*List达到O(1)的时间复杂度）
 //	           PushFront/PushBack（有延迟初始化）可以将自己生成的interface元素插入到链表中
