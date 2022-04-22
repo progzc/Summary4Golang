@@ -43,3 +43,7 @@
   - 分组背包
     - [1155.掷骰子的N种方法](https://leetcode-cn.com/problems/number-of-dice-rolls-with-target-sum/)
       - 分组0/1背包的组合问题
+    
+ - 多维背包
+   - [879.盈利计划](https://leetcode-cn.com/problems/profitable-schemes/)
+      - 多维0/1背包
