@@ -30,8 +30,31 @@ func lengthOfLIS(nums []int) int {
 // 状态：dp[i]：表示长度为i的最长上升子序列的末尾元素的最小值
 // 可使用反证法证明dp[i]是关于i调递递增的；而根据dp[i]单调递增，可以使用二分法进行搜索
 func lengthOfLIS_2(nums []int) int {
-	// TODO
-	return -1
+	len, n := 1, len(nums)
+	if n == 0 {
+		return 0
+	}
+	dp := make([]int, n+1)
+	dp[len] = nums[0]
+	for i := 1; i < n; i++ {
+		if nums[i] > dp[len] {
+			len++
+			dp[len] = nums[i]
+		} else {
+			l, r, pos := 1, len, 0
+			for l <= r {
+				mid := (l + r) >> 1
+				if dp[mid] < nums[i] {
+					pos = mid
+					l = mid + 1
+				} else {
+					r = mid - 1
+				}
+			}
+			dp[pos+1] = nums[i]
+		}
+	}
+	return len
 }
 
 func max(x, y int) int {
