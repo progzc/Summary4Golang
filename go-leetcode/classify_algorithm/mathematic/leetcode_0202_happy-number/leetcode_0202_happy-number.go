@@ -9,10 +9,30 @@ package leetcode_0202_happy_number
 // 思路：会出现环 表示会进行无限循环
 func isHappy(n int) bool {
 	r := map[int]bool{}
-	for n != 1 && !r[n] {
-		n, r[n] = next(n), true
+	for {
+		if n == 1 {
+			return true
+		}
+		if r[n] {
+			return false
+		} else {
+			r[n] = true
+		}
+		n = next(n)
 	}
-	return n == 1
+}
+
+// isHappy_2 快慢指针+环
+// 时间复杂度: O(log(n))
+// 空间复杂度: O(1)
+// 思路：会出现环 表示会进行无限循环
+func isHappy_2(n int) bool {
+	slow, fast := n, next(n)
+	for fast != 1 && slow != fast {
+		slow = next(slow)
+		fast = next(next(fast))
+	}
+	return fast == 1
 }
 
 func next(n int) int {
