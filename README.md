@@ -109,3 +109,5 @@
 ## 7.About Work
 - Git
   - https://marklodato.github.io/visual-git-guide/index-zh-cn.html?no-svg
+- Linux命令
+  - https://github.com/tldr-pages/tldr
