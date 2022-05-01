@@ -160,6 +160,12 @@ func slicePointerOpt(s *[]int) {
 
 > 相关文章：[数组指针、切片指针与结构体指针](https://blog.csdn.net/u013792921/article/details/84565336)
 
+## 1.5 定时器
+
+
+
+> 参考文章：[Golang中的定时器](https://www.cnblogs.com/zhangmingcheng/p/15817344.html)
+
 # 2. 网络及通信协议
 
 ## 2.1 计算机网络的应用层协议有哪些?
