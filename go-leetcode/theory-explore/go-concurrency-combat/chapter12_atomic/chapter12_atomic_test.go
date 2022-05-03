@@ -17,8 +17,8 @@ const x int64 = 1 + 1<<33
 func TestAtomic_1(t *testing.T) {
 	var i = x
 	// 下面这一句使用GOARCH=386的架构去编译，会被拆成两个指令；使用GOARCH=amd64去编译，则是一条指令。
-	// 编译：GOARCH=386 go tool compile -N -l test.go
-	// 反编译：GOARCH=386 go tool objdump -gnu test.o
+	// 编译：GOARCH=386 go_knowledge tool compile -N -l test.go_knowledge
+	// 反编译：GOARCH=386 go_knowledge tool objdump -gnu test.o
 	_ = i
 }
 
@@ -39,7 +39,7 @@ func TestAtomic_1(t *testing.T) {
 //		func StoreInt32(addr *int32, val int32)
 //	注意事项：
 //		a.atomic操作的对象是一个地址，你需要把可寻址的变量的地址作为参数传递给方法，而不是把变量的值传递给方法。
-//		b.可以利用计算机补码的知识，将减法变为加法 （参加 src/sync/atomic/doc.go#AddUint32）
+//		b.可以利用计算机补码的知识，将减法变为加法 （参加 src/sync/atomic/doc.go_knowledge#AddUint32）
 //			例如：针对func AddUint32(addr *uint32, delta uint32) (new uint32)，可以使用 AddUint32(&x, ^uint32(c-1))，
 //				 达到x=x-c的效果。尤其是减1这种操作，可以记为 AddUint32(&x, ^uint32(0))
 //	Go中的位操作：
