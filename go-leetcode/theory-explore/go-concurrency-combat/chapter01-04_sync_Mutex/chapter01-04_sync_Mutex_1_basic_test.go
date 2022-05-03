@@ -18,14 +18,14 @@ import (
 //	举例：count++不是一个原子操作。它至少包含几个步骤，比如读取变量count的当前值，对这个值加1，把结果再保存到count中。
 //		 因为不是原子操作，就可能有并发的问题。
 //	一个检测并发访问共享资源是否有问题的工具：https://go.dev/blog/race-detector，使用方法如下：
-//		go run -race counter.go
-//		go test -race counter.go
-//		go compile -race counter.go (由于这个工具实现方式，只能通过真正对实际地址进行读写访问的时候才能探测，所以它并不能在编译的时候发现data race的问题)。
-//		go tool compile -race -S counter.go // 将汇编列表打印到标准输出
-//			go tool compile工具的使用：https://www.cnblogs.com/linguoguo/p/11699006.html
+//		go_knowledge run -race counter.go_knowledge
+//		go_knowledge test -race counter.go_knowledge
+//		go_knowledge compile -race counter.go_knowledge (由于这个工具实现方式，只能通过真正对实际地址进行读写访问的时候才能探测，所以它并不能在编译的时候发现data race的问题)。
+//		go_knowledge tool compile -race -S counter.go_knowledge // 将汇编列表打印到标准输出
+//			go_knowledge tool compile工具的使用：https://www.cnblogs.com/linguoguo/p/11699006.html
 // (3)Q:如果Mutex已经被一个goroutine获取了锁，其它等待中的goroutine们只能一直等待。
 //		那么，等这个锁释放后，等待中的goroutine中哪一个会优先获取Mutex呢？
-//	  A:等待的goroutine们是以FIFO排队的。详见https://github.com/golang/go/blob/master/src/sync/mutex.go#L42
+//	  A:等待的goroutine们是以FIFO排队的。详见https://github.com/golang/go_knowledge/blob/master/src/sync/mutex.go_knowledge#L42
 func TestMutex_1(t *testing.T) {
 	// 互斥锁保护计数器
 	var mu sync.Mutex
@@ -100,7 +100,7 @@ func TestMutex_1(t *testing.T) {
 //			state字段：从右到左分别是，右边第1位代表锁是否被持有、右边第2位代表是否有唤醒的goroutine、右边第3位代表是否有饥饿的goroutine
 //					  剩下代表等待此锁的goroutine数。
 //			sema字段：等待者队列使用的信号量，用以阻塞/唤醒goroutine。
-//		2.获取锁的过程：具体流程可详见https://github.com/golang/go/blob/master/src/sync/mutex.go#L42
+//		2.获取锁的过程：具体流程可详见https://github.com/golang/go_knowledge/blob/master/src/sync/mutex.go_knowledge#L42
 //			a.若当前没有goroutine持有锁、没有唤醒的goroutine、没有锁饥饿、没有等待持有锁的goroutine，那么新来的goroutine就会直接获取到锁。
 //			b.若有唤醒的goroutine，则唤醒的goroutine与新来的goroutine争抢锁，争抢的方式采用自旋（这是因为临界区的代码大都耗时很短，锁可以很快释放，这样只需
 //		  	  浪费少许CPU资源就能避免昂贵的上下文切换，因此提升了程序性能）。
@@ -128,7 +128,7 @@ func TestMutex_2(t *testing.T) {
 //		i)编译时，使用共go vet copy.go检查即可。（推荐这种方式，最好不要依赖于运行时检查机制）
 //		  机制原理：https://github.com/golang/tools/blob/master/go/analysis/passes/copylock/copylock.go
 //	  	ii)Go在运行时，有死锁检查机制，能够发现死锁的goroutine；
-//	  	  详见https://github.com/golang/go/blob/master/src/runtime/proc.go#L4935
+//	  	  详见https://github.com/golang/go_knowledge/blob/master/src/runtime/proc.go_knowledge#L4935
 //	c.sync.Mutex不可重入，否则会导致死锁。
 //	  当然，我们通过hack设计一个可重入锁，这里有两种方式：
 //	  	i)方案一：通过hacker的方式获取到goroutine id，记录下获取锁的goroutine id，它可以实现Locker接口。
