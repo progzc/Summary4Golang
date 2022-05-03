@@ -20,6 +20,7 @@
   - 《Redis核心技术与实战》 [80%]
   - 《Kafka核心技术与实战》 [80%]
   - 《RPC实战与核心原理》 [88%]
+  - 《Go程序员面试笔试宝典》 [100%] 强烈推荐
 
 ## 2.Code Standards
 - Go Code Review Comments：
