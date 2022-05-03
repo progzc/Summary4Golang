@@ -1,3 +1,7 @@
+# 0. Blog
+
+- 官方博客：https://go.dev/blog/all
+
 # 1. Go语法
 
 ## 1.1 slice类型nil和空切片的区别?
@@ -160,7 +164,13 @@ func slicePointerOpt(s *[]int) {
 
 > 相关文章：[数组指针、切片指针与结构体指针](https://blog.csdn.net/u013792921/article/details/84565336)
 
-## 1.5 定时器
+## 1.5 错误处理
+
+
+
+> 参考文章：[Working with Errors in Go 1.13](https://go.dev/blog/go1.13-errors)、[Go 1.13中的错误处理](https://mp.weixin.qq.com/s/3gEf-vL_iAIaL_tWCddILQ)、[pkg/errors](https://pkg.go.dev/github.com/pkg/errors)
+
+## 1.6 定时器
 
 
 
