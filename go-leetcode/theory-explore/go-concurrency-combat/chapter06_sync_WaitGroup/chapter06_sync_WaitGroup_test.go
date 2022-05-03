@@ -30,7 +30,7 @@ func TestWaitGroup_1(t *testing.T) {
 //		noCopy: 辅助vet工具检查是否存在复制操作。如果你想要自己定义的数据结构不被复制使用，或者说，不能通过 vet 工具检查出复制使用的报警，
 //		        就可以通过嵌入 noCopy 这个数据类型来实现。
 //				type noCopy struct{}
-//				// Lock is a no-op used by -copylocks checker from `go_knowledge vet`.
+//				// Lock is a no-op used by -copylocks checker from `go vet`.
 //				func (*noCopy) Lock()   {}
 //				func (*noCopy) Unlock() {}
 //		state1: [3]uint32类型，记录了3个数，分别是计数值、waiter数、信号量
