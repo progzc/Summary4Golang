@@ -8,6 +8,10 @@ import (
 // 0378.有序矩阵中第K小的元素
 // https://leetcode-cn.com/problems/kth-smallest-element-in-a-sorted-matrix/
 
+// 类似题：
+// 0240.搜索二维矩阵 II
+// https://leetcode-cn.com/problems/search-a-2d-matrix-ii/
+
 // kthSmallest 直接排序
 // 时间复杂度: O(n^2*log(n))
 // 空间复杂度: O(n^2)

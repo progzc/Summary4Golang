@@ -13,10 +13,6 @@ import (
 // https://leetcode-cn.com/problems/kth-largest-element-in-an-array/
 // 复习巩固：快速排序+堆排序
 
-// 类似题：
-// 0240.搜索二维矩阵 II
-// https://leetcode-cn.com/problems/search-a-2d-matrix-ii/
-
 // findKthLargest 使用标准库
 // 时间复杂度: O(n*log(n))
 // 空间复杂度: O(log(n))
