@@ -75,6 +75,9 @@
   - https://github.com/go-gorm/gorm (操作mysql)
   - https://github.com/gomodule/redigo (操作redis)
   - https://github.com/Shopify/sarama (操作kafka)
+  - RPC调用
+    - grpc生态：https://github.com/grpc-ecosystem
+    - grpc数据校验：https://github.com/mwitkow/go-proto-validators
   
 ## 5.Improve Code
 - leetcode
