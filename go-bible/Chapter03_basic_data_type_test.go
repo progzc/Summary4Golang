@@ -49,9 +49,9 @@ func TestString4(t *testing.T) {
 }
 
 func TestString5(t *testing.T) {
-	fmt.Println(basename("a/b/c.go")) // "c"
-	fmt.Println(basename("c.d.go"))   // "c.d"
-	fmt.Println(basename("abc"))      // "abc"
+	fmt.Println(basename("a/b/c.go_knowledge")) // "c"
+	fmt.Println(basename("c.d.go_knowledge"))   // "c.d"
+	fmt.Println(basename("abc"))                // "abc"
 }
 
 func basename(s string) string {

@@ -115,7 +115,7 @@ func main() {
 	//    chanStream <-chan <-chan interface{},
 	//) <-chan interface{} {
 	//    valStream := make(chan interface{}) // <1>
-	//    go func() {
+	//    go_knowledge func() {
 	//        defer close(valStream)
 	//        for { // <2>
 	//            var stream <-chan interface{}

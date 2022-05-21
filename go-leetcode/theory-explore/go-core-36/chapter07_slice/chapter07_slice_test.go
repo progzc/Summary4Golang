@@ -49,7 +49,7 @@ func TestSlice_1(t *testing.T) {
 }
 
 // 关于切片的内存分配:
-// 源码见 D:/Program Files/go_knowledge/go1.16.8/src/runtime/slice.go_knowledge:125中的growslice函数
+// 源码见 D:/Program Files/go/go1.16.8/src/runtime/slice.go:125中的growslice函数
 // (1) 初始化切片时,若未指定容量,则容量等于长度
 // (2) 容量小于1024,扩容时按照1.5倍(实际考虑到内存对齐,会有细微差异)
 // (3) 容量大于1024,扩容按照1.25倍(实际考虑到内存对齐,会有细微差异)
