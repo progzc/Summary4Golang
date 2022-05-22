@@ -39,3 +39,18 @@ func longestCommonPrefix_2(strs []string) string {
 		i++
 	}
 }
+
+// longestCommonPrefix_3 空间进一步优化
+// 时间复杂度: O(n)
+// 空间复杂度: O(1)
+func longestCommonPrefix_3(strs []string) string {
+	i := 0
+	for {
+		for j := range strs {
+			if i >= len(strs[j]) || strs[0][i] != strs[j][i] {
+				return strs[0][:i]
+			}
+		}
+		i++
+	}
+}
