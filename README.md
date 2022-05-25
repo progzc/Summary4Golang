@@ -78,6 +78,9 @@
   - RPC调用
     - grpc生态：https://github.com/grpc-ecosystem
     - grpc数据校验：https://github.com/mwitkow/go-proto-validators
+- 单元测试
+  - 自动生成单元测试：https://github.com/cweill/gotests
+  - mock外部依赖(如rpc调用或者db调用)：https://github.com/golang/mock
   
 ## 5.Improve Code
 - leetcode
