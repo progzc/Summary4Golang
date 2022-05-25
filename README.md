@@ -80,8 +80,8 @@
     - grpc数据校验：https://github.com/mwitkow/go-proto-validators
 - 单元测试
   - 自动生成单元测试(这也是Goland内嵌的自动生成单元测试工具)：https://github.com/cweill/gotests
-  - mock外部依赖(如rpc调用/mysql调用/redis调用)：https://github.com/golang/mock
-  - mock外部依赖（如rpc调用,直接mock调用的函数/方法/变量）：https://github.com/agiledragon/gomonkey
+  - mock外部依赖(如rpc调用/mysql调用/redis调用：mock接口)：https://github.com/golang/mock
+  - mock外部依赖（如rpc调用/mysql调用/redis调用：直接mock调用的函数/方法/变量）：https://github.com/agiledragon/gomonkey
   
 ## 5.Improve Code
 - leetcode
