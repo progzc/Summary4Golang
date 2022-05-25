@@ -81,6 +81,7 @@
 - 单元测试
   - 自动生成单元测试(这也是Goland内嵌的自动生成单元测试工具)：https://github.com/cweill/gotests
   - mock外部依赖(如rpc调用或者db调用)：https://github.com/golang/mock
+  - mock外部依赖（如rpc调用,面向接口）：https://github.com/agiledragon/gomonkey
   
 ## 5.Improve Code
 - leetcode
