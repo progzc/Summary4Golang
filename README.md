@@ -83,6 +83,8 @@
   - mock外部依赖(如rpc调用/mysql调用/redis调用：mock接口)：https://github.com/golang/mock
   - mock外部依赖(如rpc调用/mysql调用/redis调用：直接mock调用的函数/方法/变量)：https://github.com/agiledragon/gomonkey
   - 断言：https://github.com/stretchr/testify
+- go工具
+  - go工具教程：https://github.com/hyper0x/go_command_tutorial 
   
 ## 5.Improve Code
 - leetcode
