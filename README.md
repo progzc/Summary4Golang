@@ -78,6 +78,7 @@
   - RPC调用
     - grpc生态：https://github.com/grpc-ecosystem
     - grpc数据校验：https://github.com/mwitkow/go-proto-validators
+  - 文件系统调用：https://github.com/fsnotify/fsnotify
 - 单元测试
   - 自动生成单元测试(这也是Goland内嵌的自动生成单元测试工具)：https://github.com/cweill/gotests
   - mock外部依赖(如rpc调用/mysql调用/redis调用：mock接口)：https://github.com/golang/mock
