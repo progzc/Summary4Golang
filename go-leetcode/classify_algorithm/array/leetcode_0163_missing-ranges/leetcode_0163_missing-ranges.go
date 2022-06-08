@@ -44,3 +44,28 @@ func helper(left, right int) string {
 	}
 	return sb.String()
 }
+
+// findMissingRanges_2
+// 时间复杂度: O(n)
+// 空间复杂度: O(1)
+func findMissingRanges_2(nums []int, lower int, upper int) []string {
+	var (
+		ans []string
+	)
+	// 预处理，这样就不需要考虑边界问题了
+	nums = append([]int{lower - 1}, nums...)
+	nums = append(nums, upper+1)
+
+	n := len(nums)
+	for i := 0; i < n-1; i++ {
+		if nums[i]+1 != nums[i+1] {
+			left, right := nums[i]+1, nums[i+1]-1
+			if left == right {
+				ans = append(ans, fmt.Sprintf("%d", left))
+			} else {
+				ans = append(ans, fmt.Sprintf("%d->%d", left, right))
+			}
+		}
+	}
+	return ans
+}
