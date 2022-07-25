@@ -81,8 +81,11 @@
   - 文件系统调用：https://github.com/fsnotify/fsnotify
 - 单元测试
   - 自动生成单元测试(这也是Goland内嵌的自动生成单元测试工具)：https://github.com/cweill/gotests
-  - mock外部依赖(如rpc调用/mysql调用/redis调用：mock接口)：https://github.com/golang/mock
-  - mock外部依赖(如rpc调用/mysql调用/redis调用：直接mock调用的函数/方法/变量)：https://github.com/agiledragon/gomonkey
+  - mock及打桩工具：
+    - mock接口：https://github.com/golang/mock
+    - mock函数/方法/变量：https://github.com/agiledragon/gomonkey
+    - 打桩变量：https://github.com/prashantv/gostub
+  - 测试框架：https://github.com/smartystreets/goconvey
   - 断言：https://github.com/stretchr/testify
 - go工具
   - go工具教程：https://github.com/hyper0x/go_command_tutorial
