@@ -85,6 +85,7 @@
     - mock接口：https://github.com/golang/mock
     - mock函数/方法/变量：https://github.com/agiledragon/gomonkey
     - 打桩变量：https://github.com/prashantv/gostub
+    - mock sql：https://github.com/DATA-DOG/go-sqlmock
   - 测试框架：https://github.com/smartystreets/goconvey
   - 断言：https://github.com/stretchr/testify
 - go工具
