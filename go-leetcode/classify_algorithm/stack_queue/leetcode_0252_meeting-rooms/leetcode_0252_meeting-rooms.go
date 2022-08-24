@@ -8,6 +8,9 @@ import "sort"
 // canAttendMeetings 排序
 // 时间复杂度: O(nlog(n))
 // 空间复杂度: O(1)
+// 注意特例：
+// 输入：[[7,11],[7,10]]; 输出: false
+// 输入：[[7,10],[7,11]]; 输出: false
 func canAttendMeetings(intervals [][]int) bool {
 	sort.Slice(intervals, func(i, j int) bool {
 		return intervals[i][0] < intervals[j][0]
