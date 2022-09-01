@@ -19,23 +19,23 @@ func minAvailableDuration(slots1 [][]int, slots2 [][]int, duration int) []int {
 
 	// 分情况讨论, 具体可参见 https://leetcode.cn/problems/meeting-scheduler/solution/golang-er-fen-cha-zhao-by-resara-7/
 	for i, j := 0, 0; i < len(slots1) && j < len(slots2); {
-		if slots1[i][0] >= slots2[j][1] {
+		if slots1[i][0] >= slots2[j][1] { // 对应图中的case1
 			j++
-		} else if slots1[i][1] >= slots2[j][1] && slots1[i][0] < slots2[j][1] {
+		} else if slots1[i][1] >= slots2[j][1] && slots1[i][0] < slots2[j][1] { // 对应图中的case2,case3
 			end := slots2[j][1]
 			start := max(slots1[i][0], slots2[j][0])
 			if end-start >= duration {
 				return []int{start, start + duration}
 			}
 			j++
-		} else if slots1[i][1] < slots2[j][1] && slots1[i][1] > slots2[j][0] {
+		} else if slots1[i][1] < slots2[j][1] && slots1[i][1] > slots2[j][0] { // 对应图中的case4,case5
 			end := slots1[i][1]
 			start := max(slots1[i][0], slots2[j][0])
 			if end-start >= duration {
 				return []int{start, start + duration}
 			}
 			i++
-		} else {
+		} else { // 对应图中的case6
 			i++
 		}
 	}
