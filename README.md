@@ -93,6 +93,8 @@
   - go工具教程：https://github.com/hyper0x/go_command_tutorial
   - go工具：https://golang.google.cn/cmd/go/
   - go generate: https://pkg.go.dev/golang.org/x/tools/cmd
+- go kit
+  - 浮点数的精确处理：https://github.com/shopspring/decimal
   
 ## 5.Improve Code
 - leetcode
