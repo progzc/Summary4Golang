@@ -95,6 +95,7 @@
   - go generate: https://pkg.go.dev/golang.org/x/tools/cmd
 - go kit
   - 浮点数的精确处理：https://github.com/shopspring/decimal
+  - 结构体转换(减少重复代码): https://github.com/mitchellh/mapstructure
   
 ## 5.Improve Code
 - leetcode
