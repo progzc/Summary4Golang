@@ -9,6 +9,8 @@ package leetcode_0261_graph_valid_tree
 //	b.BFS
 //	c.DFS
 
+// 并查集的总结：https://www.zhihu.com/question/25257633/answer/2298724917
+
 // validTree 并查集
 // 思路：树需要满足的两个条件是：没有环；连通分量为1
 // 时间复杂度: O(n)
