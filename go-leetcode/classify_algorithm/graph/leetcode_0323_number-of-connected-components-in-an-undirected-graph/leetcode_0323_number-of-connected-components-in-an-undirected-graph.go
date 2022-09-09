@@ -13,9 +13,7 @@ func countComponents(n int, edges [][]int) int {
 	}
 
 	for i := 0; i < len(edges); i++ {
-		if find(edges[i][0], p) != find(edges[i][1], p) {
-			union(edges[i][0], edges[i][1], p)
-		}
+		union(edges[i][0], edges[i][1], p)
 	}
 
 	c := 0
