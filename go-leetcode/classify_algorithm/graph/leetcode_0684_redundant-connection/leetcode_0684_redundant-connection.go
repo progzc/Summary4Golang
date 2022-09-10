@@ -4,6 +4,8 @@ package leetcode_0684_redundant_connection
 // https://leetcode.cn/problems/redundant-connection/
 
 // findRedundantConnection 并查集
+// 时间复杂度: O(n*log(n))
+// 空间复杂度: O(n)
 func findRedundantConnection(edges [][]int) []int {
 	n := len(edges)
 	parent, rank := make([]int, n+1), make([]int, n+1)
