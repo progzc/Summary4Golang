@@ -4,6 +4,8 @@ package leetcode_0547_number_of_provinces
 // https://leetcode.cn/problems/number-of-provinces/
 
 // findCircleNum 并查集（按秩合并+路径压缩）
+// 时间复杂度: O(n^2*log(n))
+// 空间复杂度: O(n)
 func findCircleNum(isConnected [][]int) int {
 	n := len(isConnected)
 	parent, rank := make([]int, n), make([]int, n)
