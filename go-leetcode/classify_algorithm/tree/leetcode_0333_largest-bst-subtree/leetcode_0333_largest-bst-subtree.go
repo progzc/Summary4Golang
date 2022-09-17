@@ -5,13 +5,17 @@ import "math"
 // 0333. 最大 BST 子树
 // https://leetcode.cn/problems/largest-bst-subtree/
 
+// 同下面题
+// 1373. 二叉搜索子树的最大键值和
+// https://leetcode.cn/problems/maximum-sum-bst-in-binary-tree/
+
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
 	Right *TreeNode
 }
 
-// largestBSTSubtree 中序遍历(常规解法)
+// largestBSTSubtree 层次遍历(常规解法)
 // 时间复杂度: O(n^2)
 // 空间复杂度: O(n)
 func largestBSTSubtree(root *TreeNode) int {
@@ -47,7 +51,7 @@ func largestBSTSubtree(root *TreeNode) int {
 	return max(largestBSTSubtree(root.Left), largestBSTSubtree(root.Right))
 }
 
-// largestBSTSubtree_2 中序遍历(优化解法)
+// largestBSTSubtree_2 后序遍历(优化解法)
 // 时间复杂度: O(n)
 // 空间复杂度: O(n)
 // 思路：一棵树如果是二叉搜索树，那么它的左右子树也必然是二叉搜索树，则对于一个节点为根的子树，
