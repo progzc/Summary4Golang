@@ -88,7 +88,7 @@ func searchFirstGreaterElement(nums []int, target int) int {
 	return -1
 }
 
-// searchLastLessElement 变种4: searchLastLessElement
+// searchLastLessElement 变种4: 查找最后一个小于等于 target 的元素
 func searchLastLessElement(nums []int, target int) int {
 	low, high := 0, len(nums)-1
 	for low <= high {
