@@ -16,7 +16,7 @@ func maxA(n int) int {
 	for i := 1; i <= n; i++ {
 		dp[i] = dp[i-1] + 1
 		// j+2<i的缘由：i-(j+2)>0
-		for j := 2; j+2 < i; j++ {
+		for j := 1; j+2 < i; j++ {
 			// 解释 i-(j+2)+1：i-(j+2)是Ctrl-V执行的次数, 末尾的+1是指原来的倍数
 			dp[i] = max(dp[i], dp[j]*(i-(j+2)+1))
 		}
