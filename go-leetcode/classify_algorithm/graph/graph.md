@@ -85,7 +85,10 @@ class UnionFind{
 ##3.Dijkstra最短路径
     - 适用于路径权重都是正数
     - 本质是贪心算法
+    - 单源
 ##4.Bellman-Ford算法
     - 适用于路径权重包含负数
+    - 单源
 ##5.Floyd-Warshall算法
+    - 多源
     
