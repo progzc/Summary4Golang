@@ -82,6 +82,8 @@ class UnionFind{
     - [839. 相似字符串组](https://leetcode.cn/problems/similar-string-groups/)
     - [1631. 最小体力消耗路径](https://leetcode.cn/problems/path-with-minimum-effort/)
 ##2.tarjan强连通分量
-
 ##3.Dijkstra最短路径
+    - 适用于路径权重都是正数
+##4.Bellman-Fold算法
+    - 适用于路径权重包含负数
     
