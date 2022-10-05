@@ -84,6 +84,8 @@ class UnionFind{
 ##2.tarjan强连通分量
 ##3.Dijkstra最短路径
     - 适用于路径权重都是正数
-##4.Bellman-Fold算法
+    - 本质是贪心算法
+##4.Bellman-Ford算法
     - 适用于路径权重包含负数
+##5.Floyd-Warshall算法
     
