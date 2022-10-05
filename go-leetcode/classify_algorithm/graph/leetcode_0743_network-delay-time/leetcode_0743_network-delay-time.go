@@ -5,6 +5,11 @@ import "math"
 // 0743. 网络延迟时间
 // https://leetcode.cn/problems/network-delay-time/
 
+// 几篇比较好的总结：
+//	吃透Dijkstra：https://leetcode.cn/problems/network-delay-time/solution/gtalgorithm-dan-yuan-zui-duan-lu-chi-tou-w3zc/
+//	一题七解：https://leetcode.cn/problems/network-delay-time/solution/by-tong-zhu-ud0k/
+//	五种最短路径算法总结：https://leetcode.cn/problems/network-delay-time/solution/dirkdtra-by-happysnaker-vjii/
+
 // networkDelayTime Dijkstra最短路径算法
 // 时间复杂度: O(n^2)
 // 空间复杂度: O(n^2)
