@@ -83,12 +83,38 @@ class UnionFind{
     - [1631. 最小体力消耗路径](https://leetcode.cn/problems/path-with-minimum-effort/)
 ##2.tarjan强连通分量
 ##3.Dijkstra最短路径
-    - 适用于路径权重都是正数
-    - 本质是贪心算法
-    - 单源
+- [宫水三叶】涵盖所有的「存图方式」与「最短路算法（详尽注释）」](https://leetcode.cn/problems/network-delay-time/solution/gong-shui-san-xie-yi-ti-wu-jie-wu-chong-oghpz/)
+- 适用于路径权重都是正数
+- 本质是广度优先搜索+贪心算法
+- 单源
+- 代码模板
+```c#
+public int Dijkstra(int k){ //k表示初始点， this.n, n = 终点
+        Array.Fill(distance, int.MaxValue/2); //搜索最短路径前以inf来代替未记录的两节点间距
+        distance[k] = 0; //k代表，出发点，从k到它自己的距离为0
+
+        for(int i = 1; i <= n; i++){
+            int t = -1; //两者不相邻，先初始-1
+            for(int j = 1; j <= n; j++){
+                //t == -1为true，第一次可执行，后面被j赋值
+                if(!visited[j] && (t == -1 || distance[t] > distance[j])) //找还未访问的节点
+                    t = j;
+            }
+            visited[t] = true; //表示为已访问元素
+
+            for(int j = 1; j <= n; j++) //对比路径大小
+                distance[j] = Math.Min(distance[j], distance[t] + nodes[t][j]); //比较最短距离
+        }
+        return distance[n];
+    }
+```
+- 相关题目
+    - [743. 网络延迟时间](https://leetcode.cn/problems/network-delay-time/)
 ##4.Bellman-Ford算法
-    - 适用于路径权重包含负数
-    - 单源
+- 适用于路径权重包含负数
+- 单源
+- 相关题目
+    - [787. K 站中转内最便宜的航班](https://leetcode.cn/problems/cheapest-flights-within-k-stops/)
 ##5.Floyd-Warshall算法
     - 多源
     
