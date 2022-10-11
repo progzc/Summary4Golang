@@ -68,6 +68,7 @@
   - https://github.com/ouqiang/timewheel (时间轮)
   - https://github.com/cweill/gotests (自动生成测试用例)
   - https://github.com/dtm-labs/dtf (分布式事务)
+  - https://github.com/bsm/redislock (redis分布式锁)
   - 文档书写
     - godoc：https://golang.org/x/tools/cmd/godoc (用来本地调试自己的GoDoc显示效果)
     - pkgsite：https://golang.org/x/pkgsite/cmd/pkgsite (在无法科学上网的时候，用来本地搭建GoDoc服务器之用) 
