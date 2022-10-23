@@ -101,7 +101,7 @@ func checkInclusion_2(s1 string, s2 string) bool {
 	return false
 }
 
-// checkInclusion 双指针(很棒的思路，推荐)
+// checkInclusion_3 双指针(很棒的思路，推荐)
 // 时间复杂度: O(n)
 // 空间复杂度：O(A),A=26
 func checkInclusion_3(s1 string, s2 string) bool {
