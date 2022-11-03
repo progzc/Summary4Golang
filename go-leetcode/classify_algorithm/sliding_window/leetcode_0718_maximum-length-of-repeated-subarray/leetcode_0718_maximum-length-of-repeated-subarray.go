@@ -34,8 +34,8 @@ func findLength(nums1 []int, nums2 []int) int {
 		for j := 1; j < n; j++ {
 			if nums1[i] == nums2[j] {
 				dp[i][j] = dp[i-1][j-1] + 1
+				ans = max(ans, dp[i][j])
 			}
-			ans = max(ans, dp[i][j])
 		}
 	}
 	return ans
