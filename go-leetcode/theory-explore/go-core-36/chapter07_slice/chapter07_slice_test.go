@@ -124,3 +124,21 @@ func TestSlice_3(t *testing.T) {
 	fmt.Println(s2)      // [10 20 30]
 	fmt.Println(s2[:10]) // [10 20 30 0 0 0 0 0 0 0]
 }
+
+func Test_slice(t *testing.T) {
+	s := []int{5}
+	s = append(s, 7)
+	s = append(s, 9)
+	x := append(s, 11)
+	y := append(s, 12)
+	fmt.Println(s, x, y) // [5 7 9] [5 7 9 12] [5 7 9 12]
+}
+
+func Test_slice_2(t *testing.T) {
+	s := []int{5}
+	s = append(s, 7)
+	s = append(s, 9)
+	x := append(s, 11)
+	y := append(s, 12, 13)
+	fmt.Println(s, x, y) // [5 7 9] [5 7 9 11] [5 7 9 12 13]
+}
