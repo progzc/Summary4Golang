@@ -234,3 +234,22 @@ func Test_chan_8(t *testing.T) {
 	<-doneC
 	close(doneC)
 }
+
+func Test_chan_9(t *testing.T) {
+	done := make(chan struct{})
+	go func() {
+		time.Sleep(time.Second * 3)
+		done <- struct{}{}
+	}()
+
+	for {
+		select {
+		case <-done:
+			close(done)
+			return
+		default:
+			fmt.Println("滴答滴答...")
+		}
+		time.Sleep(time.Second)
+	}
+}
