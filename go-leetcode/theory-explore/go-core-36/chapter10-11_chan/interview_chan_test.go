@@ -253,3 +253,39 @@ func Test_chan_9(t *testing.T) {
 		time.Sleep(time.Second)
 	}
 }
+
+func Test_chan_10(t *testing.T) {
+	a := []int{2, 4, 6}
+	b := []int{1, 3, 5, 7}
+	ans := add(a, b)
+	fmt.Println(ans)
+}
+
+func add(a, b []int) []int {
+	la, lb := len(a), len(b)
+	x, y := a, b
+	l := la
+	if lb > la {
+		l = lb
+		x, y = b, a
+	}
+
+	ch := make(chan int)
+	done := make(chan struct{})
+	c := make([]int, l)
+	go func() {
+		for _, v := range y {
+			ch <- v
+		}
+		close(ch)
+	}()
+	go func() {
+		for i, t := range x {
+			temp := <-ch
+			c[i] = temp + t
+		}
+		done <- struct{}{}
+	}()
+	<-done
+	return c
+}
