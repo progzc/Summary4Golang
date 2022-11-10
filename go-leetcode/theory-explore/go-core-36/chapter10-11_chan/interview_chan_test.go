@@ -145,3 +145,92 @@ func SeqPrint(number, target int) {
 	}
 	wg.Wait()
 }
+
+// Test_chan_6
+// 功能：2个协程交替打印字母和数字
+// 使用缓冲通道
+func Test_chan_6(t *testing.T) {
+	limit := 26
+	numChan := make(chan struct{}, 1)
+	charChan := make(chan struct{}, 1)
+	mainChan := make(chan struct{}, 1)
+	go func() {
+		for i := 0; i < limit; i++ {
+			<-charChan
+			fmt.Printf("%c\n", 'a'+i)
+			numChan <- struct{}{}
+		}
+	}()
+	go func() {
+		for i := 0; i < limit; i++ {
+			<-numChan
+			fmt.Println(i + 1)
+			charChan <- struct{}{}
+		}
+		mainChan <- struct{}{}
+	}()
+	charChan <- struct{}{}
+	<-mainChan
+	close(charChan)
+	close(numChan)
+	close(mainChan)
+}
+
+// Test_chan_7
+// 功能：2个协程交替打印字母和数字
+// 使用无缓冲通道
+func Test_chan_7(t *testing.T) {
+	limit := 26
+	numChan := make(chan struct{})
+	charChan := make(chan struct{})
+	mainChan := make(chan struct{})
+	go func() {
+		for i := 0; i < limit; i++ {
+			<-charChan
+			fmt.Printf("%c\n", 'a'+i)
+			numChan <- struct{}{}
+		}
+	}()
+	go func() {
+		for i := 0; i < limit; i++ {
+			<-numChan
+			fmt.Println(i + 1)
+			if i != limit-1 {
+				charChan <- struct{}{}
+			}
+		}
+		mainChan <- struct{}{}
+	}()
+	charChan <- struct{}{}
+	<-mainChan
+	close(charChan)
+	close(numChan)
+	close(mainChan)
+}
+
+// Test_chan_8
+// 功能：2个协程交替打印字母和数字
+func Test_chan_8(t *testing.T) {
+	numLock := sync.Mutex{}
+	charLock := sync.Mutex{}
+	numLock.Lock()
+	limit := 26
+	doneC := make(chan int, 1)
+	go func() {
+		for i := 0; i < limit; i++ {
+			numLock.Lock()
+			fmt.Println(i + 1)
+			charLock.Unlock()
+		}
+	}()
+	go func() {
+		for i := 0; i < limit; i++ {
+			charLock.Lock()
+			fmt.Println(fmt.Sprintf("%c", 'a'+i))
+			numLock.Unlock()
+		}
+		doneC <- 1
+	}()
+	<-doneC
+	close(doneC)
+}
