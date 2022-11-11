@@ -6,7 +6,7 @@ import "strings"
 // https://leetcode.cn/problems/remove-k-digits/
 
 // removeKdigits 单调递增（非严格）栈
-// 时间复杂度: O(nk)
+// 时间复杂度: O(n)
 // 空间复杂度: O(n)
 // 思路:
 //	a.丢弃k位数字,相当于保留n-k位数字
