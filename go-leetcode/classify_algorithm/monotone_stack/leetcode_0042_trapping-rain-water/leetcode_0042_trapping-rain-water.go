@@ -32,10 +32,10 @@ func trap(height []int) int {
 	return ans
 }
 
-// trap_2 单调不增栈
+// trap_2 单调递减(非严格)栈
 // 时间复杂度: O(n)
 // 空间复杂度: O(n)
-// 思路：画出柱状图+想到用单调不增栈
+// 思路：画出柱状图+想到用单调递减(非严格)栈
 func trap_2(height []int) int {
 	ans := 0
 	stack := []int{}
