@@ -39,7 +39,7 @@ func removeNthFromEnd_2(head *ListNode, n int) *ListNode {
 		stack = append(stack, node)
 		node = node.Next
 	}
-	prev := stack[len(stack)-1-n]
+	prev := stack[len(stack)-n-1]
 	prev.Next = prev.Next.Next
 	return dummy.Next
 }
