@@ -3,6 +3,10 @@ package leetcode_0316_remove_duplicate_letters
 // 0316. 去除重复字母
 // https://leetcode.cn/problems/remove-duplicate-letters/
 
+// 题目同:
+// 1081. 不同字符的最小子序列
+// https://leetcode.cn/problems/smallest-subsequence-of-distinct-characters/
+
 // removeDuplicateLetters 单调递增(非严格)栈
 // 时间复杂度: O(n)
 // 空间复杂度: O(n)
