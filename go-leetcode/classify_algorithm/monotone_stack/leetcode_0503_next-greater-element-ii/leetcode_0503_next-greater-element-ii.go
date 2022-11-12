@@ -3,7 +3,7 @@ package leetcode_0503_next_greater_element_ii
 // 0503. 下一个更大元素 II
 // https://leetcode.cn/problems/next-greater-element-ii/
 
-// nextGreaterElements 单调递减(严格)栈
+// nextGreaterElements 单调递减(非严格)栈
 // 时间复杂度: O(n)
 // 空间复杂度: O(n)
 // 思路：两次搜索
