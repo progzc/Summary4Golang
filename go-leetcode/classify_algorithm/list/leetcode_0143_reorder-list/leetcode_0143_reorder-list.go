@@ -8,7 +8,7 @@ type ListNode struct {
 	Next *ListNode
 }
 
-// reorderList 递归
+// reorderList 队列
 // 时间复杂度: O(n)
 // 空间复杂度: O(n)
 func reorderList(head *ListNode) {
