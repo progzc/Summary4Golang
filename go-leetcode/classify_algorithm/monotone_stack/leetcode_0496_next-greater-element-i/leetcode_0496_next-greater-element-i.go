@@ -5,7 +5,7 @@ package leetcode_0496_next_greater_element_i
 
 // nextGreaterElement 单调递增(严格)栈
 // 时间复杂度: O(m+n)
-// 空间复杂度: O(1)
+// 空间复杂度: O(n)
 func nextGreaterElement(nums1 []int, nums2 []int) []int {
 	m := make(map[int]int, len(nums2))
 	var stack []int
