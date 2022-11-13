@@ -11,14 +11,14 @@ package leetcode_0017_letter_combinations_of_a_phone_number
 //	m+n是输入数字的总个数。
 func letterCombinations(digits string) []string {
 	m := map[byte]string{
-		2: "abc",
-		3: "def",
-		4: "ghi",
-		5: "jkl",
-		6: "mno",
-		7: "pqrs",
-		8: "tuv",
-		9: "wxyz",
+		'2': "abc",
+		'3': "def",
+		'4': "ghi",
+		'5': "jkl",
+		'6': "mno",
+		'7': "pqrs",
+		'8': "tuv",
+		'9': "wxyz",
 	}
 	var (
 		ans []string
@@ -31,8 +31,8 @@ func letterCombinations(digits string) []string {
 			ans = append(ans, item)
 			return
 		}
-		// 注意事项：下面换成letters := m[digits[idx]]会出错
-		letters := m[digits[idx]-'0']
+		// 注意事项：下面换成letters := m[digits[idx]-'0']会出错
+		letters := m[digits[idx]]
 		for i := 0; i < len(letters); i++ {
 			dfs(idx+1, item+string(letters[i]))
 		}
