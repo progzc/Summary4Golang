@@ -12,7 +12,7 @@ type ListNode struct {
 
 // deleteDuplicates 顺序遍历
 // 时间复杂度: O(n)
-// 空间复杂度: O(n)
+// 空间复杂度: O(1)
 func deleteDuplicates(head *ListNode) *ListNode {
 	dummy := &ListNode{math.MinInt32, head}
 	first := dummy.Next

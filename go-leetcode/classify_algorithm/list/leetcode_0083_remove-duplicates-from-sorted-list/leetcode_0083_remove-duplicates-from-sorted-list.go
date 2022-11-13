@@ -10,7 +10,7 @@ type ListNode struct {
 
 // deleteDuplicates 顺序遍历
 // 时间复杂度: O(n)
-// 空间复杂度: O(n)
+// 空间复杂度: O(1)
 func deleteDuplicates(head *ListNode) *ListNode {
 	first := head
 	for first != nil && first.Next != nil {
