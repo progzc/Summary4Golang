@@ -23,8 +23,6 @@ func reorderList(head *ListNode) {
 		queue = queue[1 : len(queue)-1]
 		last.Next = first.Next
 		first.Next = last
-		if len(queue) > 0 {
-			queue[len(queue)-1].Next = nil
-		}
+		queue[len(queue)-1].Next = nil
 	}
 }
