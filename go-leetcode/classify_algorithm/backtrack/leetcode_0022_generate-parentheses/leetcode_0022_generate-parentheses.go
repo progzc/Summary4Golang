@@ -22,6 +22,7 @@ func generateParenthesis(n int) []string {
 		// 亦即递归终止条件
 		if left == 0 && right == 0 {
 			ans = append(ans, curStr)
+			return
 		}
 		// 剪枝
 		if left > right {
