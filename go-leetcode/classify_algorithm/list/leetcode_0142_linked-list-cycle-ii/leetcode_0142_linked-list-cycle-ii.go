@@ -31,11 +31,8 @@ func detectCycle_1(head *ListNode) *ListNode {
 // 快慢指针的思路：其实是一道 龟兔赛跑 的路径题，主要是画图分析出 a = c + (n-1)(b+c)
 func detectCycle_2(head *ListNode) *ListNode {
 	slow, fast := head, head
-	for fast != nil {
+	for fast != nil && fast.Next != nil {
 		slow = slow.Next
-		if fast.Next == nil {
-			return nil
-		}
 		fast = fast.Next.Next
 		if fast == slow {
 			p := head
