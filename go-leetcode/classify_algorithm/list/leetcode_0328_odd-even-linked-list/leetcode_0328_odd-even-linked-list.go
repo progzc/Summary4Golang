@@ -12,7 +12,7 @@ type ListNode struct {
 // 时间复杂度: O(n)
 // 空间复杂度: O(1)
 func oddEvenList(head *ListNode) *ListNode {
-	if head == nil || head.Next == nil {
+	if head == nil || head.Next == nil || head.Next.Next == nil {
 		return head
 	}
 	// odd代表奇数的链表
@@ -34,7 +34,7 @@ func oddEvenList(head *ListNode) *ListNode {
 		head = head.Next
 	}
 
-	curEven.Next = nil
 	curOdd.Next = even
+	curEven.Next = nil
 	return odd
 }
