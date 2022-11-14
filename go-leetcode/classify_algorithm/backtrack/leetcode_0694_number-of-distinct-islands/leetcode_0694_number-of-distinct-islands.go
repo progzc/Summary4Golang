@@ -25,6 +25,7 @@ func numDistinctIslands(grid [][]int) int {
 			if grid[i][j] == 1 {
 				sb := &strings.Builder{}
 				dfs(grid, i, j, sb, 0)
+				fmt.Println(i, j, sb.String())
 				m[sb.String()] += 1
 			}
 		}
@@ -43,5 +44,6 @@ func dfs(grid [][]int, row, column int, sb *strings.Builder, dir int) {
 	dfs(grid, row+1, column, sb, 2)
 	dfs(grid, row, column-1, sb, 3)
 	dfs(grid, row, column+1, sb, 4)
+	// 注意下面这行不能去掉,否则用例2不能通过
 	sb.WriteString(fmt.Sprintf("%d", -dir))
 }
