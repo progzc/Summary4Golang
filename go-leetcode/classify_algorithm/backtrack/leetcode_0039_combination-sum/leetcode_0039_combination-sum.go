@@ -6,6 +6,9 @@ package leetcode_0039_combination_sum
 // combinationSum dfs
 // 时间复杂度: O(n*2^n)
 // 空间复杂度: O(n)
+// 特点:
+//	a.无重复元素
+//	b.同一个数字可以无限制重复被选择
 func combinationSum(candidates []int, target int) [][]int {
 	var (
 		ans  [][]int
