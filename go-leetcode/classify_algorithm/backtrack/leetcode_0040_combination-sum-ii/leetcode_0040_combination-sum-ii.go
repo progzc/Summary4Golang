@@ -29,6 +29,7 @@ func combinationSum2(candidates []int, target int) [][]int {
 		}
 		for i := idx; i < n; i++ {
 			// 1.1 终止条件（大剪枝）
+			// 这里剪枝的前提是前面要排序
 			// 大剪枝：减去 candidates[i] 小于 0，减去后面的 candidates[i + 1]、candidates[i + 2] 肯定也小于 0，因此用 break
 			if target-candidates[i] < 0 {
 				break
