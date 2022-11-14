@@ -13,24 +13,28 @@ func combinationSum2(candidates []int, target int) [][]int {
 	// 0 排序
 	sort.Ints(candidates)
 
-	var ans [][]int
-	var comb []int
+	var (
+		ans  [][]int
+		comb []int
+		dfs  func(idx, target int)
+		n    = len(candidates)
+	)
 	// idx 从候选数组的idx位置开始搜索
 	// target 表示剩余
-	var dfs func(idx, target int)
 	dfs = func(idx, target int) {
 		// 2. 添加结果
 		if target == 0 {
 			ans = append(ans, append([]int(nil), comb...))
 			return
 		}
-		for i := idx; i < len(candidates); i++ {
+		for i := idx; i < n; i++ {
 			// 1.1 终止条件（大剪枝）
 			// 大剪枝：减去 candidates[i] 小于 0，减去后面的 candidates[i + 1]、candidates[i + 2] 肯定也小于 0，因此用 break
 			if target-candidates[i] < 0 {
 				break
 			}
 			// 1.2 终止条件（小剪枝）
+			// 这里剪枝的前提是前面要排序
 			// 小剪枝：同一层相同数值的结点，从第 2 个开始，候选数更少，结果一定发生重复，因此跳过，用 continue
 			if i > idx && candidates[i] == candidates[i-1] {
 				continue
