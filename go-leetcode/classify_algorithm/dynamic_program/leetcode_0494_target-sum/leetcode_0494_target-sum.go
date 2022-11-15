@@ -31,3 +31,26 @@ func findTargetSumWays(nums []int, target int) int {
 	}
 	return dp[newTarget]
 }
+
+// findTargetSumWays_2 dfs (快超时)
+func findTargetSumWays_2(nums []int, target int) int {
+	var (
+		n     = len(nums)
+		count = 0
+		dfs   func(idx, sum int)
+	)
+
+	dfs = func(idx, sum int) {
+		if idx == n && sum == target {
+			count++
+			return
+		}
+		if idx >= n {
+			return
+		}
+		dfs(idx+1, sum-nums[idx])
+		dfs(idx+1, sum+nums[idx])
+	}
+	dfs(0, 0)
+	return count
+}
