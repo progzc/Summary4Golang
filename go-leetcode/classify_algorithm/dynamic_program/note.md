@@ -3,6 +3,8 @@
 - [leetcode动态规划题目总结](https://leetcode-cn.com/circle/article/2Xxlw3/)
 - [背包问题九讲](https://github.com/tianyicui/pack/blob/master/V2.pdf)
 - [背包问题解法总结](https://oi-wiki.org/dp/dynamic/)
+- [Leetcode题解-动态规划](https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode%20%E9%A2%98%E8%A7%A3%20-%20%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92.md)
+- [用一种规律搞定背包问题](https://leetcode.cn/problems/combination-sum-iv/solution/xi-wang-yong-yi-chong-gui-lu-gao-ding-bei-bao-wen-/)
 
 ## 1. 背包DP
 [背包问题题目的归纳解法](https://leetcode-cn.com/problems/last-stone-weight-ii/solution/yi-pian-wen-zhang-chi-tou-bei-bao-wen-ti-5lfv/)
@@ -10,9 +12,10 @@
   - 背包问题大体的解题模板是两层循环，分别遍历物品nums和背包容量target，然后写转移方程
   - 根据背包的分类我们确定物品和容量遍历的先后顺序，根据问题的分类我们确定状态转移方程的写法
 ### 1.2 首先是背包分类的模板：
-  - 0/1背包：外循环nums,内循环target,target倒序且target>=nums\[i\];
-  - 完全背包：外循环nums,内循环target,target正序且target>=nums\[i\];
-  - 组合背包：外循环target,内循环nums,target正序且target>=nums\[i\];
+  - 0/1背包(元素不可复用)：外循环nums,内循环target,target倒序且target>=nums\[i\];
+  - 完全背包(元素可复用)：外循环nums,内循环target,target正序且target>=nums\[i\];
+  - 组合背包：
+    - 需要考虑顺序：外循环target,内循环nums,target正序且target>=nums\[i\];
   - 分组背包：这个比较特殊，需要三重循环：外循环背包bags,内部两层循环根据题目的要求转化为1,2,3三种背包类型的模板
 ### 1.3 然后是问题分类的模板：
   - 最值问题: dp\[i\] = max/min(dp\[i\], dp\[i-nums\]+1)或dp\[i\] = max/min(dp\[i\], dp\[i-num\]+nums);
@@ -21,6 +24,7 @@
 
 ### 1.4 经典例题
   - 0/1背包
+    - [139. 单词拆分](https://leetcode.cn/problems/word-break/)
     - [416.分割等和子集](https://leetcode-cn.com/problems/partition-equal-subset-sum/)
       - 0/1背包存在性问题
     - [494.目标和](https://leetcode-cn.com/problems/target-sum/)
@@ -33,6 +37,7 @@
       - 完全背包最值问题
     - [322.零钱兑换](https://leetcode-cn.com/problems/coin-change/)
       - 完全背包最值问题
+    - [474.一和零](https://leetcode.cn/problems/ones-and-zeroes/)
     - [518.零钱兑换II](https://leetcode-cn.com/problems/coin-change-2/)
       - 完全背包不考虑顺序的组合问题
 
