@@ -7,10 +7,17 @@ package leetcode_0494_target_sum
 // 时间复杂度: O(N*T)
 // 空间复杂度: O(T)
 // 思路：转化为如下的0/1背包问题
-// 数组和sum,目标和target, 正数和x,负数和y,则x+y=sum,x-y=target,
-// 那么x=(target+sum)/2=newTarget,y=(sum-target)/2
-// ==> 选nums里的数得到target的种数
+// 		数组和sum,目标和target, 正数和x,负数和y,则x+y=sum,x-y=target,
+// 		那么x=(target+sum)/2=newTarget,y=(sum-target)/2
+// 		==> 选nums里的数得到target的种数
 // 特点：0-1背包不考虑元素顺序的组合问题
+// 状态: dp[i][j]表示在数组 nums 的前 i 个数中选取元素，使得这些元素之和等于 j 的方案数。
+// 初始值:
+//		dp[0][j] = 1,j==0
+//		dp[0][j] = 0,j>=1
+// 状态转移方程: 1<=i<=n
+// 		dp[i][j] = dp[i-1][j], j<nums[i]
+//		dp[i][j] = dp[i-1][j]+dp[i-1][j-nums[i]], j>=nums[i]
 func findTargetSumWays(nums []int, target int) int {
 	sum := 0
 	for _, num := range nums {
