@@ -14,6 +14,7 @@ func combinationSum3(k int, n int) [][]int {
 		dfs  func(begin, count, target int)
 	)
 
+	start, end := 1, 9
 	// begin 从数字几开始进行选择
 	// count 已经选择了多少个数
 	// target 剩下数的和
@@ -23,7 +24,7 @@ func combinationSum3(k int, n int) [][]int {
 			return
 		}
 
-		for i := begin; i <= 9; i++ {
+		for i := begin; i <= end; i++ {
 			if target-i < 0 {
 				break
 			}
@@ -32,6 +33,6 @@ func combinationSum3(k int, n int) [][]int {
 			comb = comb[:len(comb)-1]
 		}
 	}
-	dfs(1, 0, n)
+	dfs(start, 0, n)
 	return ans
 }
