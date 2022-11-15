@@ -5,7 +5,7 @@ package leetcode_0377_combination_sum_iv
 
 // combinationSum4 超时
 // 特点:
-//	a.数组元素都是正数（假设若是负数呢?又该如何处理）
+//	a.数组元素都是正数（假设若是负数呢?又该如何处理。如果允许负数出现，则必须限制排列的最大长度，避免出现无限长度的排列，才能计算排列数。）
 //	b.数组元素是不同的
 //	c.数组元素可无限次取
 //	d.顺序不同的序列被视作不同的组合
@@ -45,6 +45,7 @@ func combinationSum4(nums []int, target int) int {
 // 时间复杂度: O(N*T)
 // 空间复杂度: O(T)
 // 思路：考虑顺序的组合背包
+//	状态: dp[i]: 选取的元素之和等于i的方案数
 func combinationSum4_2(nums []int, target int) int {
 	dp := make([]int, target+1)
 	// 注意事项：只有当不选取任何元素时，元素之和才为0，因此只有1种方案
