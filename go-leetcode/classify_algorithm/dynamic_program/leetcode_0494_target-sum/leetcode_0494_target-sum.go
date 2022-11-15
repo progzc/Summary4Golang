@@ -33,6 +33,8 @@ func findTargetSumWays(nums []int, target int) int {
 }
 
 // findTargetSumWays_2 dfs (快超时)
+// 时间复杂度: O(2^n)
+// 空间复杂度: O(n)
 func findTargetSumWays_2(nums []int, target int) int {
 	var (
 		n     = len(nums)
@@ -41,11 +43,10 @@ func findTargetSumWays_2(nums []int, target int) int {
 	)
 
 	dfs = func(idx, sum int) {
-		if idx == n && sum == target {
-			count++
-			return
-		}
-		if idx >= n {
+		if idx == n {
+			if sum == target {
+				count++
+			}
 			return
 		}
 		dfs(idx+1, sum-nums[idx])
