@@ -1,5 +1,7 @@
 package leetcode_0139_word_break
 
+import "sort"
+
 // 0139.单词拆分
 // https://leetcode-cn.com/problems/word-break/
 
@@ -25,4 +27,33 @@ func wordBreak(s string, wordDict []string) bool {
 		}
 	}
 	return dp[len(s)]
+}
+
+// wordBreak_2 dfs (超时)
+func wordBreak_2(s string, wordDict []string) bool {
+	sort.Slice(wordDict, func(i, j int) bool {
+		return len(wordDict[i]) < len(wordDict[j])
+	})
+	var (
+		dfs func(begin int, str string) bool
+		n   = len(wordDict)
+	)
+	dfs = func(begin int, str string) bool {
+		if begin < n {
+			if str == s {
+				return true
+			}
+		}
+
+		for i := begin; i < n; i++ {
+			if len(wordDict[i])+len(str) > len(s) {
+				break
+			}
+			if dfs(begin, str+wordDict[i]) {
+				return true
+			}
+		}
+		return false
+	}
+	return dfs(0, "")
 }
