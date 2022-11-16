@@ -7,9 +7,54 @@ import "math"
 
 // maxSubArray 动态规划
 // 时间复杂度: O(n)
-// 空间复杂度: O(1)
-// 思路：用f(i)代表以第i个数结尾的「连续子数组的最大和」，则f(i)=max{f(i−1)+nums[i],nums[i]}
+// 空间复杂度: O(n)
+// 思路：
+//	状态: dp[i] 代表以元素 nums[i] 为结尾的连续子数组最大和。
+//	转移方程: 若 dp[i-1] ≤ 0 ，说明 dp[i-1] 对 dp[i] 产生负贡献，即 dp[i-1]+nums[i] 还不如 nums[i] 本身大.
+//		当dp[i-1]>0时, dp[i] = dp[i-1] + nums[i];
+//		当dp[i-1]≤0时, dp[i] = nums[i];
+//	初始状态: dp[0] = nums[0], 即以 nums[0] 结尾的连续子数组最大和为 nums[0].
 func maxSubArray(nums []int) int {
+	n := len(nums)
+	if n == 0 {
+		return 0
+	}
+	if n == 1 {
+		return nums[0]
+	}
+
+	dp := make([]int, n)
+	dp[0] = nums[0]
+	ans := math.MinInt32
+	ans = max(ans, dp[0])
+	for i := 1; i < n; i++ {
+		if dp[i-1] > 0 {
+			dp[i] = dp[i-1] + nums[i]
+		} else {
+			dp[i] = nums[i]
+		}
+		ans = max(ans, dp[i])
+	}
+	return ans
+}
+
+func max(x, y int) int {
+	if x > y {
+		return x
+	}
+	return y
+}
+
+// maxSubArray_2 动态规划
+// 时间复杂度: O(n)
+// 空间复杂度: O(1)
+// 思路：
+//	状态: dp[i] 代表以元素 nums[i] 为结尾的连续子数组最大和。
+//	转移方程: 若 dp[i-1] ≤ 0 ，说明 dp[i-1] 对 dp[i] 产生负贡献，即 dp[i-1]+nums[i] 还不如 nums[i] 本身大.
+//		当dp[i-1]>0时, dp[i] = dp[i-1] + nums[i];
+//		当dp[i-1]≤0时, dp[i] = nums[i];
+//	初始状态: dp[0] = nums[0], 即以 nums[0] 结尾的连续子数组最大和为 nums[0].
+func maxSubArray_2(nums []int) int {
 	ans, pre := math.MinInt32, math.MinInt32
 	for _, num := range nums {
 		if pre+num < num {
@@ -20,11 +65,4 @@ func maxSubArray(nums []int) int {
 		ans = max(ans, pre)
 	}
 	return ans
-}
-
-func max(x, y int) int {
-	if x > y {
-		return x
-	}
-	return y
 }
