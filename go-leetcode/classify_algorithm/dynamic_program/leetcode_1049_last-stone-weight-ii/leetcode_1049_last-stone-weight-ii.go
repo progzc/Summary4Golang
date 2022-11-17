@@ -50,25 +50,24 @@ func lastStoneWeightII_2(stones []int) int {
 	// 求解01背包问题
 	target := sum / 2
 	n := len(stones)
-	dp := make([][]int, n)
-	for i := 0; i < n; i++ {
+	dp := make([][]int, n+1)
+	for i := 0; i < n+1; i++ {
 		dp[i] = make([]int, target+1)
 	}
-	for j := 0; j < target+1; j++ {
-		if stones[0] <= j {
-			dp[0][j] = stones[0]
-		}
-	}
-	for i := 1; i < n; i++ {
-		for j := 1; j < target+1; j++ {
-			if stones[i] > j {
+
+	// 初始值: 当 0 =< j< target+1 时, dp[0][j] = 0
+	// 默认就满足初始化条件
+
+	for i := 1; i < n+1; i++ {
+		for j := 0; j < target+1; j++ {
+			if stones[i-1] > j {
 				dp[i][j] = dp[i-1][j]
 			} else {
-				dp[i][j] = max(dp[i-1][j], dp[i-1][j-stones[i]]+stones[i])
+				dp[i][j] = max(dp[i-1][j], dp[i-1][j-stones[i-1]]+stones[i-1])
 			}
 		}
 	}
-	return sum - 2*dp[n-1][target]
+	return sum - 2*dp[n][target]
 }
 
 // lastStoneWeightII_3 动态规划（二维优化成一维）
