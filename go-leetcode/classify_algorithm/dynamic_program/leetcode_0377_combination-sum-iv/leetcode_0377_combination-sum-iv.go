@@ -33,15 +33,15 @@ func combinationSum4(nums []int, target int) int {
 //		3.最后一个数选择nums[2]，方案数为dp[len-1][target-nums[2]]
 //		....
 func combinationSum4_2(nums []int, target int) int {
-	n := len(nums)
-	dp := make([][]int, target+1)
-	for i := 0; i < target+1; i++ {
-		dp[i] = make([]int, n+1)
+	// 因为 nums[i] 最小值为 1，因此构成答案的最大长度为 target
+	l := target
+	dp := make([][]int, l+1)
+	for i := 0; i < l+1; i++ {
+		dp[i] = make([]int, target+1)
 	}
 
 	// 初始化
 	dp[0][0] = 1
-	l := target
 	ans := 0
 	for i := 1; i < l+1; i++ {
 		for j := 0; j < target+1; j++ {
