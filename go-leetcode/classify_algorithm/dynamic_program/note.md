@@ -57,6 +57,7 @@
       - 多维0/1背包
 ## 2. 线性DP
   - [53.最大子数组和](https://leetcode-cn.com/problems/maximum-subarray/)
+  - [152.乘积最大子数组](https://leetcode.cn/problems/maximum-product-subarray/)
   - [300.最长递增子序列](https://leetcode-cn.com/problems/longest-increasing-subsequence/)
   - [1143.最长公共子序列](https://leetcode-cn.com/problems/longest-common-subsequence/)
     - 二维动态规划
