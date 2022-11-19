@@ -21,7 +21,7 @@ type TreeNode struct {
 //		a.x的左子树包含p,且x的右子树包含q，则x即为最近公共祖先
 //		b.x的左子树包含q,且x的右子树包含p，则x即为最近公共祖先
 //	(x==p||x==q) && (f(x_L)||f(x_R)：
-//		c.x为p节点，且x的右或右子树包含q，则p即为最近公共祖先
+//		c.x为p节点，且x的左或右子树包含q，则p即为最近公共祖先
 //		d.x为q节点，且x的左或右子树包含p，则q即为最近公共祖先
 func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 	if root == nil {
