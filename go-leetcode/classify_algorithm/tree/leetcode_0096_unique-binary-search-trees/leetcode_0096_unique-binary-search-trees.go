@@ -20,7 +20,7 @@ func numTrees(n int) int {
 	return count
 }
 
-// numTrees_2 dfs+记忆法搜索（超时）
+// numTrees_2 dfs+记忆法搜索（勉强可以通过）
 // 时间复杂度: O(n^2)
 // 空间复杂度: O(n)
 func numTrees_2(n int) int {
@@ -39,10 +39,19 @@ func numTrees_2(n int) int {
 
 		count := 0
 		for i := 1; i <= n; i++ {
-			left := numTrees(i - 1)
-			m[i-1] = left
-			right := numTrees(n - i)
-			m[n-i] = right
+			var left, right int
+			if v, ok := m[i-1]; ok {
+				left = v
+			} else {
+				left = numTrees(i - 1)
+				m[i-1] = left
+			}
+			if v, ok := m[n-i]; ok {
+				right = v
+			} else {
+				right = numTrees(n - i)
+				m[n-i] = right
+			}
 			count += left * right
 		}
 		m[n] = count
