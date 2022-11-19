@@ -46,3 +46,37 @@ func generateTrees(n int) []*TreeNode {
 	}
 	return dfs(nums)
 }
+
+// generateTrees_2 递归(优化时间复杂度)
+// 时间复杂度:
+// 空间复杂度:
+func generateTrees_2(n int) []*TreeNode {
+	if n == 0 {
+		return nil
+	}
+
+	var dfs func(start, end int) []*TreeNode
+	dfs = func(start, end int) []*TreeNode {
+		var ans []*TreeNode
+		if start > end {
+			return []*TreeNode{nil}
+		}
+		for i := start; i <= end; i++ {
+			// 左子树集合
+			lefts := dfs(start, i-1)
+			// 右子树集合
+			rights := dfs(i+1, end)
+			// 组装成树
+			for _, left := range lefts {
+				for _, right := range rights {
+					root := &TreeNode{Val: i}
+					root.Left = left
+					root.Right = right
+					ans = append(ans, root)
+				}
+			}
+		}
+		return ans
+	}
+	return dfs(1, n)
+}
