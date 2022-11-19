@@ -3,6 +3,10 @@ package leetcode_0236_lowest_common_ancestor_of_a_binary_tree
 // 0236.二叉树的最近公共祖先
 // https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/
 
+// 题目同:
+// 235. 二叉搜索树的最近公共祖先
+// https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-search-tree/
+
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
