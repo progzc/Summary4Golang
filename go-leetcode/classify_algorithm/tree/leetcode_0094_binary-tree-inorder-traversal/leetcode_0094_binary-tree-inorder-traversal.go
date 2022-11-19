@@ -9,7 +9,7 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-// inorderTraversal_1 递归 深度优先遍历
+// inorderTraversal_1 递归法
 // 时间复杂度: O(n)
 // 空间复杂度: O(log(n))，当二叉树退化为一条链时空间复杂度最差,为O(n)
 func inorderTraversal_1(root *TreeNode) []int {
@@ -29,7 +29,7 @@ func inorderTraversal_1(root *TreeNode) []int {
 	return ans
 }
 
-// inorderTraversal_2 迭代 广度优先遍历
+// inorderTraversal_2 迭代
 // 时间复杂度: O(n)
 // 空间复杂度: O(n)
 func inorderTraversal_2(root *TreeNode) []int {
