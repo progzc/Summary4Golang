@@ -23,7 +23,7 @@ func diameterOfBinaryTree(root *TreeNode) int {
 		depth func(node *TreeNode) int
 	)
 
-	// depth函数即为该二叉树的最大深度
+	// depth 以node节点为起始点出发的最大深度
 	depth = func(node *TreeNode) int {
 		if node == nil {
 			return 0
