@@ -21,14 +21,13 @@ func verifyPostorder(postorder []int) bool {
 		}
 	}
 
-	isVerify := true
 	if idx > -1 {
 		for i := idx + 1; i < n-1; i++ {
 			if postorder[i] <= num {
-				isVerify = false
+				return false
 			}
 		}
-		return isVerify && verifyPostorder(postorder[:idx]) && verifyPostorder(postorder[idx:n-1])
+		return verifyPostorder(postorder[:idx]) && verifyPostorder(postorder[idx:n-1])
 	}
 	return verifyPostorder(postorder[:n-1])
 }
