@@ -5,6 +5,10 @@ import "math"
 // 124. 二叉树中的最大路径和
 // https://leetcode.cn/problems/binary-tree-maximum-path-sum/
 
+// 同以下题目类似:
+// 687. 最长同值路径
+// https://leetcode.cn/problems/longest-univalue-path/
+
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
@@ -23,6 +27,8 @@ func maxPathSum(root *TreeNode) int {
 		dfs func(root *TreeNode) int
 		ans = math.MinInt32
 	)
+
+	// dfs 定义从root节点为起始点出发的最大路径和
 	dfs = func(root *TreeNode) int {
 		if root == nil {
 			return 0
