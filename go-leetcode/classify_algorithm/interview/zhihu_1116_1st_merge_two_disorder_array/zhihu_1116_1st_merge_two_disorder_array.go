@@ -14,12 +14,6 @@ func combine(nums1, nums2 []int) []int {
 	})
 
 	len1, len2 := len(nums1), len(nums2)
-	if len1 == 0 {
-		return nums2
-	}
-	if len2 == 0 {
-		return nums1
-	}
 
 	p1, p2 := 0, 0
 	for p1 < len1 && p2 < len2 {
