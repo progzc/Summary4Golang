@@ -1,4 +1,4 @@
-package futu_go_basic
+package futu_20221124_go_basic
 
 import (
 	"errors"
