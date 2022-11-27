@@ -48,6 +48,30 @@ func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 	return left
 }
 
+// lowestCommonAncestor_4
+// 注意：对比与 lowestCommonAncestor 写法的异同
+func lowestCommonAncestor_4(root, p, q *TreeNode) *TreeNode {
+	if root == nil {
+		return nil
+	}
+	if root == p || root == q {
+		return root
+	}
+	x := lowestCommonAncestor(root.Left, p, q)
+	y := lowestCommonAncestor(root.Right, p, q)
+	if x != nil && y != nil {
+		return root
+	}
+	if x == nil {
+		return y
+	}
+
+	if y == nil {
+		return x
+	}
+	return nil
+}
+
 // lowestCommonAncestor_2 二次遍历
 // 时间复杂度: O(n)
 // 空间复杂度: O(n)
