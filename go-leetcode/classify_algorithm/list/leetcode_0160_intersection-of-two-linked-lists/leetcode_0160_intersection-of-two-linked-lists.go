@@ -35,6 +35,9 @@ func getIntersectionNode_2(headA, headB *ListNode) *ListNode {
 		return nil
 	}
 	pa, pb := headA, headB
+	// 这里很巧妙:
+	//	不相交：pa和pb会走过相同的路径,最后pa==pb==nil
+	//	相交：pa和pb会走过相同的路径,最后pa==pb==某个node
 	for pa != pb {
 		if pa == nil {
 			pa = headB
