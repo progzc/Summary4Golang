@@ -50,3 +50,30 @@ func getIntersectionNode_2(headA, headB *ListNode) *ListNode {
 	}
 	return pa
 }
+
+// getIntersectionNode_3 双指针
+// 时间复杂度: O(n)
+// 空间复杂度: O(1)
+func getIntersectionNode_3(headA, headB *ListNode) *ListNode {
+	dummy1 := &ListNode{0, headA}
+	dummy2 := &ListNode{0, headB}
+	x, y := dummy1, dummy2
+	f1, f2 := true, true
+	for x != nil && y != nil {
+		if x == y {
+			return x
+		}
+		x = x.Next
+		if x == nil && f1 {
+			x = dummy2.Next
+			f1 = !f1
+		}
+
+		y = y.Next
+		if y == nil && f2 {
+			y = dummy1.Next
+			f2 = !f2
+		}
+	}
+	return nil
+}
