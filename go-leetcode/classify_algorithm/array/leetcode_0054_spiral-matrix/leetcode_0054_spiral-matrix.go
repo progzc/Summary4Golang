@@ -3,6 +3,58 @@ package leetcode_0054_spiral_matrix
 // 0054.螺旋矩阵
 // https://leetcode-cn.com/problems/spiral-matrix/
 
+// spiralOrder_3 模拟
+// 时间复杂度: O(m*n)
+// 空间复杂度: O(m*n)
+// 思路：
+//	1.首先设定上下左右边界
+//	2.其次向右移动到最右，此时第一行因为已经使用过了，可以将其从图中删去，体现在代码中就是重新定义上边界
+//	3.判断若重新定义后，上下边界交错，表明螺旋矩阵遍历结束，跳出循环，返回答案
+//	4.若上下边界不交错，则遍历还未结束，接着向下向左向上移动，操作过程与第一，二步同理
+//	5.不断循环以上步骤，直到某两条边界交错，跳出循环，返回答案
+func spiralOrder_3(matrix [][]int) []int {
+	var ans []int
+	if len(matrix) == 0 || len(matrix[0]) == 0 {
+		return ans
+	}
+	up, down, left, right := 0, len(matrix)-1, 0, len(matrix[0])-1
+	for true {
+		for col := left; col <= right; col++ {
+			ans = append(ans, matrix[up][col])
+		}
+		up++
+		if up > down {
+			break
+		}
+
+		for row := up; row <= down; row++ {
+			ans = append(ans, matrix[row][right])
+
+		}
+		right--
+		if left > right {
+			break
+		}
+
+		for col := right; col >= left; col-- {
+			ans = append(ans, matrix[down][col])
+		}
+		down--
+		if up > down {
+			break
+		}
+
+		for row := down; row >= up; row-- {
+			ans = append(ans, matrix[row][left])
+		}
+		left++
+		if left > right {
+			break
+		}
+	}
+	return ans
+}
+
 // spiralOrder 模拟
 // 时间复杂度: O(m*n)
 // 空间复杂度: O(m*n)
