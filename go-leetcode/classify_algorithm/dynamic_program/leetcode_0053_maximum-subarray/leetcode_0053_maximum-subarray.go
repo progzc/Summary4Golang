@@ -45,6 +45,30 @@ func max(x, y int) int {
 	return y
 }
 
+// maxSubArray_3 动态规划
+// 时间复杂度: O(n)
+// 空间复杂度: O(1)
+func maxSubArray_3(nums []int) int {
+	n := len(nums)
+	if n == 0 {
+		return 0
+	}
+
+	pre := nums[0]
+	ans := nums[0]
+	for i := 1; i < n; i++ {
+		var cur int
+		if pre < 0 {
+			cur = nums[i]
+		} else {
+			cur = pre + nums[i]
+		}
+		ans = max(ans, cur)
+		pre = cur
+	}
+	return ans
+}
+
 // maxSubArray_2 动态规划
 // 时间复杂度: O(n)
 // 空间复杂度: O(1)
