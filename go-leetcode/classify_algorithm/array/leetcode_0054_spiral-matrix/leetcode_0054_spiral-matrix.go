@@ -29,7 +29,6 @@ func spiralOrder_3(matrix [][]int) []int {
 
 		for row := up; row <= down; row++ {
 			ans = append(ans, matrix[row][right])
-
 		}
 		right--
 		if left > right {
