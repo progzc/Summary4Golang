@@ -48,6 +48,40 @@ func reverseBetween(head *ListNode, left int, right int) *ListNode {
 	return dummyNode.Next
 }
 
+// reverseBetween_3 常规思路
+// 时间复杂度: O(2n)
+// 空间复杂度: O(1)
+// 思路：
+//	找准4个节点，先切割，再反转，最后再接回来。
+//	使用虚拟节点可以简化 边界条件
+// 缺点：需要遍历两次，一次是找到leftNode和rightNode；另一次是反转链表
+func reverseBetween_3(head *ListNode, left int, right int) *ListNode {
+	dummy := &ListNode{0, head}
+	pre, end := dummy, dummy
+
+	left--
+	for left > 0 {
+		pre = pre.Next
+		end = end.Next
+		left--
+		right--
+	}
+
+	for right > 0 {
+		end = end.Next
+		right--
+	}
+
+	start := pre.Next
+	next := end.Next
+	pre.Next = nil
+	end.Next = nil
+	reverse(start)
+	start.Next = next
+	pre.Next = end
+	return dummy.Next
+}
+
 func reverse(head *ListNode) {
 	var pre *ListNode
 	cur := head
