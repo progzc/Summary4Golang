@@ -24,6 +24,33 @@ func lengthOfLIS(nums []int) int {
 	return ans
 }
 
+// lengthOfLIS 动态规划
+// 时间复杂度：O(n*n)
+// 空间复杂度：O(n)
+// 状态：dp[i]：以nums[i]结尾的最长子序列的长度
+// 转移方程：dp[i]=max(dp[j]+1),其中0<=j<i 且 nums[j]<nums[i]
+func lengthOfLIS_3(nums []int) int {
+	n := len(nums)
+	if n < 2 {
+		return n
+	}
+
+	dp := make([]int, n)
+	dp[0] = 1
+
+	maxLen := 1
+	for i := 1; i < n; i++ {
+		dp[i] = 1
+		for j := 0; j < i; j++ {
+			if nums[j] < nums[i] {
+				dp[i] = max(dp[i], dp[j]+1)
+			}
+		}
+		maxLen = max(maxLen, dp[i])
+	}
+	return maxLen
+}
+
 // lengthOfLIS_2 贪心+二分
 // 时间复杂度：O(n*log(n))
 // 空间复杂度：O(n)
