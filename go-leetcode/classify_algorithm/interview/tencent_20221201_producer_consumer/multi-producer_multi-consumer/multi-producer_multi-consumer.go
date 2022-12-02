@@ -41,11 +41,7 @@ func monitor(m, n int) {
 				//fmt.Printf("producer: %d; value: %d\n", i+1, start)
 				time.Sleep(time.Second * 1)
 				start += m
-				if i+1 < m {
-					ms[i+1] <- struct{}{}
-				} else {
-					ms[0] <- struct{}{}
-				}
+				ms[(i+1)%m] <- struct{}{}
 			}
 		}(i)
 	}
@@ -57,11 +53,7 @@ func monitor(m, n int) {
 				x := <-ch
 				fmt.Printf("consumer: %d; value: %d\n", j+1, x)
 				time.Sleep(time.Second * 1)
-				if j+1 < n {
-					ns[j+1] <- struct{}{}
-				} else {
-					ns[0] <- struct{}{}
-				}
+				ns[(j+1)%n] <- struct{}{}
 			}
 		}(j)
 	}
