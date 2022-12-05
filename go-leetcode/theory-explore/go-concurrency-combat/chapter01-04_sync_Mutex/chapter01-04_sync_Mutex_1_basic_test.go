@@ -223,7 +223,7 @@ func (m *RecursiveMutex) Unlock() {
 		return
 	}
 	// 此goroutine最后一次调用，需要释放锁
-	atomic.StoreInt64(&m.owner, -1)
+	atomic.StoreInt64(&m.owner, 0)
 	m.Mutex.Unlock()
 }
 
