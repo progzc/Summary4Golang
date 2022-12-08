@@ -7,6 +7,9 @@ package leetcode_0583_delete_operation_for_two_strings
 // 【583.两个字符串的删除操作】：只允许插入
 // 【72.编辑距离】：允许删除/插入/修改
 
+// 也可以借鉴：
+// 【1143.最长公共子序列】
+
 // minDistance
 // 时间复杂度：O(m*n)
 // 空间复杂度：O(m*n)
@@ -49,6 +52,43 @@ func minDistance(word1 string, word2 string) int {
 		}
 	}
 	return dp[n][m]
+}
+
+// minDistance_2
+// 时间复杂度：O(m*n)
+// 空间复杂度：O(m*n)
+// 思路:
+//	可以计算两个字符串的最长公共子序列的长度，然后分别计算两个字符串的长度和最长公共子序列的长度之差，即为最小操作步数。
+func minDistance_2(word1 string, word2 string) int {
+	n, m := len(word1), len(word2)
+	// 若有一个字符串为空串
+	if n*m == 0 {
+		return n + m
+	}
+
+	// dp数组及边界状态初始化
+	dp := make([][]int, n+1)
+	for i := range dp {
+		dp[i] = make([]int, m+1)
+	}
+
+	for i := 0; i < n; i++ {
+		for j := 0; j < m; j++ {
+			if word1[i] == word2[j] {
+				dp[i+1][j+1] = dp[i][j] + 1
+			} else {
+				dp[i+1][j+1] = max(dp[i][j+1], dp[i+1][j])
+			}
+		}
+	}
+	return n + m - dp[n][m]*2
+}
+
+func max(x, y int) int {
+	if x > y {
+		return x
+	}
+	return y
 }
 
 func min(x, y int) int {
