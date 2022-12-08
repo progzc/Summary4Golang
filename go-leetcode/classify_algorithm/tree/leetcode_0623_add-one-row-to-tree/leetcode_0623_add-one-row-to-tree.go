@@ -13,11 +13,7 @@ type TreeNode struct {
 // 时间复杂度: O(n)
 // 空间复杂度: O(n)
 func addOneRow(root *TreeNode, val int, depth int) *TreeNode {
-	if root == nil {
-		return nil
-	}
-
-	if depth == 1 {
+	if depth == 1 || root == nil {
 		return &TreeNode{Val: val, Left: root}
 	}
 
