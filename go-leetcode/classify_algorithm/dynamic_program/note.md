@@ -60,8 +60,6 @@
   - [53.最大子数组和](https://leetcode-cn.com/problems/maximum-subarray/)
   - [72.编辑距离](https://leetcode.cn/problems/edit-distance/)
   - [152.乘积最大子数组](https://leetcode.cn/problems/maximum-product-subarray/)
-  - [198.打家劫舍](https://leetcode.cn/problems/house-robber/)
-  - [213.打家劫舍 II](https://leetcode.cn/problems/house-robber-ii/)
   - [300.最长递增子序列](https://leetcode-cn.com/problems/longest-increasing-subsequence/)
   - [583.两个字符串的删除操作](https://leetcode.cn/problems/delete-operation-for-two-strings/)
   - [712.两个字符串的最小ASCII删除和](https://leetcode.cn/problems/minimum-ascii-delete-sum-for-two-strings/)
@@ -78,3 +76,9 @@
   - [337.打家劫舍 III](https://leetcode.cn/problems/house-robber-iii/)
   - [543.二叉树的直径](https://leetcode.cn/problems/diameter-of-binary-tree/)
   - [1245.树的直径](https://leetcode.cn/problems/tree-diameter/)
+## 5. 状态DP
+  - [198.打家劫舍](https://leetcode.cn/problems/house-robber/)
+  - [213.打家劫舍 II](https://leetcode.cn/problems/house-robber-ii/)
+  - [256.粉刷房子](https://leetcode.cn/problems/paint-house/)
+  - [265.粉刷房子II](https://leetcode.cn/problems/paint-house-ii/)
+  - [276.栅栏涂色](https://leetcode.cn/problems/paint-fence/)
