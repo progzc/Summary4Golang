@@ -68,6 +68,8 @@ func minCost_2(costs [][]int) int {
 // 思路: 类似于[198. 打家劫舍]
 //	状态: dp[i][j]表示粉刷第 0 号房子到第 i 号房子且第 i 号房子被粉刷成第 j 种颜色时的最小花费成本。
 //	转移方程: dp[i][j] = min(dp[i-1][0],...,dp[i-1][j-1],dp[i-1][j+1]...,dp[i-1][n-1])+cost[i][j]
+// 注意:
+//	 此题代码可同样用于[265.粉刷房子 II]
 func minCost_3(costs [][]int) int {
 	if len(costs) == 0 {
 		return 0
