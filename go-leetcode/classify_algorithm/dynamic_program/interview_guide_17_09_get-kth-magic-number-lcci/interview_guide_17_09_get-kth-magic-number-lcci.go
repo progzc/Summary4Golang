@@ -17,7 +17,7 @@ package interview_guide_17_09_get_kth_magic_number_lcci
 //	 上面这个三个数列合在一起就形成了新的、更长的丑数数列.
 //	 如果合在一起呢？这其实就是一个合并有序线性表的问题。
 func getKthMagicNumber(k int) int {
-	ugly := make([]int, k+1)
+	ugly := make([]int, k)
 	p1, p2, p3 := 0, 0, 0
 	ugly[0] = 1
 	for i := 1; i < k; i++ {
