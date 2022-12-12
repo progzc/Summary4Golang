@@ -67,8 +67,10 @@
     - 二维动态规划
 ## 3. 区间DP
   - [5.最长回文子串](https://leetcode-cn.com/problems/longest-palindromic-substring/)
+  - [32.最长有效括号](https://leetcode.cn/problems/longest-valid-parentheses/)
   - [516.最长回文子序列](https://leetcode-cn.com/problems/longest-palindromic-subsequence/)
   - [647.回文子串](https://leetcode-cn.com/problems/palindromic-substrings/)
+  - [678.有效的括号字符串](https://leetcode.cn/problems/valid-parenthesis-string/)
   - [730.统计不同回文子序列](https://leetcode-cn.com/problems/count-different-palindromic-subsequences/)
 ## 4. 树形DP
   - [124.二叉树中的最大路径和](https://leetcode.cn/problems/binary-tree-maximum-path-sum/)
