@@ -4,8 +4,8 @@ package leetcode_0343_integer_break
 // https://leetcode.cn/problems/integer-break/
 
 // integerBreak 动态规划
-// 时间复杂度: O()
-// 空间复杂度: O()
+// 时间复杂度: O(n^2)
+// 空间复杂度: O(n)
 // 思路:
 //	状态: dp[i]表示使正整数i拆分后乘积的最大值
 //	转移方程:
