@@ -60,6 +60,39 @@ func largestRectangleArea_2(heights []int) int {
 	return ans
 }
 
+// largestRectangleArea_3 单调栈+哨兵（空间换时间）
+// 时间复杂度: O(n)
+// 空间复杂度: O(n)
+// 思路：单调递增(非严格)栈
+func largestRectangleArea_3(heights []int) int {
+	n := len(heights)
+	if n == 0 {
+		return 0
+	}
+	if n == 1 {
+		return heights[0]
+	}
+
+	// 首尾加入哨兵
+	heights = append([]int{0}, heights...)
+	heights = append(heights, 0)
+
+	var (
+		stack []int
+		ans   int
+	)
+	for i, h := range heights {
+		for len(stack) > 0 && h < heights[stack[len(stack)-1]] {
+			curH := heights[stack[len(stack)-1]]
+			stack = stack[:len(stack)-1]
+			curW := i - stack[len(stack)-1] - 1
+			ans = max(ans, curH*curW)
+		}
+		stack = append(stack, i)
+	}
+	return ans
+}
+
 func max(x, y int) int {
 	if x > y {
 		return x
