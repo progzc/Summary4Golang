@@ -68,6 +68,8 @@
 ## 3. 区间DP
   - [5.最长回文子串](https://leetcode-cn.com/problems/longest-palindromic-substring/)
   - [32.最长有效括号](https://leetcode.cn/problems/longest-valid-parentheses/)
+  - [131.分割回文串](https://leetcode.cn/problems/palindrome-partitioning/)
+  - [132.分割回文串 II](https://leetcode.cn/problems/palindrome-partitioning-ii/)
   - [516.最长回文子序列](https://leetcode-cn.com/problems/longest-palindromic-subsequence/)
   - [647.回文子串](https://leetcode-cn.com/problems/palindromic-substrings/)
   - [678.有效的括号字符串](https://leetcode.cn/problems/valid-parenthesis-string/)
@@ -84,3 +86,6 @@
   - [256.粉刷房子](https://leetcode.cn/problems/paint-house/)
   - [265.粉刷房子II](https://leetcode.cn/problems/paint-house-ii/)
   - [276.栅栏涂色](https://leetcode.cn/problems/paint-fence/)
+## 6. 多维DP
+  - [85.最大矩形](https://leetcode.cn/problems/maximal-rectangle/)
+  - [221.最大正方形](https://leetcode.cn/problems/maximal-square/)
