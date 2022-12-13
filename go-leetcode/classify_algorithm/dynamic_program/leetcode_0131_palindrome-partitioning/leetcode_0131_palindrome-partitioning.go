@@ -3,7 +3,7 @@ package leetcode_0131_palindrome_partitioning
 // 0131. 分割回文串
 // https://leetcode.cn/problems/palindrome-partitioning/
 
-// partition dfs
+// partition dfs (快超时)
 // 时间复杂度: O(n*2^n)
 // 空间复杂度: O(n^2)
 // 注意: 结果集中不同的顺序也是不同的方案
@@ -43,6 +43,53 @@ func partition(s string) [][]string {
 	return ans
 }
 
+// partition_2 dfs+动态规划预处理
+// 时间复杂度: O(n*2^n)
+// 空间复杂度: O(n^2)
+// 注意: 结果集中不同的顺序也是不同的方案
+//	针对用例:
+//		实际输入: "aaa"
+//		预期输出: [["a","a","a"],["a","aa"],["aa","a"],["aaa"]]
+//		错误输出: [["a","a","a"],["a","aa"],["aaa"]]
+func partition_2(s string) [][]string {
+	n := len(s)
+	dp := make([][]bool, n)
+	for i := 0; i < n; i++ {
+		dp[i] = make([]bool, n)
+	}
+	for i := n - 1; i >= 0; i-- {
+		for j := i; j < n; j++ {
+			if j-i == 0 {
+				dp[i][j] = true
+			} else if j-i == 1 {
+				dp[i][j] = s[i] == s[j]
+			} else {
+				dp[i][j] = s[i] == s[j] && dp[i+1][j-1]
+			}
+		}
+	}
+
+	var dfs func(i, j int) [][]string
+	// dfs 求解s[i...j](左闭右闭)的所有可能分割方案
+	dfs = func(i, j int) [][]string {
+		var ans [][]string
+		for end := i; end <= j; end++ {
+			if dp[i][end] {
+				if end-j == 0 {
+					ans = append(ans, []string{s[i : end+1]})
+				} else {
+					nexts := dfs(end+1, j)
+					for _, next := range nexts {
+						ans = append(ans, append([]string{s[i : end+1]}, next...))
+					}
+				}
+			}
+		}
+		return ans
+	}
+	return dfs(0, n-1)
+}
+
 // partition_3 dfs+动态规划预处理
 // 时间复杂度: O(n*2^n)
 // 空间复杂度: O(n^2)
@@ -62,7 +109,7 @@ func partition_3(s string) [][]string {
 	var (
 		ans  [][]string
 		comb []string
-		dfs  func(idx int)
+		dfs  func(i int)
 	)
 
 	n := len(s)
