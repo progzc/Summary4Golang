@@ -56,6 +56,7 @@
     - [879.盈利计划](https://leetcode-cn.com/problems/profitable-schemes/)
       - 多维0/1背包
 ## 2. 线性DP
+  - [10.正则表达式匹配](https://leetcode.cn/problems/regular-expression-matching/)
   - [32.最长有效括号](https://leetcode.cn/problems/longest-valid-parentheses/)
   - [53.最大子数组和](https://leetcode-cn.com/problems/maximum-subarray/)
   - [72.编辑距离](https://leetcode.cn/problems/edit-distance/)
