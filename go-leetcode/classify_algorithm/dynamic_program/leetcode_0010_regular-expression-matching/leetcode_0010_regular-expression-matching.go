@@ -44,6 +44,8 @@ func isMatch(s string, p string) bool {
 	for i := 1; i < m+1; i++ {
 		for j := 1; j < n+1; j++ {
 			if p[j-1] == '*' {
+				// 因为题目保证每次出现字符 * 时，前面都匹配到有效的字符，
+				// 所以这里j-2不会出现越界。
 				if match(s[i-1], p[j-2]) {
 					dp[i][j] = dp[i-1][j] || dp[i][j-2]
 				} else {
