@@ -33,6 +33,7 @@
 ## 集合划分
 - [473.火柴拼正方形](https://leetcode.cn/problems/matchsticks-to-square/)
 - [698.划分为k个相等的子集](https://leetcode.cn/problems/partition-to-k-equal-sum-subsets/)
+- [1723.完成所有工作的最短时间](https://leetcode.cn/problems/find-minimum-time-to-finish-all-jobs/)
 - [2305.公平分发饼干](https://leetcode.cn/problems/fair-distribution-of-cookies/)
 
 
