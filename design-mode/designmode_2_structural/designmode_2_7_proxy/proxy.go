@@ -6,6 +6,7 @@ type Nginx struct {
 	rateLimiter       map[string]int
 }
 
+// newNginxServer 静态代理
 func newNginxServer() *Nginx {
 	return &Nginx{
 		application:       &Application{},
