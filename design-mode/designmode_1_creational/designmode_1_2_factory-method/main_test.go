@@ -14,5 +14,4 @@ func Test_main(t *testing.T) {
 
 	fmt.Println(ak47.Name())
 	fmt.Println(musket.Name())
-
 }

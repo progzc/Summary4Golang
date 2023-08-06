@@ -9,12 +9,12 @@ type IGun interface {
 type Ak47 struct{}
 
 func (a *Ak47) Name() string {
-	return "Ak47"
+	return "this is Ak47"
 }
 
 // Musket Musket枪支
 type Musket struct{}
 
 func (m *Musket) Name() string {
-	return "Musket"
+	return "this is Musket"
 }
