@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"golang.org/x/time/rate"
 	"github.com/gin-gonic/gin"
+	"golang.org/x/time/rate"
 )
 
 // 令牌桶限流：https://lailin.xyz/post/go-training-week6-2-token-bucket-1.html
@@ -23,18 +23,18 @@ import (
 //	b.如果令牌放置速率为无穷大，那么相当于没有限制。
 // 实现: golang.org/x/time/rate
 
-// Test_IP_Limiter 实现基于IP的gin限流中间件
-func Test_IP_Limiter(t *testing.T) {
+// Test_IP_TokenLimiter 实现基于IP的gin限流中间件（令牌桶算法）
+func Test_IP_TokenLimiter(t *testing.T) {
 	e := gin.Default()
 	// 新建一个限速器，允许突发 10 个并发，限速 3rps，超过 500ms 就不再等待
-	e.Use(NewIPLimiter(3, 10, 500*time.Millisecond))
+	e.Use(NewTokenLimiter(3, 10, 500*time.Millisecond))
 	e.GET("ping", func(c *gin.Context) {
 		c.String(http.StatusOK, "pong")
 	})
 	e.Run(":8080")
 }
 
-func NewIPLimiter(r rate.Limit, b int, t time.Duration) gin.HandlerFunc {
+func NewTokenLimiter(r rate.Limit, b int, t time.Duration) gin.HandlerFunc {
 	limiters := &sync.Map{}
 
 	return func(c *gin.Context) {
