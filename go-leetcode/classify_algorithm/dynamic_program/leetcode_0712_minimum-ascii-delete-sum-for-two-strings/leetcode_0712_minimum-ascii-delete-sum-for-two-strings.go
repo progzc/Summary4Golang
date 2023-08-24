@@ -5,6 +5,8 @@ package leetcode_0712_minimum_ascii_delete_sum_for_two_strings
 
 // 与下面类似：
 // 【583.两个字符串的删除操作】
+// 【0072.编辑距离】
+// 【1035.不相交的线】
 
 // minimumDeleteSum
 // 时间复杂度：O(m*n)
@@ -23,6 +25,7 @@ func minimumDeleteSum(s1 string, s2 string) int {
 		dp[i] = make([]int, m+1)
 	}
 
+	// dp数组及边界状态初始化
 	for i := 1; i < n+1; i++ {
 		dp[i][0] = dp[i-1][0] + int(s1[i-1])
 	}
@@ -30,12 +33,12 @@ func minimumDeleteSum(s1 string, s2 string) int {
 		dp[0][j] = dp[0][j-1] + int(s2[j-1])
 	}
 
-	for i := 0; i < n; i++ {
-		for j := 0; j < m; j++ {
-			if s1[i] == s2[j] {
-				dp[i+1][j+1] = dp[i][j]
+	for i := 1; i < n+1; i++ {
+		for j := 1; j < m+1; j++ {
+			if s1[i-1] == s2[j-1] {
+				dp[i][j] = dp[i-1][j-1]
 			} else {
-				dp[i+1][j+1] = min(dp[i][j+1]+int(s1[i]), dp[i+1][j]+int(s2[j]))
+				dp[i][j] = min(dp[i-1][j]+int(s1[i-1]), dp[i][j-1]+int(s2[j-1]))
 			}
 		}
 	}
