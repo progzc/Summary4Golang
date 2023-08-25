@@ -59,7 +59,8 @@ func isSubsequence_2(s string, t string) bool {
 	}
 
 	for i := 1; i < sLen; i++ {
-		for j := 1; j < tLen; j++ {
+		// j从i开始，这是因为当i>j时，肯定有dp[i][j]=false
+		for j := i; j < tLen; j++ {
 			if s[i] == t[j] {
 				dp[i][j] = dp[i-1][j-1]
 			} else {
