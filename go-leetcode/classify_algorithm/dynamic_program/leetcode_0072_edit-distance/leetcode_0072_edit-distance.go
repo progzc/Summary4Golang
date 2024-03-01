@@ -1,5 +1,7 @@
 package leetcode_0072_edit_distance
 
+import "math"
+
 // 0072.编辑距离
 // https://leetcode-cn.com/problems/edit-distance/
 
@@ -22,7 +24,7 @@ package leetcode_0072_edit_distance
 func minDistance(word1 string, word2 string) int {
 	n, m := len(word1), len(word2)
 	// 若有一个字符串为空串
-	if n*m == 0 {
+	if n == 0 || m == 0 {
 		return n + m
 	}
 
@@ -37,25 +39,29 @@ func minDistance(word1 string, word2 string) int {
 	for j := 0; j < m+1; j++ {
 		dp[0][j] = j
 	}
-
+	// 递推
 	for i := 1; i < n+1; i++ {
 		for j := 1; j < m+1; j++ {
-			s1 := dp[i-1][j] + 1
-			s2 := dp[i][j-1] + 1
 			// 注意这里与【583.两个字符串的删除操作】的区别
-			s3 := dp[i-1][j-1] + 1
 			if word1[i-1] == word2[j-1] {
-				s3 -= 1
+				dp[i][j] = min(dp[i-1][j]+1, dp[i][j-1]+1, dp[i-1][j-1])
+			} else {
+				dp[i][j] = min(dp[i-1][j]+1, dp[i][j-1]+1, dp[i-1][j-1]+1)
 			}
-			dp[i][j] = min(s1, min(s2, s3))
 		}
 	}
 	return dp[n][m]
 }
 
-func min(x, y int) int {
-	if x < y {
-		return x
+func min(nums ...int) int {
+	if len(nums) == 0 {
+		return math.MinInt64
 	}
-	return y
+	minNum := nums[0]
+	for i := 1; i < len(nums); i++ {
+		if nums[i] < minNum {
+			minNum = nums[i]
+		}
+	}
+	return minNum
 }

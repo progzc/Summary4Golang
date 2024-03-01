@@ -3,6 +3,9 @@ package leetcode_0161_one_edit_distance
 // 0161.相隔为 1 的编辑距离
 // https://leetcode.cn/problems/one-edit-distance/
 
+// isOneEditDistance 指针
+// 时间复杂度: O(n)
+// 空间复杂度: O(1)
 func isOneEditDistance(s string, t string) bool {
 	ns, nt := len(s), len(t)
 

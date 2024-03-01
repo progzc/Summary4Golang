@@ -23,7 +23,7 @@ package leetcode_0583_delete_operation_for_two_strings
 func minDistance(word1 string, word2 string) int {
 	n, m := len(word1), len(word2)
 	// 若有一个字符串为空串
-	if n*m == 0 {
+	if n == 0 || m == 0 {
 		return n + m
 	}
 
@@ -41,14 +41,13 @@ func minDistance(word1 string, word2 string) int {
 
 	for i := 1; i < n+1; i++ {
 		for j := 1; j < m+1; j++ {
-			s1 := dp[i-1][j] + 1
-			s2 := dp[i][j-1] + 1
 			// 注意这里与【72.编辑距离】的区别
-			s3 := dp[i-1][j-1] + 2
+			// 注意下标是i-1
 			if word1[i-1] == word2[j-1] {
-				s3 -= 2
+				dp[i][j] = min(dp[i-1][j]+1, min(dp[i][j-1]+1, dp[i-1][j-1]))
+			} else {
+				dp[i][j] = min(dp[i-1][j]+1, min(dp[i][j-1]+1, dp[i-1][j-1]+2))
 			}
-			dp[i][j] = min(s1, min(s2, s3))
 		}
 	}
 	return dp[n][m]
