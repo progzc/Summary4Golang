@@ -89,5 +89,6 @@
   - [265.粉刷房子II](https://leetcode.cn/problems/paint-house-ii/)
   - [276.栅栏涂色](https://leetcode.cn/problems/paint-fence/)
 ## 6. 多维DP
+  - [120.三角形最小路径和](https://leetcode.cn/problems/triangle/)
   - [85.最大矩形](https://leetcode.cn/problems/maximal-rectangle/)
   - [221.最大正方形](https://leetcode.cn/problems/maximal-square/)
