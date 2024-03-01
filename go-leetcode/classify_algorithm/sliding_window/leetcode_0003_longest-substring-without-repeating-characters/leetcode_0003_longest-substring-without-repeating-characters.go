@@ -12,7 +12,7 @@ func lengthOfLongestSubstring(s string) int {
 		return n
 	}
 
-	m := map[byte]int{}
+	m := map[byte]int{} // 记录每个字符出现的次数
 	ans := 0
 	for l, r := 0, 0; r < n; r++ {
 		m[s[r]]++
@@ -23,6 +23,27 @@ func lengthOfLongestSubstring(s string) int {
 			}
 			l++
 		}
+		ans = max(ans, r-l+1)
+	}
+	return ans
+}
+
+// lengthOfLongestSubstring_2 滑动窗口
+// 时间复杂度: O(n)
+// 空间复杂度: O(1)
+func lengthOfLongestSubstring_2(s string) int {
+	n := len(s)
+	if n < 2 {
+		return n
+	}
+
+	m := map[byte]int{} // 记录每个字符出现的位置
+	ans := 0
+	for l, r := 0, 0; r < n; r++ {
+		if pos, ok := m[s[r]]; ok {
+			l = max(l, pos+1)
+		}
+		m[s[r]] = r
 		ans = max(ans, r-l+1)
 	}
 	return ans
