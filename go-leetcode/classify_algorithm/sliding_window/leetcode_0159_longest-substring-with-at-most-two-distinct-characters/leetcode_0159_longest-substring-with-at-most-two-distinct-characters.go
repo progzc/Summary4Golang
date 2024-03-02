@@ -17,7 +17,6 @@ func lengthOfLongestSubstringTwoDistinct(s string) int {
 	ans := 0
 	for right < n {
 		m[s[right]]++
-		right++
 		for len(m) > 2 {
 			m[s[left]]--
 			if m[s[left]] == 0 {
@@ -25,7 +24,8 @@ func lengthOfLongestSubstringTwoDistinct(s string) int {
 			}
 			left++
 		}
-		ans = max(ans, right-left)
+		ans = max(ans, right-left+1)
+		right++
 	}
 	return ans
 }
