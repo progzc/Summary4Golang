@@ -65,10 +65,12 @@ func isValid_3(s string) bool {
 // 空间复杂度: O(n)
 // 思路: 消消乐
 func isValid_2(s string) bool {
-	length := 0
-	for length != len(s) {
-		length = len(s)
-		s = strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(s, "()", ""), "{}", ""), "[]", "")
+	sLen := 0
+	for sLen != len(s) {
+		sLen = len(s)
+		s = strings.ReplaceAll(s, "()", "")
+		s = strings.ReplaceAll(s, "{}", "")
+		s = strings.ReplaceAll(s, "[]", "")
 	}
 	return len(s) == 0
 }
