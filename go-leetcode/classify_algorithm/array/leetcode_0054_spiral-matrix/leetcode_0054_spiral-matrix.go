@@ -18,7 +18,8 @@ func spiralOrder_3(matrix [][]int) []int {
 		return ans
 	}
 	up, down, left, right := 0, len(matrix)-1, 0, len(matrix[0])-1
-	for true {
+	for {
+		// 从左->右
 		for col := left; col <= right; col++ {
 			ans = append(ans, matrix[up][col])
 		}
@@ -27,6 +28,7 @@ func spiralOrder_3(matrix [][]int) []int {
 			break
 		}
 
+		// 从上->下
 		for row := up; row <= down; row++ {
 			ans = append(ans, matrix[row][right])
 		}
@@ -35,6 +37,7 @@ func spiralOrder_3(matrix [][]int) []int {
 			break
 		}
 
+		// 从右->左
 		for col := right; col >= left; col-- {
 			ans = append(ans, matrix[down][col])
 		}
@@ -43,6 +46,7 @@ func spiralOrder_3(matrix [][]int) []int {
 			break
 		}
 
+		// 从下->上
 		for row := down; row >= up; row-- {
 			ans = append(ans, matrix[row][left])
 		}
