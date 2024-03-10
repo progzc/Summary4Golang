@@ -60,3 +60,30 @@ func addStrings_2(num1 string, num2 string) string {
 	}
 	return ans
 }
+
+// addStrings_3 模拟
+// 时间复杂度: O(n)
+// 空间复杂度: O(1)
+func addStrings_3(num1 string, num2 string) string {
+	m, n := len(num1)-1, len(num2)-1
+	remain := 0
+	var ans string
+	for m >= 0 || n >= 0 {
+		x, y := 0, 0
+		if m >= 0 {
+			x = int(num1[m] - '0')
+			m--
+		}
+		if n >= 0 {
+			y = int(num2[n] - '0')
+			n--
+		}
+		cur := (x + y + remain) % 10
+		remain = (x + y + remain) / 10
+		ans = strconv.Itoa(cur) + ans
+	}
+	if remain > 0 {
+		ans = strconv.Itoa(remain) + ans
+	}
+	return ans
+}
