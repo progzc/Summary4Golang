@@ -36,9 +36,7 @@ func permute(nums []int) [][]int {
 		}
 	}
 
-	for _, num := range nums {
-		output = append(output, num)
-	}
+	output = append([]int(nil), nums...)
 	dfs(0, output)
 	return ans
 }
