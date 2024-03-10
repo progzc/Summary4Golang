@@ -15,18 +15,18 @@ type ListNode struct {
 // 空间复杂度: O(1)
 func deleteDuplicates(head *ListNode) *ListNode {
 	dummy := &ListNode{math.MinInt32, head}
-	first := dummy.Next
+	cur := dummy.Next
 	pre := dummy
-	for first != nil && first.Next != nil {
-		if first.Val != first.Next.Val {
-			pre = first
-			first = first.Next
+	for cur != nil && cur.Next != nil {
+		if cur.Val != cur.Next.Val {
+			pre = cur
+			cur = cur.Next
 		} else {
-			for first.Next != nil && first.Val == first.Next.Val {
-				first = first.Next
+			for cur.Next != nil && cur.Val == cur.Next.Val {
+				cur = cur.Next
 			}
-			pre.Next = first.Next
-			first = first.Next
+			pre.Next = cur.Next
+			cur = cur.Next
 		}
 	}
 
