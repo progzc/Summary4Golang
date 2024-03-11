@@ -1,6 +1,6 @@
-package leetcode_0069_sqrtx
+package leetcode_40069_sqrtx
 
-// 69. x 的平方根
+// 0069. x 的平方根
 // https://leetcode.cn/problems/sqrtx/
 
 // mySqrt 二分查找
