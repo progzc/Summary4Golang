@@ -11,6 +11,29 @@ package leetcode_0031_next_permutation
 //	(2)较小数尽量靠右，较大数尽量小。
 //	(3)交换较大数和较小数后，较大数右边应该升序排列。
 func nextPermutation(nums []int) {
+	i := len(nums) - 1
+	for i-1 >= 0 && nums[i-1] >= nums[i] { // 注意nums[i-1] >= nums[i]的等号
+		i--
+	}
+	i--
+	if i >= 0 {
+		j := len(nums) - 1
+		for j >= 0 && nums[j] <= nums[i] { // 注意nums[j] <= nums[i]的等号
+			j--
+		}
+		nums[i], nums[j] = nums[j], nums[i]
+	}
+	reverse(nums[i+1:])
+}
+
+// nextPermutation_2 二次遍历
+// 时间复杂度: O(n)
+// 空间复杂度: O(1)
+// 思路:
+//	(1)较小数在左边，较大数在右边。
+//	(2)较小数尽量靠右，较大数尽量小。
+//	(3)交换较大数和较小数后，较大数右边应该升序排列。
+func nextPermutation_2(nums []int) {
 	n := len(nums)
 	i := n - 2
 	// 较小数尽量靠右 且 较小数在左边，较大数在右边
