@@ -39,3 +39,31 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	}
 	return head
 }
+
+// addTwoNumbers_2 双指针
+// 时间复杂度: O(n)
+// 空间复杂度: O(1)
+func addTwoNumbers_2(l1 *ListNode, l2 *ListNode) *ListNode {
+	dummy := &ListNode{}
+	head := dummy
+	remain := 0
+	for l1 != nil || l2 != nil {
+		var x1, x2 int
+		if l1 != nil {
+			x1 = l1.Val
+			l1 = l1.Next
+		}
+		if l2 != nil {
+			x2 = l2.Val
+			l2 = l2.Next
+		}
+		x := (x1 + x2 + remain) % 10
+		remain = (x1 + x2 + remain) / 10
+		head.Next = &ListNode{Val: x}
+		head = head.Next
+	}
+	if remain > 0 {
+		head.Next = &ListNode{Val: remain}
+	}
+	return dummy.Next
+}
