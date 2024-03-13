@@ -40,3 +40,29 @@ func generateParenthesis(n int) []string {
 	dfs(n, n, "")
 	return ans
 }
+
+// generateParenthesis_2 深度优先遍历（回溯）
+// 思路：回溯+剪枝
+//	a.可以生出左括号的条件：左括号的剩余数量大于0
+//	b.可以生出右括号的条件：左括号的剩余数量小于右括号的剩余数量
+func generateParenthesis_2(n int) []string {
+	var ans []string
+	var dfs func(left, right, num int, output string)
+	dfs = func(left, right, num int, output string) {
+		if left > n || right > n || left < right {
+			return
+		}
+		if left == n && right == n {
+			ans = append(ans, output)
+			return
+		}
+		if left == right {
+			dfs(left+1, right, num+1, output+"(")
+		} else if left > right {
+			dfs(left+1, right, num+1, output+"(")
+			dfs(left, right+1, num+1, output+")")
+		}
+	}
+	dfs(0, 0, 0, "")
+	return ans
+}
