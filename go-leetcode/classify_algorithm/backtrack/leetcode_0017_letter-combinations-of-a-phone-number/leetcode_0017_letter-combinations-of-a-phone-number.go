@@ -44,6 +44,45 @@ func letterCombinations(digits string) []string {
 	return ans
 }
 
+// letterCombinations_3 回溯
+// 时间复杂度: O(3^m*4^n)
+// 空间复杂度: O(m+n)
+//	其中m是输入中对应3个字母的数字个数（包括数字2、3、4、5、6、8）;
+//	n是输入中对应4个字母的数字个数（包括数字7、9）;
+//	m+n是输入数字的总个数。
+func letterCombinations_3(digits string) []string {
+	pair := map[byte]string{
+		'2': "abc",
+		'3': "def",
+		'4': "ghi",
+		'5': "jkl",
+		'6': "mno",
+		'7': "pqrs",
+		'8': "tuv",
+		'9': "wxyz",
+	}
+	var dfs func(idx int, cur string)
+	var ans []string
+	if len(digits) == 0 {
+		return ans
+	}
+	dfs = func(idx int, cur string) {
+		if idx == len(digits) {
+			ans = append(ans, cur)
+			return
+		}
+		v, ok := pair[digits[idx]]
+		if !ok {
+			return
+		}
+		for i := 0; i < len(v); i++ {
+			dfs(idx+1, cur+string(v[i]))
+		}
+	}
+	dfs(0, "")
+	return ans
+}
+
 // letterCombinations 回溯（切片指针的使用）
 // 时间复杂度: O(3^m*4^n)
 // 空间复杂度: O(m+n)
