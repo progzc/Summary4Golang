@@ -9,7 +9,7 @@ import "math"
 // 时间复杂度: O(n)
 // 空间复杂度: O(1)
 func myAtoi(s string) int {
-	abs, sign, i, n := 0, 1, 0, len(s)
+	sum, sign, i, n := 0, 1, 0, len(s)
 	// 去掉前导空格
 	for i < n && s[i] == ' ' {
 		i++
@@ -25,12 +25,12 @@ func myAtoi(s string) int {
 		}
 	}
 	for ; i < n && s[i] >= '0' && s[i] <= '9'; i++ {
-		abs = 10*abs + int(s[i]-'0')
-		if sign*abs < math.MinInt32 {
+		sum = 10*sum + int(s[i]-'0')
+		if sign*sum < math.MinInt32 {
 			return math.MinInt32
-		} else if sign*abs > math.MaxInt32 {
+		} else if sign*sum > math.MaxInt32 {
 			return math.MaxInt32
 		}
 	}
-	return sign * abs
+	return sign * sum
 }
