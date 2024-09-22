@@ -1,6 +1,8 @@
 package leetcode_0049_group_anagrams
 
-import "sort"
+import (
+	"sort"
+)
 
 // 0049.字母异位词分组
 // https://leetcode-cn.com/problems/group-anagrams/
@@ -31,11 +33,11 @@ func groupAnagrams(strs []string) [][]string {
 // 空间复杂度: O(n*k)
 // 思路：使用[26]int作为map的key，比较巧妙
 func groupAnagrams_2(strs []string) [][]string {
-	m := map[[26]int][]string{}
+	m := map[[26]byte][]string{}
 	for _, str := range strs {
-		cnt := [26]int{}
+		cnt := [26]byte{}
 		for _, b := range str {
-			cnt[b-'a']++
+			cnt[byte(b)-'a']++
 		}
 		m[cnt] = append(m[cnt], str)
 	}
