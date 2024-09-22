@@ -6,6 +6,7 @@ package leetcode_0011_container_with_most_water
 // maxArea 双指针
 // 时间复杂度: O(n)
 // 空间复杂度: O(1)
+// 思路：贪心
 func maxArea(height []int) int {
 	left, right, area := 0, len(height)-1, 0
 	for left < right {
