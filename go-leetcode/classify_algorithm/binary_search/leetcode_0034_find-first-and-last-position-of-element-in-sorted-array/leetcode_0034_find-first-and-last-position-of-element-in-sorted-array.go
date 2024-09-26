@@ -9,8 +9,9 @@ import "sort"
 // 时间复杂度: O(log(n))
 // 空间复杂度: O(1)
 // 思路:
+//
 //	查找第一个元素	等价于	在数组中寻找第一个等于target的下标
-//  查找最后一个元素	等于于	在数组中寻找最后一个等于target(即等于target+1)的下标,然后讲下标减一,并判断下标处的值是否等于target
+//	查找最后一个元素	等于于	在数组中寻找最后一个等于target(即等于target+1)的下标,然后讲下标减一,并判断下标处的值是否等于target
 func searchRange_1(nums []int, target int) []int {
 	// sort.SearchInts采用快排,返回的是第一个等于target的索引
 	li := sort.SearchInts(nums, target)
@@ -25,8 +26,9 @@ func searchRange_1(nums []int, target int) []int {
 // 时间复杂度: O(log(n))
 // 空间复杂度: O(1)
 // 思路:
+//
 //	查找第一个元素	等价于	在数组中寻找第一个等于target的下标
-//  查找最后一个元素	等于于	在数组中寻找最后一个等于target
+//	查找最后一个元素	等于于	在数组中寻找最后一个等于target
 func searchRange_2(nums []int, target int) []int {
 	li, ri := -1, -1
 
