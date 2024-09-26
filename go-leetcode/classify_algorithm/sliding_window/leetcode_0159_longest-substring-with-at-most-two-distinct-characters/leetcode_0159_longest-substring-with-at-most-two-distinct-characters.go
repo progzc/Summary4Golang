@@ -12,10 +12,9 @@ func lengthOfLongestSubstringTwoDistinct(s string) int {
 		return n
 	}
 
-	left, right := 0, 0
-	m := map[byte]int{}
+	m := map[byte]int{} // 记录字符出现次数
 	ans := 0
-	for right < n {
+	for left, right := 0, 0; right < n; right++ {
 		m[s[right]]++
 		for len(m) > 2 {
 			m[s[left]]--
@@ -25,7 +24,6 @@ func lengthOfLongestSubstringTwoDistinct(s string) int {
 			left++
 		}
 		ans = max(ans, right-left+1)
-		right++
 	}
 	return ans
 }
