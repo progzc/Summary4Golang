@@ -10,7 +10,7 @@ package leetcode_0153_find_minimum_in_rotated_sorted_array
 // 空间复杂度: O(1)
 func findMin(nums []int) int {
 	left, right := 0, len(nums)-1
-	// 这里不取等号(因为下面赋值是right = mid),否则如果最小值恰好在中间时会出错
+	// 这里不取等号(因为下面赋值是right = mid),否则如果最小值恰好在中间时会导致进入死循环
 	// 例如: [3,4,0,1,2]
 	for left < right {
 		mid := left + (right-left)/2
