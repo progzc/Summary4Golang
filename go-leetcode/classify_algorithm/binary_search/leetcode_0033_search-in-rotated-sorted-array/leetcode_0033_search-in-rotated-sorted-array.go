@@ -16,18 +16,17 @@ func search(nums []int, target int) int {
 		if nums[mid] == target {
 			return mid
 		}
-		// 如果nums[left] <= nums[mid]，则必然前半部分是有序的;否则后半部分有序
-		if nums[left] <= nums[mid] {
-			if nums[left] <= target && target < nums[mid] {
-				right = mid - 1
-			} else {
-				left = mid + 1
-			}
-		} else {
+		if nums[mid] <= nums[right] { // 注意与右端点进行比较
 			if nums[mid] < target && target <= nums[right] {
 				left = mid + 1
 			} else {
 				right = mid - 1
+			}
+		} else {
+			if nums[left] <= target && target < nums[mid] {
+				right = mid - 1
+			} else {
+				left = mid + 1
 			}
 		}
 	}
