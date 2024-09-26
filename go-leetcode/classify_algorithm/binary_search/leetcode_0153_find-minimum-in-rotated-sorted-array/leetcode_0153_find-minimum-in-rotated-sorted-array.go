@@ -14,7 +14,7 @@ func findMin(nums []int) int {
 	// 例如: [3,4,0,1,2]
 	for left < right {
 		mid := left + (right-left)/2
-		if nums[mid] <= nums[right] {
+		if nums[mid] <= nums[right] { // 必须和nums[right]进行比较
 			right = mid
 		} else {
 			left = mid + 1
