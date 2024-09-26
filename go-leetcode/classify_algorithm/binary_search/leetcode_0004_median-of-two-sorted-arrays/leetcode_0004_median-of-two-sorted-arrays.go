@@ -5,5 +5,6 @@ package leetcode_0004_median_of_two_sorted_arrays
 
 // findMedianSortedArrays
 func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
-
+	// todo
+	return 0.0
 }
