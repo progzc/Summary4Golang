@@ -1,5 +1,7 @@
 package leetcode_0035_search_insert_position
 
+import "sort"
+
 // 0035.搜索插入位置
 // https://leetcode-cn.com/problems/search-insert-position/
 
@@ -19,4 +21,10 @@ func searchInsert(nums []int, target int) int {
 		}
 	}
 	return len(nums)
+}
+
+// searchInsert2 标准SDK库
+// 前提：升序+无重复
+func searchInsert2(nums []int, target int) int {
+	return sort.SearchInts(nums, target)
 }
