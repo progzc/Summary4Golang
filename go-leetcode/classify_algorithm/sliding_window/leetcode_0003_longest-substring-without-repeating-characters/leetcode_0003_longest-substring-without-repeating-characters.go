@@ -21,7 +21,7 @@ func lengthOfLongestSubstring(s string) int {
 			if m[s[l]] == 0 {
 				delete(m, s[l])
 			}
-			l++
+			l++ // 注意 l++ 的位置
 		}
 		ans = max(ans, r-l+1)
 	}
@@ -41,6 +41,8 @@ func lengthOfLongestSubstring_2(s string) int {
 	ans := 0
 	for l, r := 0, 0; r < n; r++ {
 		if pos, ok := m[s[r]]; ok {
+			// 通过 s = "abba" 示例来理解这里为何要加 max 条件
+			// 本质是保证 l 永远不会倒退
 			l = max(l, pos+1)
 		}
 		m[s[r]] = r
