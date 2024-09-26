@@ -45,5 +45,5 @@ func Test_permutation(t *testing.T) {
 func Test_findSubstring(t *testing.T) {
 	s := "wordgoodgoodgoodbestword"
 	words := []string{"word", "good", "best", "good"}
-	fmt.Printf("findSubstring: %v\n", findSubstring(s, words))
+	fmt.Printf("findSubstring: %v\n", findSubstring_2(s, words))
 }
