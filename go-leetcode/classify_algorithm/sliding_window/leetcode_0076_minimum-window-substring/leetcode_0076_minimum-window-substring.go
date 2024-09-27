@@ -9,6 +9,7 @@ import "math"
 // 时间复杂度：O(n)
 // 空间复杂度: O(k) k为字符集合
 // 思路：
+//
 //	need: 始终记录着当前滑动窗口下，我们还需要的元素数量，我们在改变i,j时，需同步维护need。
 //	needCnt: 如果每次判断滑动窗口是否包含了T的所有元素，都去遍历need看是否所有元素数量都小于等于0，这个会耗费O(k)的时间复杂度;
 //			 可以维护一个额外的变量needCnt来记录所需元素的总数量，当我们碰到一个所需元素c，不仅need[c]的数量减少1，同时needCnt也要减少1，
@@ -21,10 +22,9 @@ func minWindow(s string, t string) string {
 	for i := 0; i < len(t); i++ {
 		need[t[i]] += 1
 	}
-	// 记录起始位置
-	l, r := 0, 0
+
 	start, end, size := 0, 0, math.MaxInt32
-	for r < len(s) {
+	for l, r := 0, 0; r < len(s); r++ {
 		// 若需要字符s[r]
 		if need[s[r]] > 0 {
 			needCnt--
@@ -49,7 +49,6 @@ func minWindow(s string, t string) string {
 			l++
 			needCnt++
 		}
-		r++
 	}
 	return s[start:end]
 }
