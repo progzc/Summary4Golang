@@ -5,4 +5,24 @@ package leetcode_0395_longest_substring_with_at_least_k_repeating_characters
 
 func longestSubstring(s string, k int) int {
 	// TODO
+	return 0
+}
+
+func subarraySum(nums []int, k int) int {
+	var (
+		ans int
+		sum int
+	)
+	for l, r := 0, 0; r < len(nums); r++ {
+		sum += nums[r]
+		if sum == k {
+			ans++
+			sum -= nums[l]
+			l++
+		} else if sum < k {
+
+		}
+
+	}
+	return ans
 }
