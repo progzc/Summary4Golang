@@ -7,6 +7,7 @@ package leetcode_0239_sliding_window_maximum
 // 时间复杂度: O(n)
 // 空间复杂度: O(k)
 // 思路:
+//
 //	我们可以使用一个队列存储所有还没有被移除的下标。在队列中，这些下标按照从小到大的顺序被存储，并且它们在数组 nums 中对应的值是严格单调递减的。
 //	简言之, 队列中随着下标递增, 值递减。
 func maxSlidingWindow(nums []int, k int) []int {
