@@ -15,7 +15,7 @@ func findAnagrams(s string, p string) []int {
 	}
 
 	var ans []int
-	cnt1, cnt2 := [26]int{}, [26]int{}
+	cnt1, cnt2 := [26]byte{}, [26]byte{}
 	for i, ch := range p {
 		cnt1[ch-'a']++
 		cnt2[s[i]-'a']++
@@ -103,8 +103,8 @@ func findAnagrams_3(s string, p string) []int {
 	}
 
 	cnt := [26]int{}
-	for _, ch := range p {
-		cnt[ch-'a']--
+	for i := 0; i < n; i++ {
+		cnt[p[i]-'a']--
 	}
 
 	var ans []int
@@ -116,7 +116,7 @@ func findAnagrams_3(s string, p string) []int {
 			l++
 		}
 		if r-l+1 == n {
-			ans = append(ans, r-n+1)
+			ans = append(ans, l)
 		}
 	}
 	return ans
