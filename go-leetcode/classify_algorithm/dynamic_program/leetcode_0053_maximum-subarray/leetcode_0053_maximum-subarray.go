@@ -9,6 +9,7 @@ import "math"
 // 时间复杂度: O(n)
 // 空间复杂度: O(n)
 // 思路：
+//
 //	状态: dp[i] 代表以元素 nums[i] 为结尾的连续子数组最大和。
 //	转移方程: 若 dp[i-1] ≤ 0 ，说明 dp[i-1] 对 dp[i] 产生负贡献，即 dp[i-1]+nums[i] 还不如 nums[i] 本身大.
 //		当dp[i-1]>0时, dp[i] = dp[i-1] + nums[i];
@@ -28,11 +29,7 @@ func maxSubArray(nums []int) int {
 	ans := math.MinInt32
 	ans = max(ans, dp[0])
 	for i := 1; i < n; i++ {
-		if dp[i-1] > 0 {
-			dp[i] = dp[i-1] + nums[i]
-		} else {
-			dp[i] = nums[i]
-		}
+		dp[i] = max(dp[i-1]+nums[i], nums[i])
 		ans = max(ans, dp[i])
 	}
 	return ans
@@ -73,6 +70,7 @@ func maxSubArray_3(nums []int) int {
 // 时间复杂度: O(n)
 // 空间复杂度: O(1)
 // 思路：
+//
 //	状态: dp[i] 代表以元素 nums[i] 为结尾的连续子数组最大和。
 //	转移方程: 若 dp[i-1] ≤ 0 ，说明 dp[i-1] 对 dp[i] 产生负贡献，即 dp[i-1]+nums[i] 还不如 nums[i] 本身大.
 //		当dp[i-1]>0时, dp[i] = dp[i-1] + nums[i];
