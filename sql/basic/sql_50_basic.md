@@ -137,3 +137,26 @@ insert into EmployeeUNI (id, unique_id) values ('90', '3')
 SELECT u.unique_id,e.name FROM Employees e LEFT JOIN EmployeeUNI u ON e.id = u.id;
 ```
 
+### [1068. 产品销售分析 I](https://leetcode.cn/problems/product-sales-analysis-i/)
+
+![image-20240928232853068](assets/image-20240928232853068.png)
+
+![image-20240928232921704](assets/image-20240928232921704.png)
+
+```sql
+# Schema
+Create table If Not Exists Sales (sale_id int, product_id int, year int, quantity int, price int)
+Create table If Not Exists Product (product_id int, product_name varchar(10))
+Truncate table Sales
+insert into Sales (sale_id, product_id, year, quantity, price) values ('1', '100', '2008', '10', '5000')
+insert into Sales (sale_id, product_id, year, quantity, price) values ('2', '100', '2009', '12', '5000')
+insert into Sales (sale_id, product_id, year, quantity, price) values ('7', '200', '2011', '15', '9000')
+Truncate table Product
+insert into Product (product_id, product_name) values ('100', 'Nokia')
+insert into Product (product_id, product_name) values ('200', 'Apple')
+insert into Product (product_id, product_name) values ('300', 'Samsung')
+
+# Result
+SELECT p.product_name,s.year,s.price FROM Sales s LEFT JOIN Product p ON s.product_id = p.product_id;
+```
+
