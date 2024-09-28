@@ -43,3 +43,23 @@ insert into Customer (id, name, referee_id) values ('6', 'Mark', '2')
 SELECT name FROM Customer WHERE referee_id IS NULL OR referee_id <> 2;
 ```
 
+### [595. 大的国家](https://leetcode.cn/problems/big-countries/)
+
+![image-20240928225100243](assets/image-20240928225100243.png)
+
+![image-20240928225125390](assets/image-20240928225125390.png)
+
+```sql
+# Schema
+Create table If Not Exists World (name varchar(255), continent varchar(255), area int, population int, gdp bigint)
+Truncate table World
+insert into World (name, continent, area, population, gdp) values ('Afghanistan', 'Asia', '652230', '25500100', '20343000000')
+insert into World (name, continent, area, population, gdp) values ('Albania', 'Europe', '28748', '2831741', '12960000000')
+insert into World (name, continent, area, population, gdp) values ('Algeria', 'Africa', '2381741', '37100000', '188681000000')
+insert into World (name, continent, area, population, gdp) values ('Andorra', 'Europe', '468', '78115', '3712000000')
+insert into World (name, continent, area, population, gdp) values ('Angola', 'Africa', '1246700', '20609294', '100990000000')
+
+# Result
+SELECT name,population,area FROM World WHERE area >= 3000000 OR population >= 25000000;
+```
+
