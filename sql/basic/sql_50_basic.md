@@ -23,3 +23,23 @@ SELECT product_id FROM Products WHERE low_fats = 'Y' AND recyclable = 'Y';
 ```
 
 ### [584. 寻找用户推荐人](https://leetcode.cn/problems/find-customer-referee/)
+
+![image-20240928224011554](assets/image-20240928224011554.png)
+
+![image-20240928224024097](assets/image-20240928224024097.png)
+
+```sql
+# Schema
+Create table If Not Exists Customer (id int, name varchar(25), referee_id int)
+Truncate table Customer
+insert into Customer (id, name, referee_id) values ('1', 'Will', NULL)
+insert into Customer (id, name, referee_id) values ('2', 'Jane', NULL)
+insert into Customer (id, name, referee_id) values ('3', 'Alex', '2')
+insert into Customer (id, name, referee_id) values ('4', 'Bill', NULL)
+insert into Customer (id, name, referee_id) values ('5', 'Zack', '1')
+insert into Customer (id, name, referee_id) values ('6', 'Mark', '2')
+
+# Result
+SELECT name FROM Customer WHERE referee_id IS NULL OR referee_id <> 2;
+```
+
