@@ -107,3 +107,33 @@ SELECT tweet_id FROM Tweets WHERE CHAR_LENGTH(content) > 15;
 - 对于SQL表，用于计算字符串中字符数的最佳函数是 CHAR_LENGTH(str)，它返回字符串 str 的长度。
 
 - 另一个常用的函数 LENGTH(str) 在这个问题中也适用，因为列 content 只包含英文字符，没有特殊字符。否则，LENGTH() 可能会返回不同的结果，因为该函数返回字符串 str 的字节数，某些字符包含多于 1 个字节。以字符 '¥' 为例：CHAR_LENGTH() 返回结果为 1，而 LENGTH() 返回结果为 2，因为该字符串包含 2 个字节。
+
+## 连接
+
+### [1378. 使用唯一标识码替换员工ID](https://leetcode.cn/problems/replace-employee-id-with-the-unique-identifier/)
+
+![image-20240928231619728](assets/image-20240928231619728.png)
+
+![image-20240928231651126](assets/image-20240928231651126.png)
+
+![image-20240928231712065](assets/image-20240928231712065.png)
+
+```sql
+# Schema
+Create table If Not Exists Employees (id int, name varchar(20))
+Create table If Not Exists EmployeeUNI (id int, unique_id int)
+Truncate table Employees
+insert into Employees (id, name) values ('1', 'Alice')
+insert into Employees (id, name) values ('7', 'Bob')
+insert into Employees (id, name) values ('11', 'Meir')
+insert into Employees (id, name) values ('90', 'Winston')
+insert into Employees (id, name) values ('3', 'Jonathan')
+Truncate table EmployeeUNI
+insert into EmployeeUNI (id, unique_id) values ('3', '1')
+insert into EmployeeUNI (id, unique_id) values ('11', '2')
+insert into EmployeeUNI (id, unique_id) values ('90', '3')
+
+# Result
+SELECT u.unique_id,e.name FROM Employees e LEFT JOIN EmployeeUNI u ON e.id = u.id;
+```
+
