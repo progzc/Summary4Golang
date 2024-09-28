@@ -85,3 +85,25 @@ insert into Views (article_id, author_id, viewer_id, view_date) values ('3', '4'
 SELECT DISTINCT(author_id) as id FROM Views WHERE viewer_id = author_id ORDER BY id asc;
 ```
 
+### [1683. 无效的推文](https://leetcode.cn/problems/invalid-tweets/)
+
+![image-20240928230646335](assets/image-20240928230646335.png)
+
+![image-20240928230658096](assets/image-20240928230658096.png)
+
+```sql
+# Schema
+Create table If Not Exists Tweets(tweet_id int, content varchar(50))
+Truncate table Tweets
+insert into Tweets (tweet_id, content) values ('1', 'Let us Code')
+insert into Tweets (tweet_id, content) values ('2', 'More than fifteen chars are here!')
+
+# Result
+SELECT tweet_id FROM Tweets WHERE CHAR_LENGTH(content) > 15;
+```
+
+**注意**：
+
+- 对于SQL表，用于计算字符串中字符数的最佳函数是 CHAR_LENGTH(str)，它返回字符串 str 的长度。
+
+- 另一个常用的函数 LENGTH(str) 在这个问题中也适用，因为列 content 只包含英文字符，没有特殊字符。否则，LENGTH() 可能会返回不同的结果，因为该函数返回字符串 str 的字节数，某些字符包含多于 1 个字节。以字符 '¥' 为例：CHAR_LENGTH() 返回结果为 1，而 LENGTH() 返回结果为 2，因为该字符串包含 2 个字节。
