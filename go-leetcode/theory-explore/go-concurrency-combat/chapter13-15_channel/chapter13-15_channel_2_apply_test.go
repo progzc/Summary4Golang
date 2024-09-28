@@ -44,6 +44,7 @@ func TestChannelCodePattern_1(t *testing.T) {
 
 // TestChannelCodePattern_2
 // (2)worker池：生产者和消费者的消息交流都是通过Channel实现的
+//
 //	一个例子：http://marcio.io/2015/07/handling-1-million-requests-per-minute-with-golang/
 func TestChannelCodePattern_2(t *testing.T) {
 }
@@ -72,6 +73,7 @@ func TestChannelCodePattern_3(t *testing.T) {
 
 // TestChannelCodePattern_4
 // (4)信号通知
+//
 //	a.实现wait/notify功能（与sync.Cond的功能一致）
 //	b.在程序关闭时，在退出之前做一些清理（doCleanup方法）的动作，即实现程序的graceful shutdown，在退出之前执行一些连接关闭、文件close、
 //	  缓存落盘等动作。
@@ -112,6 +114,7 @@ func TestChannelCodePattern_4(t *testing.T) {
 
 // TestChannelCodePattern_5
 // (5)互斥锁
+//
 //	要想使用chan实现互斥锁，至少有两种方式：
 //		a.一种方式是先初始化一个capacity等于1的Channel，然后再放入一个元素。这个元素就代表锁，谁取得了这个元素，就相当于获取了这把锁。
 //		b.另一种方式是，先初始化一个capacity等于1的Channel，它的“空槽”代表锁，谁能成功地把元素发送到这个Channel，谁就获取了这把锁。
