@@ -205,3 +205,33 @@ WHERE t.transaction_id IS NULL
 GROUP BY customer_id;
 ```
 
+### [197. 上升的温度](https://leetcode.cn/problems/rising-temperature/)
+
+![image-20240929221629146](assets/image-20240929221629146.png)
+
+![image-20240929221649068](assets/image-20240929221649068.png)
+
+```sql
+# Schema
+Create table If Not Exists Weather (id int, recordDate date, temperature int)
+Truncate table Weather
+insert into Weather (id, recordDate, temperature) values ('1', '2015-01-01', '10')
+insert into Weather (id, recordDate, temperature) values ('2', '2015-01-02', '25')
+insert into Weather (id, recordDate, temperature) values ('3', '2015-01-03', '20')
+insert into Weather (id, recordDate, temperature) values ('4', '2015-01-04', '30')
+
+# Result
+SELECT w1.id FROM Weather w1 
+LEFT JOIN Weather w2 ON datediff(w1.recordDate,w2.recordDate) = 1
+WHERE w1.temperature > w2.temperature;
+
+# Result2
+SELECT w1.id FROM Weather w1 
+LEFT JOIN Weather w2 ON timestampdiff(day,w1.recordDate,w2.recordDate) = -1
+WHERE w1.temperature > w2.temperature;
+```
+
+两个关于时间计算的函数：
+
+- datediff(日期1, 日期2)：得到的结果是日期1与日期2相差的天数。如果日期1比日期2大，结果为正；如果日期1比日期2小，结果为负。
+- timestampdiff(时间类型, 日期1, 日期2)：这个函数和上面diffdate的正、负号规则刚好相反。日期1大于日期2，结果为负，日期1小于日期2，结果为正。
