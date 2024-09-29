@@ -1,4 +1,4 @@
-module github.com/progzc/Summary4Golang/read-note/geekbang/go-concurrency-combat
+module github.com/progzc/Summary4Golang/read-note/go-concurrency-combat
 
 go 1.14
 
