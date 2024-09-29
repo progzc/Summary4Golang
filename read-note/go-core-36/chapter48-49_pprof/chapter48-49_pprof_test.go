@@ -10,8 +10,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/progzc/Summary4Golang/read-note/geekbang/go-core-36/chapter48-49_pprof/common"
-	"github.com/progzc/Summary4Golang/read-note/geekbang/go-core-36/chapter48-49_pprof/common/op"
+	"github.com/progzc/Summary4Golang/read-note/go-core-36/chapter48-49_pprof/common"
+	"github.com/progzc/Summary4Golang/read-note/go-core-36/chapter48-49_pprof/common/op"
 )
 
 // TestPProf_1
