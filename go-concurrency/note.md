@@ -1,2 +1,0 @@
-- 目录concurrency-in-go-src中的源码来自于书籍《concurrency-in-go》
-- 其他总结来自极客时间课程《Go并发编程实战课》
