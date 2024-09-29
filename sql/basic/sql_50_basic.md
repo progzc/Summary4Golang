@@ -280,3 +280,31 @@ GROUP BY a.machine_id;
 > 2. [数据库 | 辨析 cross join、inner join和outer join](https://blog.csdn.net/a26013/article/details/123615320)
 >    - CROSS JOIN、INNER JOIN、JOIN 和逗号分隔的连接是等价的。
 > 3. [mySQL中AVG()函数如何去除null值或0值求平均值](https://blog.csdn.net/m0_51088798/article/details/123906790)
+
+### [577. 员工奖金](https://leetcode.cn/problems/employee-bonus/)
+
+![image-20240929232356692](assets/image-20240929232356692.png)
+
+![image-20240929232414141](assets/image-20240929232414141.png)
+
+![image-20240929232450003](assets/image-20240929232450003.png)
+
+```sql
+# Schema
+Create table If Not Exists Employee (empId int, name varchar(255), supervisor int, salary int)
+Create table If Not Exists Bonus (empId int, bonus int)
+Truncate table Employee
+insert into Employee (empId, name, supervisor, salary) values ('3', 'Brad', NULL, '4000')
+insert into Employee (empId, name, supervisor, salary) values ('1', 'John', '3', '1000')
+insert into Employee (empId, name, supervisor, salary) values ('2', 'Dan', '3', '2000')
+insert into Employee (empId, name, supervisor, salary) values ('4', 'Thomas', '3', '4000')
+Truncate table Bonus
+insert into Bonus (empId, bonus) values ('2', '500')
+insert into Bonus (empId, bonus) values ('4', '2000')
+
+# Result
+SELECT e.name,b.bonus FROM Employee e LEFT JOIN Bonus b 
+ON e.empId = b.empId
+WHERE b.bonus < 1000 OR b.bonus is null;
+```
+
