@@ -1,3 +1,5 @@
+[TOC]
+
 # 高频 SQL 50 题（基础版）
 
 ## 查询
@@ -235,3 +237,46 @@ WHERE w1.temperature > w2.temperature;
 
 - datediff(日期1, 日期2)：得到的结果是日期1与日期2相差的天数。如果日期1比日期2大，结果为正；如果日期1比日期2小，结果为负。
 - timestampdiff(时间类型, 日期1, 日期2)：这个函数和上面diffdate的正、负号规则刚好相反。日期1大于日期2，结果为负，日期1小于日期2，结果为正。
+
+### [1661. 每台机器的进程平均运行时间](https://leetcode.cn/problems/average-time-of-process-per-machine/)
+
+![image-20240929223018963](assets/image-20240929223018963.png)
+
+![image-20240929223049577](assets/image-20240929223049577.png)
+
+```sql
+# Schema
+Create table If Not Exists Activity (machine_id int, process_id int, activity_type ENUM('start', 'end'), timestamp float)
+Truncate table Activity
+insert into Activity (machine_id, process_id, activity_type, timestamp) values ('0', '0', 'start', '0.712')
+insert into Activity (machine_id, process_id, activity_type, timestamp) values ('0', '0', 'end', '1.52')
+insert into Activity (machine_id, process_id, activity_type, timestamp) values ('0', '1', 'start', '3.14')
+insert into Activity (machine_id, process_id, activity_type, timestamp) values ('0', '1', 'end', '4.12')
+insert into Activity (machine_id, process_id, activity_type, timestamp) values ('1', '0', 'start', '0.55')
+insert into Activity (machine_id, process_id, activity_type, timestamp) values ('1', '0', 'end', '1.55')
+insert into Activity (machine_id, process_id, activity_type, timestamp) values ('1', '1', 'start', '0.43')
+insert into Activity (machine_id, process_id, activity_type, timestamp) values ('1', '1', 'end', '1.42')
+insert into Activity (machine_id, process_id, activity_type, timestamp) values ('2', '0', 'start', '4.1')
+insert into Activity (machine_id, process_id, activity_type, timestamp) values ('2', '0', 'end', '4.512')
+insert into Activity (machine_id, process_id, activity_type, timestamp) values ('2', '1', 'start', '2.5')
+insert into Activity (machine_id, process_id, activity_type, timestamp) values ('2', '1', 'end', '5')
+
+# Result：推荐这种做法 JOIN/INNER JOIN/CROSS JOIN都不会影响结果
+SELECT a.machine_id, ROUND(AVG(a.timestamp - b.timestamp),3) as processing_time 
+FROM Activity a JOIN Activity b 
+ON a.machine_id = b.machine_id AND a.process_id = b.process_id AND a.activity_type = 'end' AND b.activity_type = 'start' 
+GROUP BY a.machine_id;
+
+# Result2: 虽然使用左连接也是对的（因为AVG计算平均值时会去掉null的项），但是这里使用交叉连接更容易理解
+SELECT a.machine_id, ROUND(AVG(a.timestamp - b.timestamp),3) as processing_time 
+FROM Activity a LEFT JOIN Activity b 
+ON a.machine_id = b.machine_id AND a.process_id = b.process_id AND a.activity_type = 'end' AND b.activity_type = 'start' 
+GROUP BY a.machine_id;
+```
+
+> 参考文档：
+>
+> 1. [一分钟让你搞明白 left join、right join和join的区别](https://blog.csdn.net/Li_Jian_Hui_/article/details/105801454)
+> 2. [数据库 | 辨析 cross join、inner join和outer join](https://blog.csdn.net/a26013/article/details/123615320)
+>    - CROSS JOIN、INNER JOIN、JOIN 和逗号分隔的连接是等价的。
+> 3. [mySQL中AVG()函数如何去除null值或0值求平均值](https://blog.csdn.net/m0_51088798/article/details/123906790)
