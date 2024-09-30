@@ -443,5 +443,32 @@ GROUP BY s.user_id;
 
 #### a.AVG函数的使用
 
+## 聚合函数
 
+### [620. 有趣的电影](https://leetcode.cn/problems/not-boring-movies/)
+
+![image-20240930172214188](assets/image-20240930172214188.png)
+
+![image-20240930172239206](assets/image-20240930172239206.png)
+
+```sql
+# Schema
+Create table If Not Exists cinema (id int, movie varchar(255), description varchar(255), rating float(2, 1))
+Truncate table cinema
+insert into cinema (id, movie, description, rating) values ('1', 'War', 'great 3D', '8.9')
+insert into cinema (id, movie, description, rating) values ('2', 'Science', 'fiction', '8.5')
+insert into cinema (id, movie, description, rating) values ('3', 'irish', 'boring', '6.2')
+insert into cinema (id, movie, description, rating) values ('4', 'Ice song', 'Fantacy', '8.6')
+insert into cinema (id, movie, description, rating) values ('5', 'House card', 'Interesting', '9.1')
+
+# Result
+SELECT * FROM cinema 
+WHERE id % 2 = 1 AND description != 'boring'
+ORDER BY rating DESC;
+
+# Result2: 推荐
+SELECT * FROM cinema 
+WHERE mod(id, 2) = 1 AND description != 'boring'
+ORDER BY rating DESC;
+```
 
