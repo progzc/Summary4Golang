@@ -535,5 +535,50 @@ FROM Project p LEFT JOIN Employee e ON p.employee_id = e.employee_id
 GROUP BY p.project_id;
 ```
 
+### [1633. 各赛事的用户注册率](https://leetcode.cn/problems/percentage-of-users-attended-a-contest/)
 
+![image-20240930222411635](assets/image-20240930222411635.png)
+
+![image-20240930222424438](assets/image-20240930222424438.png)
+
+![image-20240930222452419](assets/image-20240930222452419.png)
+
+![image-20240930222511821](assets/image-20240930222511821.png)
+
+![image-20240930222526676](assets/image-20240930222526676.png)
+
+```sql
+# Schema
+Create table If Not Exists Users (user_id int, user_name varchar(20))
+Create table If Not Exists Register (contest_id int, user_id int)
+Truncate table Users
+insert into Users (user_id, user_name) values ('6', 'Alice')
+insert into Users (user_id, user_name) values ('2', 'Bob')
+insert into Users (user_id, user_name) values ('7', 'Alex')
+Truncate table Register
+insert into Register (contest_id, user_id) values ('215', '6')
+insert into Register (contest_id, user_id) values ('209', '2')
+insert into Register (contest_id, user_id) values ('208', '2')
+insert into Register (contest_id, user_id) values ('210', '6')
+insert into Register (contest_id, user_id) values ('208', '6')
+insert into Register (contest_id, user_id) values ('209', '7')
+insert into Register (contest_id, user_id) values ('209', '6')
+insert into Register (contest_id, user_id) values ('215', '7')
+insert into Register (contest_id, user_id) values ('208', '7')
+insert into Register (contest_id, user_id) values ('210', '2')
+insert into Register (contest_id, user_id) values ('207', '2')
+insert into Register (contest_id, user_id) values ('210', '7')
+
+# Result
+SELECT r.contest_id as contest_id, ROUND(COUNT(r.user_id)/t.total_cnt*100,2) as percentage
+FROM Register r JOIN (
+    SELECT COUNT(user_id) as total_cnt
+    FROM Users
+) t GROUP BY r.contest_id ORDER BY percentage DESC, contest_id ASC;
+
+# Result2: 推荐
+SELECT contest_id as contest_id, ROUND(COUNT(user_id)/(SELECT COUNT(user_id) FROM Users)*100,2) as percentage
+FROM Register 
+GROUP BY contest_id ORDER BY percentage DESC, contest_id ASC;
+```
 
