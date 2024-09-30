@@ -308,3 +308,52 @@ ON e.empId = b.empId
 WHERE b.bonus < 1000 OR b.bonus is null;
 ```
 
+### [1280. 学生们参加各科测试的次数](https://leetcode.cn/problems/students-and-examinations/)🌟
+
+![image-20240930082857674](assets/image-20240930082857674.png)
+
+![image-20240930082917183](assets/image-20240930082917183.png)
+
+![image-20240930082941656](assets/image-20240930082941656.png)
+
+![image-20240930083010742](assets/image-20240930083010742.png)
+
+![image-20240930083033002](assets/image-20240930083033002.png)
+
+```sql
+# Schema
+Create table If Not Exists Students (student_id int, student_name varchar(20))
+Create table If Not Exists Subjects (subject_name varchar(20))
+Create table If Not Exists Examinations (student_id int, subject_name varchar(20))
+Truncate table Students
+insert into Students (student_id, student_name) values ('1', 'Alice')
+insert into Students (student_id, student_name) values ('2', 'Bob')
+insert into Students (student_id, student_name) values ('13', 'John')
+insert into Students (student_id, student_name) values ('6', 'Alex')
+Truncate table Subjects
+insert into Subjects (subject_name) values ('Math')
+insert into Subjects (subject_name) values ('Physics')
+insert into Subjects (subject_name) values ('Programming')
+Truncate table Examinations
+insert into Examinations (student_id, subject_name) values ('1', 'Math')
+insert into Examinations (student_id, subject_name) values ('1', 'Physics')
+insert into Examinations (student_id, subject_name) values ('1', 'Programming')
+insert into Examinations (student_id, subject_name) values ('2', 'Programming')
+insert into Examinations (student_id, subject_name) values ('1', 'Physics')
+insert into Examinations (student_id, subject_name) values ('1', 'Math')
+insert into Examinations (student_id, subject_name) values ('13', 'Math')
+insert into Examinations (student_id, subject_name) values ('13', 'Programming')
+insert into Examinations (student_id, subject_name) values ('13', 'Physics')
+insert into Examinations (student_id, subject_name) values ('2', 'Math')
+insert into Examinations (student_id, subject_name) values ('1', 'Math')
+
+# Result
+SELECT s1.student_id,s1.student_name,s2.subject_name,IFNULL(e.attended_exams,0) attended_exams
+FROM Students s1 JOIN Subjects s2 LEFT JOIN (
+    SELECT student_id,subject_name,count(*) as attended_exams 
+    FROM Examinations 
+    GROUP BY student_id, subject_name
+) e ON s1.student_id = e.student_id AND s2.subject_name = e.subject_name 
+ORDER BY s1.student_id, s2.subject_name;
+```
+
