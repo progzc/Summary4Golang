@@ -611,3 +611,29 @@ WHERE query_name IS NOT NULL
 GROUP BY query_name;
 ```
 
+### [1193. 每月交易 I](https://leetcode.cn/problems/monthly-transactions-i/)🌟
+
+![image-20241001000343546](assets/image-20241001000343546.png)
+
+![image-20241001000414831](assets/image-20241001000414831.png)
+
+```sql
+# Schema
+Create table If Not Exists Transactions (id int, country varchar(4), state enum('approved', 'declined'), amount int, trans_date date)
+Truncate table Transactions
+insert into Transactions (id, country, state, amount, trans_date) values ('121', 'US', 'approved', '1000', '2018-12-18')
+insert into Transactions (id, country, state, amount, trans_date) values ('122', 'US', 'declined', '2000', '2018-12-19')
+insert into Transactions (id, country, state, amount, trans_date) values ('123', 'US', 'approved', '2000', '2019-01-01')
+insert into Transactions (id, country, state, amount, trans_date) values ('124', 'DE', 'approved', '2000', '2019-01-07')
+
+# Result
+SELECT DATE_FORMAT(trans_date, '%Y-%m') AS month,
+    country,
+    COUNT(*) AS trans_count,
+    COUNT(IF(state = 'approved', 1, NULL)) AS approved_count,
+    SUM(amount) AS trans_total_amount,
+    SUM(IF(state = 'approved', amount, 0)) AS approved_total_amount
+FROM Transactions
+GROUP BY month, country;
+```
+
