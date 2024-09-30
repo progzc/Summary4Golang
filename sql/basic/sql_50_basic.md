@@ -233,6 +233,8 @@ LEFT JOIN Weather w2 ON timestampdiff(day,w1.recordDate,w2.recordDate) = -1
 WHERE w1.temperature > w2.temperature;
 ```
 
+#### a.时间计算函数
+
 两个关于时间计算的函数：
 
 - datediff(日期1, 日期2)：得到的结果是日期1与日期2相差的天数。如果日期1比日期2大，结果为正；如果日期1比日期2小，结果为负。
@@ -273,6 +275,8 @@ FROM Activity a LEFT JOIN Activity b
 ON a.machine_id = b.machine_id AND a.process_id = b.process_id AND a.activity_type = 'end' AND b.activity_type = 'start' 
 GROUP BY a.machine_id;
 ```
+
+#### a. JOIN/INNER JOIN/CROSS JOIN/LEFT JOIN的区别
 
 > 参考文档：
 >
@@ -355,5 +359,44 @@ FROM Students s1 JOIN Subjects s2 LEFT JOIN (
     GROUP BY student_id, subject_name
 ) e ON s1.student_id = e.student_id AND s2.subject_name = e.subject_name 
 ORDER BY s1.student_id, s2.subject_name;
+```
+
+#### a.IFNULL函数的使用
+
+### [570. 至少有5名直接下属的经理](https://leetcode.cn/problems/managers-with-at-least-5-direct-reports/)
+
+![image-20240930092227109](assets/image-20240930092227109.png)
+
+![image-20240930092752093](assets/image-20240930092752093.png)
+
+```sql
+# Schema
+Create table If Not Exists Employee (id int, name varchar(255), department varchar(255), managerId int)
+Truncate table Employee
+insert into Employee (id, name, department, managerId) values ('101', 'John', 'A', NULL)
+insert into Employee (id, name, department, managerId) values ('102', 'Dan', 'A', '101')
+insert into Employee (id, name, department, managerId) values ('103', 'James', 'A', '101')
+insert into Employee (id, name, department, managerId) values ('104', 'Amy', 'A', '101')
+insert into Employee (id, name, department, managerId) values ('105', 'Anne', 'A', '101')
+insert into Employee (id, name, department, managerId) values ('106', 'Ron', 'B', '101')
+
+# Result1
+SELECT name FROM Employee WHERE id in (
+    SELECT managerId FROM (
+        SELECT managerId, count(*) cnt FROM Employee e 
+        WHERE e.managerId is not null
+        GROUP BY managerId
+    ) g WHERE g.cnt >= 5
+);
+
+# Result2
+SELECT Employee.name 
+FROM (
+    SELECT managerId
+    FROM Employee 
+    WHERE managerId is not NULL
+    GROUP BY managerId 
+    HAVING count(id) >= 5
+) as Manager JOIN Employee on Manager.managerId = Employee.id;
 ```
 
