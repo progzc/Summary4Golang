@@ -721,3 +721,29 @@ FROM Activity a LEFT JOIN (
 >
 > 1. [MySQL加减间隔时间函数DATE_ADD和DATE_SUB的详解](https://blog.csdn.net/liqinglonguo/article/details/138226160)
 
+## 排序和分组
+
+### [2356. 每位教师所教授的科目种类的数量](https://leetcode.cn/problems/number-of-unique-subjects-taught-by-each-teacher/)
+
+![image-20241001111231285](assets/image-20241001111231285.png)
+
+![image-20241001111246672](assets/image-20241001111246672.png)
+
+```sql
+# Schema
+Create table If Not Exists Teacher (teacher_id int, subject_id int, dept_id int)
+Truncate table Teacher
+insert into Teacher (teacher_id, subject_id, dept_id) values ('1', '2', '3')
+insert into Teacher (teacher_id, subject_id, dept_id) values ('1', '2', '4')
+insert into Teacher (teacher_id, subject_id, dept_id) values ('1', '3', '3')
+insert into Teacher (teacher_id, subject_id, dept_id) values ('2', '1', '1')
+insert into Teacher (teacher_id, subject_id, dept_id) values ('2', '2', '1')
+insert into Teacher (teacher_id, subject_id, dept_id) values ('2', '3', '1')
+insert into Teacher (teacher_id, subject_id, dept_id) values ('2', '4', '1')
+
+# Result
+SELECT teacher_id,COUNT(DISTINCT subject_id) cnt 
+FROM Teacher
+GROUP BY teacher_id;
+```
+
