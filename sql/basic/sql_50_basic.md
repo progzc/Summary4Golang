@@ -1,6 +1,6 @@
 [TOC]
 
-# 高频 SQL 50 题（基础版）
+# LeetCode高频 SQL 50 题（基础版）
 
 ## 查询
 
@@ -926,4 +926,51 @@ SELECT customer_id FROM Customer
 GROUP BY customer_id 
 HAVING COUNT(DISTINCT product_key) = (SELECT COUNT(product_key) FROM Product);
 ```
+
+## 高级查询和连接
+
+### [1731. 每位经理的下属员工数量](https://leetcode.cn/problems/the-number-of-employees-which-report-to-each-employee/)
+
+![image-20241001233814533](assets/image-20241001233814533.png)
+
+![image-20241001233843559](assets/image-20241001233843559.png)
+
+![image-20241001233903813](assets/image-20241001233903813.png)
+
+```sql
+# Schema
+Create table If Not Exists Employees(employee_id int, name varchar(20), reports_to int, age int)
+Truncate table Employees
+insert into Employees (employee_id, name, reports_to, age) values ('9', 'Hercy', NULL, '43')
+insert into Employees (employee_id, name, reports_to, age) values ('6', 'Alice', '9', '41')
+insert into Employees (employee_id, name, reports_to, age) values ('4', 'Bob', '9', '36')
+insert into Employees (employee_id, name, reports_to, age) values ('2', 'Winston', NULL, '37')
+
+# Result
+SELECT t.employee_id,e.name,t.reports_count,t.average_age
+FROM (
+    SELECT 
+        reports_to as employee_id, 
+        COUNT(employee_id) as reports_count, 
+        ROUND(AVG(age),0) as average_age 
+    FROM Employees
+    WHERE reports_to is not NULL
+    GROUP BY reports_to
+) t LEFT JOIN Employees e ON t.employee_id = e.employee_id
+ORDER BY t.employee_id ASC;
+```
+
+
+
+
+
+
+
+## 子查询
+
+
+
+
+
+## 高级字符串函数/正则表达式/子句
 
