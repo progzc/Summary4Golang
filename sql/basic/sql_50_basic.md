@@ -870,3 +870,34 @@ GROUP BY user_id
 ORDER BY user_id ASC;
 ```
 
+### [619. 只出现一次的最大数字](https://leetcode.cn/problems/biggest-single-number/)
+
+![image-20241001224305316](assets/image-20241001224305316.png)
+
+![image-20241001224324385](assets/image-20241001224324385.png)
+
+![image-20241001224341975](assets/image-20241001224341975.png)
+
+```sql
+# Schema
+Create table If Not Exists MyNumbers (num int)
+Truncate table MyNumbers
+insert into MyNumbers (num) values ('8')
+insert into MyNumbers (num) values ('8')
+insert into MyNumbers (num) values ('3')
+insert into MyNumbers (num) values ('3')
+insert into MyNumbers (num) values ('1')
+insert into MyNumbers (num) values ('4')
+insert into MyNumbers (num) values ('5')
+insert into MyNumbers (num) values ('6')
+
+# Result
+SELECT max(t.num) as num
+FROM (
+    SELECT num
+    FROM MyNumbers
+    GROUP BY num
+    HAVING COUNT(num) = 1
+) t;
+```
+
