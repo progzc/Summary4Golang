@@ -283,7 +283,6 @@ GROUP BY a.machine_id;
 > 1. [一分钟让你搞明白 left join、right join和join的区别](https://blog.csdn.net/Li_Jian_Hui_/article/details/105801454)
 > 2. [数据库 | 辨析 cross join、inner join和outer join](https://blog.csdn.net/a26013/article/details/123615320)
 >    - CROSS JOIN、INNER JOIN、JOIN 和逗号分隔的连接是等价的。
-> 3. [mySQL中AVG()函数如何去除null值或0值求平均值](https://blog.csdn.net/m0_51088798/article/details/123906790)
 
 ### [577. 员工奖金](https://leetcode.cn/problems/employee-bonus/)
 
@@ -442,6 +441,10 @@ GROUP BY s.user_id;
 ```
 
 #### a.AVG函数的使用
+
+> 参考文献：
+>
+> 1. [mySQL中AVG()函数如何去除null值或0值求平均值](https://blog.csdn.net/m0_51088798/article/details/123906790)
 
 ## 聚合函数
 
@@ -667,7 +670,7 @@ SELECT ROUND(SUM(IF(t.order_date=t.customer_pref_delivery_date,1,0))/(SELECT COU
     ) d WHERE d.rank_num <=1
 ) t
 
-# Result2
+# Result2: 推荐
 SELECT 
     ROUND(SUM(IF(order_date=customer_pref_delivery_date,1,0))/COUNT(*)*100,2) as immediate_percentage 
 FROM Delivery 
@@ -677,4 +680,44 @@ WHERE (customer_id, order_date) IN (
     GROUP BY customer_id
 )
 ```
+
+#### a.Rank排名函数
+
+> 参考文献：
+>
+> 1. [RANK/DENSE_RANK/ROW_NUMBER函数的使用](https://www.cnblogs.com/yanghr/p/17815477.html)
+> 2. [Mysql常用函数之Rank 排名函数](https://blog.csdn.net/weixin_42272869/article/details/116372776)
+
+
+
+### [550. 游戏玩法分析 IV](https://leetcode.cn/problems/game-play-analysis-iv/)🌟
+
+![image-20241001102954717](assets/image-20241001102954717.png)
+
+![image-20241001103010428](assets/image-20241001103010428.png)
+
+```sql
+# Schema
+Create table If Not Exists Activity (player_id int, device_id int, event_date date, games_played int)
+Truncate table Activity
+insert into Activity (player_id, device_id, event_date, games_played) values ('1', '2', '2016-03-01', '5')
+insert into Activity (player_id, device_id, event_date, games_played) values ('1', '2', '2016-03-02', '6')
+insert into Activity (player_id, device_id, event_date, games_played) values ('2', '3', '2017-06-25', '1')
+insert into Activity (player_id, device_id, event_date, games_played) values ('3', '1', '2016-03-02', '0')
+insert into Activity (player_id, device_id, event_date, games_played) values ('3', '4', '2018-07-03', '5')
+
+# Result
+SELECT IFNULL(ROUND(COUNT(DISTINCT e.player_id)/COUNT(DISTINCT a.player_id),2),0) as fraction
+FROM Activity a LEFT JOIN (
+    SELECT player_id,DATE_ADD(MIN(event_date),INTERVAL 1 DAY) as second_date 
+    FROM Activity
+    GROUP BY player_id
+) e ON a.player_id = e.player_id AND a.event_date = e.second_date;
+```
+
+#### a.DATE_ADD函数的使用
+
+> 参考文档：
+>
+> 1. [MySQL加减间隔时间函数DATE_ADD和DATE_SUB的详解](https://blog.csdn.net/liqinglonguo/article/details/138226160)
 
