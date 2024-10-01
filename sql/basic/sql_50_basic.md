@@ -782,7 +782,7 @@ WHERE DATEDIFF('2019-07-27',activity_date) BETWEEN 0 AND 29
 GROUP BY activity_date;
 ```
 
-### [1084. 销售分析III](https://leetcode.cn/problems/sales-analysis-iii/)
+### [1084. 销售分析III](https://leetcode.cn/problems/sales-analysis-iii/)🌟
 
 ![image-20241001113503343](assets/image-20241001113503343.png)
 
@@ -846,5 +846,27 @@ insert into Courses (student, class) values ('I', 'Math')
 SELECT class FROM Courses
 GROUP BY class
 HAVING COUNT(DISTINCT student)>=5;
+```
+
+### [1729. 求关注者的数量](https://leetcode.cn/problems/find-followers-count/)
+
+![image-20241001152747175](assets/image-20241001152747175.png)
+
+![image-20241001152802389](assets/image-20241001152802389.png)
+
+```sql
+# Schema
+Create table If Not Exists Followers(user_id int, follower_id int)
+Truncate table Followers
+insert into Followers (user_id, follower_id) values ('0', '1')
+insert into Followers (user_id, follower_id) values ('1', '0')
+insert into Followers (user_id, follower_id) values ('2', '0')
+insert into Followers (user_id, follower_id) values ('2', '1')
+
+# Result
+SELECT user_id, COUNT(follower_id) as followers_count 
+FROM Followers
+GROUP BY user_id
+ORDER BY user_id ASC;
 ```
 
