@@ -822,3 +822,29 @@ GROUP BY s.product_id
 HAVING max(s.sale_date)<='2019-03-31' AND min(s.sale_date)>='2019-01-01';
 ```
 
+### [596. 超过 5 名学生的课](https://leetcode.cn/problems/classes-more-than-5-students/)
+
+![image-20241001122909311](assets/image-20241001122909311.png)
+
+![image-20241001122933267](assets/image-20241001122933267.png)
+
+```sql
+# Schema
+Create table If Not Exists Courses (student varchar(255), class varchar(255))
+Truncate table Courses
+insert into Courses (student, class) values ('A', 'Math')
+insert into Courses (student, class) values ('B', 'English')
+insert into Courses (student, class) values ('C', 'Math')
+insert into Courses (student, class) values ('D', 'Biology')
+insert into Courses (student, class) values ('E', 'Math')
+insert into Courses (student, class) values ('F', 'Computer')
+insert into Courses (student, class) values ('G', 'Math')
+insert into Courses (student, class) values ('H', 'Math')
+insert into Courses (student, class) values ('I', 'Math')
+
+# Result
+SELECT class FROM Courses
+GROUP BY class
+HAVING COUNT(DISTINCT student)>=5;
+```
+
