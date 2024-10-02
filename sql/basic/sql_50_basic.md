@@ -960,6 +960,53 @@ FROM (
 ORDER BY t.employee_id ASC;
 ```
 
+### [1789. 员工的直属部门](https://leetcode.cn/problems/primary-department-for-each-employee/)🌟
+![image-20241002092408052](assets/image-20241002092408052.png)
+
+![image-20241002092503790](assets/image-20241002092503790.png)
+
+```sql
+# Schema
+Create table If Not Exists Employee (employee_id int, department_id int, primary_flag ENUM('Y','N'))
+Truncate table Employee
+insert into Employee (employee_id, department_id, primary_flag) values ('1', '1', 'N')
+insert into Employee (employee_id, department_id, primary_flag) values ('2', '1', 'Y')
+insert into Employee (employee_id, department_id, primary_flag) values ('2', '2', 'N')
+insert into Employee (employee_id, department_id, primary_flag) values ('3', '3', 'N')
+insert into Employee (employee_id, department_id, primary_flag) values ('4', '2', 'N')
+insert into Employee (employee_id, department_id, primary_flag) values ('4', '3', 'Y')
+insert into Employee (employee_id, department_id, primary_flag) values ('4', '4', 'N')
+
+# Result
+SELECT employee_id, department_id 
+FROM Employee
+WHERE primary_flag = 'Y'
+UNION
+SELECT employee_id, max(department_id) 
+FROM Employee
+GROUP BY employee_id
+HAVING COUNT(primary_flag) = 1;
+
+# Result2
+SELECT 
+    employee_id,
+    IF(count(department_id) = 1, department_id, max(CASE primary_flag WHEN 'Y' THEN department_id END)) as department_id
+FROM Employee
+GROUP BY employee_id;
+```
+
+#### a.CASE WHEN
+
+> 参考文献：
+>
+> 1. [SQL之CASE WHEN用法详解](https://blog.csdn.net/qq_43718048/article/details/127277369)
+
+
+
+
+
+
+
 
 
 
