@@ -1429,7 +1429,11 @@ insert into Insurance (pid, tiv_2015, tiv_2016, lat, lon) values ('3', '10', '30
 insert into Insurance (pid, tiv_2015, tiv_2016, lat, lon) values ('4', '10', '40', '40', '40')
 
 # Result
-
+SELECT ROUND(SUM(r.tiv_2016),2) as tiv_2016 FROM (
+    SELECT DISTINCT t1.*
+    FROM Insurance t1 JOIN Insurance t2 ON t1.pid != t2.pid AND t1.tiv_2015 = t2.tiv_2015
+    WHERE (SELECT COUNT(*) FROM Insurance WHERE lat = t1.lat AND lon = t1.lon)=1
+) r;
 ```
 
 ### [185. 部门工资前三高的所有员工](https://leetcode.cn/problems/department-top-three-salaries/)
