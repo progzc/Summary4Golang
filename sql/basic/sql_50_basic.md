@@ -1053,7 +1053,7 @@ FROM Triangle;
 > 1. [SQL之CASE WHEN用法详解](https://blog.csdn.net/qq_43718048/article/details/127277369)
 > 2. [case when null then 'xx' else 'yy' end 无效](https://blog.csdn.net/weixin_34270606/article/details/94049736)
 
-### [180. 连续出现的数字](https://leetcode.cn/problems/consecutive-numbers/)
+### [180. 连续出现的数字](https://leetcode.cn/problems/consecutive-numbers/)🌟
 
 ![image-20241002103724179](assets/image-20241002103724179.png)
 
@@ -1086,6 +1086,57 @@ FROM (
     FROM Logs
 ) sub GROUP BY num, serial_number HAVING COUNT(*) >= 3;
 ```
+
+### [1164. 指定日期的产品价格](https://leetcode.cn/problems/product-price-at-a-given-date/)🌟
+
+![image-20241002124346377](assets/image-20241002124346377.png)
+
+![image-20241002124404649](assets/image-20241002124404649.png)
+
+```sql
+# Schema
+Create table If Not Exists Products (product_id int, new_price int, change_date date)
+Truncate table Products
+insert into Products (product_id, new_price, change_date) values ('1', '20', '2019-08-14')
+insert into Products (product_id, new_price, change_date) values ('2', '50', '2019-08-14')
+insert into Products (product_id, new_price, change_date) values ('1', '30', '2019-08-15')
+insert into Products (product_id, new_price, change_date) values ('1', '35', '2019-08-16')
+insert into Products (product_id, new_price, change_date) values ('2', '65', '2019-08-17')
+insert into Products (product_id, new_price, change_date) values ('3', '20', '2019-08-18')
+
+# Result
+SELECT t.product_id,t.new_price as price FROM (
+    SELECT 
+        product_id,
+        new_price,
+    ROW_NUMBER() OVER(PARTITION BY product_id ORDER BY change_date DESC) as row_num
+    FROM Products
+    WHERE change_date <= '2019-08-16'
+) t WHERE t.row_num = 1
+UNION
+SELECT s.product_id,IF(true,10,0) as price FROM (
+    SELECT product_id, min(change_date) as change_date
+    FROM Products
+    GROUP BY product_id
+) s WHERE s.change_date>'2019-08-16';
+
+# Result2: 推荐
+SELECT p1.product_id, IFNULL(p2.new_price,10) as price FROM (
+    SELECT DISTINCT product_id 
+    FROM Products
+) p1 LEFT JOIN (
+   SELECT product_id,new_price
+    FROM Products 
+    WHERE (product_id, change_date) IN (
+        SELECT product_id,max(change_date) 
+        FROM Products
+        WHERE change_date <= '2019-08-16'
+        GROUP BY product_id
+    ) 
+) p2 ON p1.product_id = p2.product_id;
+```
+
+
 
 
 
