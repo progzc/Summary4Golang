@@ -1216,13 +1216,34 @@ FROM Accounts
 
 #### a.CASE WHEN
 
-
-
-
-
-
-
 ## 子查询
+
+### [1978. 上级经理已离职的公司员工](https://leetcode.cn/problems/employees-whose-manager-left-the-company/)
+
+![image-20241002183046297](assets/image-20241002183046297.png)
+
+![image-20241002183104882](assets/image-20241002183104882.png)
+
+```sql
+# Schema
+Create table If Not Exists Employees (employee_id int, name varchar(20), manager_id int, salary int)
+Truncate table Employees
+insert into Employees (employee_id, name, manager_id, salary) values ('3', 'Mila', '9', '60301')
+insert into Employees (employee_id, name, manager_id, salary) values ('12', 'Antonella', NULL, '31000')
+insert into Employees (employee_id, name, manager_id, salary) values ('13', 'Emery', NULL, '67084')
+insert into Employees (employee_id, name, manager_id, salary) values ('1', 'Kalel', '11', '21241')
+insert into Employees (employee_id, name, manager_id, salary) values ('9', 'Mikaela', NULL, '50937')
+insert into Employees (employee_id, name, manager_id, salary) values ('11', 'Joziah', '6', '28485')
+
+# Result
+SELECT employee_id
+FROM Employees
+WHERE salary<30000 AND manager_id is NOT NULL AND manager_id NOT IN (
+    SELECT employee_id FROM Employees
+) ORDER BY employee_id ASC;
+```
+
+
 
 
 
