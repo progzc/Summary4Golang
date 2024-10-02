@@ -1001,11 +1001,57 @@ GROUP BY employee_id;
 >
 > 1. [SQL之CASE WHEN用法详解](https://blog.csdn.net/qq_43718048/article/details/127277369)
 
+### [610. 判断三角形](https://leetcode.cn/problems/triangle-judgement/)
 
+![image-20241002101442825](assets/image-20241002101442825.png)
 
+![image-20241002101501622](assets/image-20241002101501622.png)
 
+```sql
+# Schema
+Create table If Not Exists Triangle (x int, y int, z int)
+Truncate table Triangle
+insert into Triangle (x, y, z) values ('13', '15', '30')
+insert into Triangle (x, y, z) values ('10', '20', '15')
 
+# Result
+SELECT 
+    t.x,
+    t.y,
+    t.z,
+    CASE WHEN r.x is null THEN 'No' ELSE 'Yes' END as triangle  
+FROM Triangle t LEFT JOIN (
+    SELECT x,y,z
+    FROM Triangle
+    WHERE x+y>z AND x+z>y AND y+z>x
+) r ON t.x = r.x AND t.y = r.y AND t.z = r.z;
 
+# Result2
+SELECT 
+    x,
+    y,
+    z,
+    CASE 
+        WHEN x+y>z AND x+z>y AND y+z>x THEN 'Yes' 
+        ELSE 'No' 
+    END as triangle  
+FROM Triangle;
+
+# Result3
+SELECT 
+    x,
+    y,
+    z,
+    IF(x+y>z AND x+z>y AND y+z>x,'Yes','No') as triangle  
+FROM Triangle;
+```
+
+#### a.CASE WHEN
+
+> 参考文献：
+>
+> 1. [SQL之CASE WHEN用法详解](https://blog.csdn.net/qq_43718048/article/details/127277369)
+> 2. [case when null then 'xx' else 'yy' end 无效](https://blog.csdn.net/weixin_34270606/article/details/94049736)
 
 
 
