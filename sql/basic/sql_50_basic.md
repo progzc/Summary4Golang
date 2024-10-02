@@ -1436,7 +1436,7 @@ SELECT ROUND(SUM(r.tiv_2016),2) as tiv_2016 FROM (
 ) r;
 ```
 
-### [185. 部门工资前三高的所有员工](https://leetcode.cn/problems/department-top-three-salaries/)
+### [185. 部门工资前三高的所有员工](https://leetcode.cn/problems/department-top-three-salaries/)🌟🌟
 
 ![image-20241002220838565](assets/image-20241002220838565.png)
 
@@ -1462,15 +1462,26 @@ Truncate table Department
 insert into Department (id, name) values ('1', 'IT')
 insert into Department (id, name) values ('2', 'Sales')
 
-# Result
+# Result: 推荐
+SELECT d.name as Department, t.name as Employee, t.salary as Salary FROM (
+    SELECT 
+        name,
+        salary,
+        departmentId,
+        DENSE_RANK() OVER(PARTITION BY departmentId ORDER BY salary DESC) as rank_num
+    FROM Employee
+) t LEFT JOIN Department d ON t.departmentId = d.id
+WHERE t.rank_num <= 3;
 
+# result2: 公司里前3高的薪水意味着有不超过3个工资比这些值大。
+SELECT d.name as Department, e1.name as Employee, e1.salary as Salary
+FROM Employee e1 JOIN Department d ON e1.departmentId = d.id
+WHERE 3>(
+    SELECT COUNT(DISTINCT e2.salary)
+    FROM Employee e2
+    WHERE e2.salary > e1.salary AND e2.departmentId = e1.departmentId
+);
 ```
-
-
-
-
-
-
 
 ## 高级字符串函数/正则表达式/子句
 
