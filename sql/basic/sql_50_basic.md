@@ -1375,7 +1375,92 @@ GROUP BY a.visited_on
 ORDER BY a.visited_on;
 ```
 
+### [602. 好友申请 II ：谁有最多的好友](https://leetcode.cn/problems/friend-requests-ii-who-has-the-most-friends/)🌟
 
+![image-20241002220127881](assets/image-20241002220127881.png)
+
+![image-20241002220145622](assets/image-20241002220145622.png)
+
+```sql
+# Schema
+Create table If Not Exists RequestAccepted (requester_id int not null, accepter_id int null, accept_date date null)
+Truncate table RequestAccepted
+insert into RequestAccepted (requester_id, accepter_id, accept_date) values ('1', '2', '2016/06/03')
+insert into RequestAccepted (requester_id, accepter_id, accept_date) values ('1', '3', '2016/06/08')
+insert into RequestAccepted (requester_id, accepter_id, accept_date) values ('2', '3', '2016/06/08')
+insert into RequestAccepted (requester_id, accepter_id, accept_date) values ('3', '4', '2016/06/09')
+
+# Result: 针对只有一个人拥有最多好友数
+SELECT requester_id as id, COUNT(DISTINCT accepter_id) as num FROM (
+    SELECT requester_id, accepter_id FROM RequestAccepted
+    UNION
+    SELECT accepter_id as requester_id, requester_id as accepter_id FROM RequestAccepted
+) t GROUP BY requester_id ORDER BY num DESC LIMIT 1;
+
+# Result2: 推荐。可针对有多个人拥有最多好友数
+SELECT r.id,r.num FROM (
+    SELECT requester_id as id, COUNT(DISTINCT accepter_id) as num FROM (
+        SELECT requester_id, accepter_id FROM RequestAccepted
+        UNION
+        SELECT accepter_id as requester_id, requester_id as accepter_id FROM RequestAccepted
+    ) t GROUP BY requester_id
+) r WHERE r.num = (
+    SELECT COUNT(DISTINCT accepter_id) as num FROM (
+        SELECT requester_id, accepter_id FROM RequestAccepted
+        UNION
+        SELECT accepter_id as requester_id, requester_id as accepter_id FROM RequestAccepted
+    ) t2 GROUP BY requester_id ORDER BY num DESC LIMIT 1
+);
+```
+
+### [585. 2016年的投资](https://leetcode.cn/problems/investments-in-2016/)
+
+![image-20241002220709539](assets/image-20241002220709539.png)
+
+![image-20241002220725132](assets/image-20241002220725132.png)
+
+```sql
+# Schema
+Create Table If Not Exists Insurance (pid int, tiv_2015 float, tiv_2016 float, lat float, lon float)
+Truncate table Insurance
+insert into Insurance (pid, tiv_2015, tiv_2016, lat, lon) values ('1', '10', '5', '10', '10')
+insert into Insurance (pid, tiv_2015, tiv_2016, lat, lon) values ('2', '20', '20', '20', '20')
+insert into Insurance (pid, tiv_2015, tiv_2016, lat, lon) values ('3', '10', '30', '20', '20')
+insert into Insurance (pid, tiv_2015, tiv_2016, lat, lon) values ('4', '10', '40', '40', '40')
+
+# Result
+
+```
+
+### [185. 部门工资前三高的所有员工](https://leetcode.cn/problems/department-top-three-salaries/)
+
+![image-20241002220838565](assets/image-20241002220838565.png)
+
+![image-20241002220854049](assets/image-20241002220854049.png)
+
+![image-20241002220909706](assets/image-20241002220909706.png)
+
+![image-20241002220931497](assets/image-20241002220931497.png)
+
+```sql
+# Schema
+Create table If Not Exists Employee (id int, name varchar(255), salary int, departmentId int)
+Create table If Not Exists Department (id int, name varchar(255))
+Truncate table Employee
+insert into Employee (id, name, salary, departmentId) values ('1', 'Joe', '85000', '1')
+insert into Employee (id, name, salary, departmentId) values ('2', 'Henry', '80000', '2')
+insert into Employee (id, name, salary, departmentId) values ('3', 'Sam', '60000', '2')
+insert into Employee (id, name, salary, departmentId) values ('4', 'Max', '90000', '1')
+insert into Employee (id, name, salary, departmentId) values ('5', 'Janet', '69000', '1')
+insert into Employee (id, name, salary, departmentId) values ('6', 'Randy', '85000', '1')
+insert into Employee (id, name, salary, departmentId) values ('7', 'Will', '70000', '1')
+Truncate table Department
+insert into Department (id, name) values ('1', 'IT')
+insert into Department (id, name) values ('2', 'Sales')
+
+# Result
+
+```
 
 
 
