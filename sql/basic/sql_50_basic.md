@@ -1243,6 +1243,40 @@ WHERE salary<30000 AND manager_id is NOT NULL AND manager_id NOT IN (
 ) ORDER BY employee_id ASC;
 ```
 
+### [626. 换座位](https://leetcode.cn/problems/exchange-seats/)🌟
+
+![image-20241002193535112](assets/image-20241002193535112.png)
+
+![image-20241002193549930](assets/image-20241002193549930.png)
+
+```sql
+# Schema
+Create table If Not Exists Seat (id int, student varchar(255))
+Truncate table Seat
+insert into Seat (id, student) values ('1', 'Abbot')
+insert into Seat (id, student) values ('2', 'Doris')
+insert into Seat (id, student) values ('3', 'Emerson')
+insert into Seat (id, student) values ('4', 'Green')
+insert into Seat (id, student) values ('5', 'Jeames')
+
+# Result: 使用 CASE WHEN 和 MOD
+SELECT
+    (CASE
+        WHEN MOD(id, 2) != 0 AND counts != id THEN id + 1
+        WHEN MOD(id, 2) != 0 AND counts = id THEN id
+        ELSE id - 1
+    END) as id,
+    student
+FROM Seat,(SELECT COUNT(*) as counts FROM Seat) seat_counts
+ORDER BY id ASC;
+```
+
+
+
+
+
+
+
 
 
 
