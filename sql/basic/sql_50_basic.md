@@ -1485,3 +1485,28 @@ WHERE 3>(
 
 ## 高级字符串函数/正则表达式/子句
 
+### [1667. 修复表中的名字](https://leetcode.cn/problems/fix-names-in-a-table/)
+
+![image-20241002234853325](assets/image-20241002234853325.png)
+
+![image-20241002234911281](assets/image-20241002234911281.png)
+
+```sql
+# Schema
+Create table If Not Exists Users (user_id int, name varchar(40))
+Truncate table Users
+insert into Users (user_id, name) values ('1', 'aLice')
+insert into Users (user_id, name) values ('2', 'bOB')
+
+# Result
+SELECT user_id, CONCAT(UPPER(SUBSTRING(name, 1, 1)), LOWER(SUBSTRING(name, 2))) AS name
+FROM Users
+ORDER BY user_id asc;
+```
+
+#### a.CONCAT/UPPER/LOWER/SUBSTRING函数的使用
+
+> 参考文献：
+>
+> 1. [SUBSTRING函数 | SUBSTRING_INDEX函数](https://blog.csdn.net/Hudas/article/details/123497927)
+
