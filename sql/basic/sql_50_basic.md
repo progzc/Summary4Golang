@@ -1001,7 +1001,7 @@ GROUP BY employee_id;
 >
 > 1. [SQL之CASE WHEN用法详解](https://blog.csdn.net/qq_43718048/article/details/127277369)
 
-### [610. 判断三角形](https://leetcode.cn/problems/triangle-judgement/)
+### [610. 判断三角形](https://leetcode.cn/problems/triangle-judgement/)🌟
 
 ![image-20241002101442825](assets/image-20241002101442825.png)
 
@@ -1052,6 +1052,40 @@ FROM Triangle;
 >
 > 1. [SQL之CASE WHEN用法详解](https://blog.csdn.net/qq_43718048/article/details/127277369)
 > 2. [case when null then 'xx' else 'yy' end 无效](https://blog.csdn.net/weixin_34270606/article/details/94049736)
+
+### [180. 连续出现的数字](https://leetcode.cn/problems/consecutive-numbers/)
+
+![image-20241002103724179](assets/image-20241002103724179.png)
+
+![image-20241002103741833](assets/image-20241002103741833.png)
+
+```sql
+# Schema
+Create table If Not Exists Logs (id int, num int)
+Truncate table Logs
+insert into Logs (id, num) values ('1', '1')
+insert into Logs (id, num) values ('2', '1')
+insert into Logs (id, num) values ('3', '1')
+insert into Logs (id, num) values ('4', '2')
+insert into Logs (id, num) values ('5', '1')
+insert into Logs (id, num) values ('6', '2')
+insert into Logs (id, num) values ('7', '2')
+
+# Result
+SELECT DISTINCT l1.num as ConsecutiveNums
+FROM Logs l1, Logs l2, Logs l3
+WHERE l1.id = l2.id-1 AND l2.id = l3.id-1 AND l1.num = l2.num AND l2.num = l3.num;
+
+# Result2: 推荐
+SELECT DISTINCT num as ConsecutiveNums
+FROM (
+    SELECT 
+        id,
+        num,
+        ROW_NUMBER() over(order by id) - ROW_NUMBER() over(partition by num order by id) as serial_number
+    FROM Logs
+) sub GROUP BY num, serial_number HAVING COUNT(*) >= 3;
+```
 
 
 
