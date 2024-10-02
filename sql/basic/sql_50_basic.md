@@ -1136,9 +1136,52 @@ SELECT p1.product_id, IFNULL(p2.new_price,10) as price FROM (
 ) p2 ON p1.product_id = p2.product_id;
 ```
 
+### [1204. 最后一个能进入巴士的人](https://leetcode.cn/problems/last-person-to-fit-in-the-bus/)🌟
 
+![image-20241002163630653](assets/image-20241002163630653.png)
 
+![image-20241002163651718](assets/image-20241002163651718.png)
 
+```sql
+# Schema
+Create table If Not Exists Queue (person_id int, person_name varchar(30), weight int, turn int)
+Truncate table Queue
+insert into Queue (person_id, person_name, weight, turn) values ('5', 'Alice', '250', '1')
+insert into Queue (person_id, person_name, weight, turn) values ('4', 'Bob', '175', '5')
+insert into Queue (person_id, person_name, weight, turn) values ('3', 'Alex', '350', '2')
+insert into Queue (person_id, person_name, weight, turn) values ('6', 'John Cena', '400', '3')
+insert into Queue (person_id, person_name, weight, turn) values ('1', 'Winston', '500', '6')
+insert into Queue (person_id, person_name, weight, turn) values ('2', 'Marie', '200', '4')
+
+# Result: 很难理解，不推荐
+SELECT a.person_name
+FROM Queue a, Queue b
+WHERE a.turn >= b.turn
+GROUP BY a.person_id HAVING SUM(b.weight) <= 1000
+ORDER BY a.turn DESC
+LIMIT 1;
+
+# Result2: 推荐
+SELECT t.person_name FROM (
+    SELECT 
+        person_id, 
+        person_name, 
+        weight, 
+        turn, 
+        @pre := @pre + weight as add_weight
+    FROM Queue, (SELECT @pre := 0) tmp
+    ORDER BY turn ASC
+) t WHERE t.add_weight <= 1000 
+ORDER BY t.add_weight DESC 
+LIMIT 1;
+```
+
+#### a.自定义变量
+
+> 参考文献：
+>
+> 1. [mysql中自定义变量](https://blog.csdn.net/weixin_42224488/article/details/125378932)
+> 2. [MySQL的 自定义变量](https://blog.csdn.net/weixin_45417821/article/details/120616692)
 
 
 
