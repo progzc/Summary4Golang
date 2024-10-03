@@ -1510,3 +1510,36 @@ ORDER BY user_id asc;
 >
 > 1. [SUBSTRING函数 | SUBSTRING_INDEX函数](https://blog.csdn.net/Hudas/article/details/123497927)
 
+### [1527. 患某种疾病的患者](https://leetcode.cn/problems/patients-with-a-condition/)
+
+![image-20241003000045323](assets/image-20241003000045323.png)
+
+![image-20241003000102143](assets/image-20241003000102143.png)
+
+```sql
+# Schema
+Create table If Not Exists Patients (patient_id int, patient_name varchar(30), conditions varchar(100))
+Truncate table Patients
+insert into Patients (patient_id, patient_name, conditions) values ('1', 'Daniel', 'YFEV COUGH')
+insert into Patients (patient_id, patient_name, conditions) values ('2', 'Alice', '')
+insert into Patients (patient_id, patient_name, conditions) values ('3', 'Bob', 'DIAB100 MYOP')
+insert into Patients (patient_id, patient_name, conditions) values ('4', 'George', 'ACNE DIAB100')
+insert into Patients (patient_id, patient_name, conditions) values ('5', 'Alain', 'DIAB201')
+
+# Result: 推荐
+SELECT patient_id,patient_name,conditions 
+FROM Patients 
+WHERE conditions LIKE 'DIAB1%' OR conditions LIKE '% DIAB1%';
+
+# Result2: 正则
+SELECT patient_id, patient_name, conditions
+FROM Patients
+WHERE conditions REGEXP '\\bDIAB1.*';
+```
+
+#### a.正则表达式的使用
+
+> 参考文献：
+>
+> 1. [正则表达式 - 元字符 \b 与 \B](https://www.runoob.com/regexp/regexp-metachar-b.html)
+
