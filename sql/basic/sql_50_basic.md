@@ -1590,3 +1590,40 @@ DELETE FROM Person WHERE id not in (
 > 参考文献：
 >
 > 1. [You can‘t specify target table ‘Person‘ for update in FROM clause](https://blog.csdn.net/Tangzx_/article/details/134313417)
+
+### [176. 第二高的薪水](https://leetcode.cn/problems/second-highest-salary/)
+
+![image-20241003085833673](assets/image-20241003085833673.png)
+
+![image-20241003085902009](assets/image-20241003085902009.png)
+
+```sql
+# Schema
+Create table If Not Exists Employee (id int, salary int)
+Truncate table Employee
+insert into Employee (id, salary) values ('1', '100')
+insert into Employee (id, salary) values ('2', '200')
+insert into Employee (id, salary) values ('3', '300')
+
+# Result: 利用排序函数
+SELECT IF(COUNT(*)=0,null,t.salary) as SecondHighestSalary FROM (
+    SELECT
+        salary,
+    DENSE_RANK() OVER(ORDER BY salary DESC) as rank_num 
+    FROM Employee
+) t WHERE t.rank_num = 2;
+
+# Result2: 很巧妙的解法
+SELECT max(salary) as SecondHighestSalary 
+FROM Employee
+WHERE salary < (SELECT max(salary) FROM Employee);
+
+# Result3: 使用 Limit+Offset
+SELECT (
+    SELECT DISTINCT Salary
+    FROM Employee
+    ORDER BY Salary DESC
+    LIMIT 1 OFFSET 1
+) AS SecondHighestSalary;
+```
+
