@@ -1580,6 +1580,8 @@ DELETE FROM Person p WHERE p.id not in (
     GROUP BY p1.email
 );
 
+# Result: 
+# Mysql会报错: You can‘t specify target table ‘Person‘ for update in FROM clause
 DELETE FROM Person WHERE id not in (
     SELECT min(id) as id
     FROM Person
@@ -1660,3 +1662,71 @@ ORDER BY sell_date asc;
 > 参考文献：
 >
 > 1. [group_concat函数](https://blog.csdn.net/weixin_48052161/article/details/109208910)
+
+### [1327. 列出指定时间段内所有的下单产品](https://leetcode.cn/problems/list-the-products-ordered-in-a-period/)
+
+![image-20241003092842290](assets/image-20241003092842290.png)
+
+![image-20241003092902797](assets/image-20241003092902797.png)
+
+![image-20241003092920006](assets/image-20241003092920006.png)
+
+![image-20241003092934620](assets/image-20241003092934620.png)
+
+```sql
+# Schema
+Create table If Not Exists Products (product_id int, product_name varchar(40), product_category varchar(40))
+Create table If Not Exists Orders (product_id int, order_date date, unit int)
+Truncate table Products
+insert into Products (product_id, product_name, product_category) values ('1', 'Leetcode Solutions', 'Book')
+insert into Products (product_id, product_name, product_category) values ('2', 'Jewels of Stringology', 'Book')
+insert into Products (product_id, product_name, product_category) values ('3', 'HP', 'Laptop')
+insert into Products (product_id, product_name, product_category) values ('4', 'Lenovo', 'Laptop')
+insert into Products (product_id, product_name, product_category) values ('5', 'Leetcode Kit', 'T-shirt')
+Truncate table Orders
+insert into Orders (product_id, order_date, unit) values ('1', '2020-02-05', '60')
+insert into Orders (product_id, order_date, unit) values ('1', '2020-02-10', '70')
+insert into Orders (product_id, order_date, unit) values ('2', '2020-01-18', '30')
+insert into Orders (product_id, order_date, unit) values ('2', '2020-02-11', '80')
+insert into Orders (product_id, order_date, unit) values ('3', '2020-02-17', '2')
+insert into Orders (product_id, order_date, unit) values ('3', '2020-02-24', '3')
+insert into Orders (product_id, order_date, unit) values ('4', '2020-03-01', '20')
+insert into Orders (product_id, order_date, unit) values ('4', '2020-03-04', '30')
+insert into Orders (product_id, order_date, unit) values ('4', '2020-03-04', '60')
+insert into Orders (product_id, order_date, unit) values ('5', '2020-02-25', '50')
+insert into Orders (product_id, order_date, unit) values ('5', '2020-02-27', '50')
+insert into Orders (product_id, order_date, unit) values ('5', '2020-03-01', '50')
+
+# Result
+SELECT p.product_name,t.unit FROM (
+    SELECT product_id, SUM(unit) as unit FROM Orders
+    WHERE YEAR(order_date) = 2020 AND MONTH(order_date) = 2
+    GROUP BY product_id
+) t LEFT JOIN Products p ON t.product_id = p.product_id
+WHERE t.unit>=100;
+```
+
+
+
+### [1517. 查找拥有有效邮箱的用户](https://leetcode.cn/problems/find-users-with-valid-e-mails/)
+
+![image-20241003093056121](assets/image-20241003093056121.png)
+
+![image-20241003093111310](assets/image-20241003093111310.png)
+
+```sql
+# Schema
+Create table If Not Exists Users (user_id int, name varchar(30), mail varchar(50))
+Truncate table Users
+insert into Users (user_id, name, mail) values ('1', 'Winston', 'winston@leetcode.com')
+insert into Users (user_id, name, mail) values ('2', 'Jonathan', 'jonathanisgreat')
+insert into Users (user_id, name, mail) values ('3', 'Annabelle', 'bella-@leetcode.com')
+insert into Users (user_id, name, mail) values ('4', 'Sally', 'sally.come@leetcode.com')
+insert into Users (user_id, name, mail) values ('5', 'Marwan', 'quarz#2020@leetcode.com')
+insert into Users (user_id, name, mail) values ('6', 'David', 'david69@gmail.com')
+insert into Users (user_id, name, mail) values ('7', 'Shapiro', '.shapo@leetcode.com')
+
+# Result
+
+```
+
