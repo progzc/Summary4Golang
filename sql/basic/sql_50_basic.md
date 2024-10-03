@@ -1543,3 +1543,50 @@ WHERE conditions REGEXP '\\bDIAB1.*';
 >
 > 1. [正则表达式 - 元字符 \b 与 \B](https://www.runoob.com/regexp/regexp-metachar-b.html)
 
+### [196. 删除重复的电子邮箱](https://leetcode.cn/problems/delete-duplicate-emails/)🌟
+
+![image-20241003083748172](assets/image-20241003083748172.png)
+
+![image-20241003083802455](assets/image-20241003083802455.png)
+
+```sql
+# Schema
+Create table If Not Exists Person (Id int, Email varchar(255))
+Truncate table Person
+insert into Person (id, email) values ('1', 'john@example.com')
+insert into Person (id, email) values ('2', 'bob@example.com')
+insert into Person (id, email) values ('3', 'john@example.com')
+
+# Result
+DELETE FROM Person p WHERE p.id not in (
+    SELECT id FROM (
+        SELECT min(id) as id
+        FROM Person
+        GROUP BY email  
+    ) p1
+);
+```
+
+#### a.MySQL报错
+
+当输入如下结果时：
+
+```sql
+# Result: 
+# Mysql会报错: You can‘t specify target table ‘Person‘ for update in FROM clause
+DELETE FROM Person p WHERE p.id not in (
+    SELECT min(p1.id) as id
+    FROM Person p1
+    GROUP BY p1.email
+);
+
+DELETE FROM Person WHERE id not in (
+    SELECT min(id) as id
+    FROM Person
+    GROUP BY email
+);
+```
+
+> 参考文献：
+>
+> 1. [You can‘t specify target table ‘Person‘ for update in FROM clause](https://blog.csdn.net/Tangzx_/article/details/134313417)
