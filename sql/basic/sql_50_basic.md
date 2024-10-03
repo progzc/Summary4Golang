@@ -1727,6 +1727,12 @@ insert into Users (user_id, name, mail) values ('6', 'David', 'david69@gmail.com
 insert into Users (user_id, name, mail) values ('7', 'Shapiro', '.shapo@leetcode.com')
 
 # Result
-
+SELECT user_id,name,mail FROM Users
+WHERE mail REGEXP '^[a-zA-Z][a-zA-Z0-9_.-]*\\@leetcode\\.com$';
 ```
 
+#### a.正则表达式的使用
+
+> 参考文献：
+>
+> 1. [正则表达式教程](https://www.runoob.com/regexp/regexp-tutorial.html)
