@@ -1627,3 +1627,36 @@ SELECT (
 ) AS SecondHighestSalary;
 ```
 
+### [1484. 按日期分组销售产品](https://leetcode.cn/problems/group-sold-products-by-the-date/)🌟
+
+![image-20241003091534046](assets/image-20241003091534046.png)
+
+![image-20241003091554249](assets/image-20241003091554249.png)
+
+```sql
+# Schema
+Create table If Not Exists Activities (sell_date date, product varchar(20))
+Truncate table Activities
+insert into Activities (sell_date, product) values ('2020-05-30', 'Headphone')
+insert into Activities (sell_date, product) values ('2020-06-01', 'Pencil')
+insert into Activities (sell_date, product) values ('2020-06-02', 'Mask')
+insert into Activities (sell_date, product) values ('2020-05-30', 'Basketball')
+insert into Activities (sell_date, product) values ('2020-06-01', 'Bible')
+insert into Activities (sell_date, product) values ('2020-06-02', 'Mask')
+insert into Activities (sell_date, product) values ('2020-05-30', 'T-Shirt')
+
+# Result
+SELECT 
+    sell_date, 
+    COUNT(DISTINCT product) as num_sold, 
+    GROUP_CONCAT(DISTINCT product ORDER BY product ASC SEPARATOR ',') as products
+FROM Activities
+GROUP BY sell_date
+ORDER BY sell_date asc;
+```
+
+#### a.GROUP_CONCAT函数的使用
+
+> 参考文献：
+>
+> 1. [group_concat函数](https://blog.csdn.net/weixin_48052161/article/details/109208910)
