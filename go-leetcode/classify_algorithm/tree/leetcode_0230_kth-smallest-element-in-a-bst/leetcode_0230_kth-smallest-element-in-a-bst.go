@@ -1,5 +1,7 @@
 package leetcode_0230_kth_smallest_element_in_a_bst
 
+import "math"
+
 // 0230. 二叉搜索树中第 K 小的元素
 // https://leetcode.cn/problems/kth-smallest-element-in-a-bst
 
@@ -57,6 +59,19 @@ func kthSmallest_2(root *TreeNode, k int) int {
 // 时间复杂度: O(n)
 // 空间复杂度: O(n)
 func kthSmallest_3(root *TreeNode, k int) int {
-	// TODO
-	return 0
+	var stack []*TreeNode
+	for root != nil || len(stack) > 0 {
+		for root != nil {
+			stack = append(stack, root)
+			root = root.Left
+		}
+		root = stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+		k--
+		if k == 0 {
+			return root.Val
+		}
+		root = root.Right
+	}
+	return math.MinInt64
 }
