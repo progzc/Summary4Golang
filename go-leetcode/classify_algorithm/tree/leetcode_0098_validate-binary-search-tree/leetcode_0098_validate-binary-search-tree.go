@@ -49,3 +49,26 @@ func isValidBST_2(root *TreeNode) bool {
 	}
 	return true
 }
+
+// isValidBST_3 递归 深度优先遍历
+// 时间复杂度: O(n)
+// 空间复杂度: O(n)
+func isValidBST_3(root *TreeNode) bool {
+	var dfs func(root *TreeNode)
+	var ans []int
+	dfs = func(root *TreeNode) {
+		if root == nil {
+			return
+		}
+		dfs(root.Left)
+		ans = append(ans, root.Val)
+		dfs(root.Right)
+	}
+	dfs(root)
+	for i, num := range ans {
+		if i > 0 && ans[i-1] >= num {
+			return false
+		}
+	}
+	return true
+}
