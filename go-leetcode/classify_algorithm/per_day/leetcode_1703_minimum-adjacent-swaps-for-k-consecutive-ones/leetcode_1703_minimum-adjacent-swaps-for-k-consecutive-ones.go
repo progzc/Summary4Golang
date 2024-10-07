@@ -7,5 +7,6 @@ package leetcode_1703_minimum_adjacent_swaps_for_k_consecutive_ones
 
 // minMoves
 func minMoves(nums []int, k int) int {
-
+	// TODO
+	return 0
 }
