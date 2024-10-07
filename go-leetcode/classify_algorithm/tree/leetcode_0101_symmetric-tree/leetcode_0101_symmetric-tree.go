@@ -9,10 +9,36 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
+// isSymmetric 递归
+// 时间复杂度: O(n)
+// 空间复杂度: O(n)
+// 思路: 一个树的左子树和右子树镜像对称 可转化为 两个树在什么情况下互为镜像?
+//
+//	而两个树互为镜像的条件:
+//	a.它们的两个根结点具有相同的值
+//	b.每个树的右子树都与另一个树的左子树镜像对称
+func isSymmetric(root *TreeNode) bool {
+	var dfs func(x, y *TreeNode) bool
+	dfs = func(x, y *TreeNode) bool {
+		if x == nil && y == nil {
+			return true
+		}
+		if x == nil || y == nil {
+			return false
+		}
+		if x.Val != y.Val {
+			return false
+		}
+		return dfs(x.Left, y.Right) && dfs(x.Right, y.Left)
+	}
+	return dfs(root, root)
+}
+
 // isSymmetric_1 递归
 // 时间复杂度: O(n)
 // 空间复杂度: O(n)
 // 思路: 一个树的左子树和右子树镜像对称 可转化为 两个树在什么情况下互为镜像?
+//
 //	而两个树互为镜像的条件:
 //	a.它们的两个根结点具有相同的值
 //	b.每个树的右子树都与另一个树的左子树镜像对称
@@ -34,6 +60,7 @@ func isSymmetric_1(root *TreeNode) bool {
 // 时间复杂度: O(n)
 // 空间复杂度: O(n)
 // 思路: 一个树的左子树和右子树镜像对称 可转化为 两个树在什么情况下互为镜像?
+//
 //	而两个树互为镜像的条件:
 //	a.它们的两个根结点具有相同的值
 //	b.每个树的右子树都与另一个树的左子树镜像对称
