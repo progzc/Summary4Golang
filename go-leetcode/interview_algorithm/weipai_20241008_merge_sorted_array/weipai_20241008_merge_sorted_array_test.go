@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestSolve(t *testing.T) {
+func TestMerges(t *testing.T) {
 	nums := [][]int{{1, 2, 3}, {2, 3, 4}, {2, 4, 5}, {4, 5, 6}}
 	//m := len(nums)
 	//fmt.Println(nums[:m/2]) // [[1 2 3]]
