@@ -110,34 +110,34 @@ func main() {
 		}()
 		return takeStream
 	}
-	//bridge := func(
-	//    done <-chan interface{},
-	//    chanStream <-chan <-chan interface{},
-	//) <-chan interface{} {
-	//    valStream := make(chan interface{}) // <1>
-	//    go_knowledge func() {
-	//        defer close(valStream)
-	//        for { // <2>
-	//            var stream <-chan interface{}
-	//            select {
-	//            case maybeStream, ok := <-chanStream:
-	//                if ok == false {
-	//                    return
-	//                }
-	//                stream = maybeStream
-	//            case <-done:
-	//                return
-	//            }
-	//            for val := range orDone(done, stream) { // <3>
-	//                select {
-	//                case valStream <- val:
-	//                case <-done:
-	//                }
-	//            }
-	//        }
-	//    }()
-	//    return valStream
-	//}
+	bridge := func(
+		done <-chan interface{},
+		chanStream <-chan <-chan interface{},
+	) <-chan interface{} {
+		valStream := make(chan interface{}) // <1>
+		go func() {
+			defer close(valStream)
+			for { // <2>
+				var stream <-chan interface{}
+				select {
+				case maybeStream, ok := <-chanStream:
+					if ok == false {
+						return
+					}
+					stream = maybeStream
+				case <-done:
+					return
+				}
+				for val := range or(done, stream) { // <3>
+					select {
+					case valStream <- val:
+					case <-done:
+					}
+				}
+			}
+		}()
+		return valStream
+	}
 	doWorkFn := func(
 		done <-chan interface{},
 		intList ...int,
