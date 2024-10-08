@@ -21,10 +21,11 @@ func flatten(root *TreeNode) {
 	temp := root.Right
 	root.Right = root.Left
 	root.Left = nil
-	for root.Right != nil {
-		root = root.Right
+	first := root
+	for first.Right != nil {
+		first = first.Right
 	}
-	root.Right = temp
+	first.Right = temp
 }
 
 // flatten bfs
