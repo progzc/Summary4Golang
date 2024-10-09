@@ -8,12 +8,12 @@ package leetcode_0739_daily_temperatures
 // 空间复杂度: O(n)
 func dailyTemperatures(temperatures []int) []int {
 	var (
-		ans   = make([]int, len(temperatures))
 		stack []int
+		ans   = make([]int, len(temperatures))
 	)
-	for i, v := range temperatures {
-		for len(stack) > 0 && v > temperatures[stack[len(stack)-1]] {
-			ans[stack[len(stack)-1]] = i - (stack[len(stack)-1])
+	for i := 0; i < len(temperatures); i++ {
+		for len(stack) > 0 && temperatures[stack[len(stack)-1]] < temperatures[i] {
+			ans[stack[len(stack)-1]] = i - stack[len(stack)-1]
 			stack = stack[:len(stack)-1]
 		}
 		stack = append(stack, i)
