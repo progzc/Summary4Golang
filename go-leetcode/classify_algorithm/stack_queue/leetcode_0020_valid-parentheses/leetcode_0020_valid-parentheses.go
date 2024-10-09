@@ -60,6 +60,36 @@ func isValid_3(s string) bool {
 	return len(stack) == 0
 }
 
+// isValid_4 栈
+// 时间复杂度: O(n)
+// 空间复杂度: O(n)
+// 思路：经典的栈解法
+func isValid_4(s string) bool {
+	n := len(s)
+	if n%2 == 1 {
+		return false
+	}
+
+	m := map[byte]byte{
+		')': '(',
+		']': '[',
+		'}': '{',
+	}
+	var stack []byte
+	for i := 0; i < len(s); i++ {
+		if v, ok := m[s[i]]; !ok {
+			stack = append(stack, s[i])
+		} else {
+			if len(stack) > 0 && stack[len(stack)-1] == v {
+				stack = stack[:len(stack)-1]
+			} else {
+				return false
+			}
+		}
+	}
+	return len(stack) == 0
+}
+
 // isValid_2 替代
 // 时间复杂度: O(n^2)
 // 空间复杂度: O(n)
