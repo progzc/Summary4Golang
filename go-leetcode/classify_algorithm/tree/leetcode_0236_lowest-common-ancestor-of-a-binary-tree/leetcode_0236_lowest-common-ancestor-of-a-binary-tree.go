@@ -1,6 +1,6 @@
 package leetcode_0236_lowest_common_ancestor_of_a_binary_tree
 
-// 0236.二叉树的最近公共祖先
+// 0236.二叉树的最近公共祖先🌟
 // https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/
 
 // 题目同:
@@ -17,6 +17,7 @@ type TreeNode struct {
 // 时间复杂度: O(n)
 // 空间复杂度: O(n)
 // 思路：
+//
 //	定义：f(x)表示x节点的子树中是否包含p节点或q节点,包含则为true，否则为false
 //	那么：最近公共祖先一定满足如下条件
 //		(f(x_L) && f(x_R)) || ((x==p||x==q) && (f(x_L)||f(x_R)))
