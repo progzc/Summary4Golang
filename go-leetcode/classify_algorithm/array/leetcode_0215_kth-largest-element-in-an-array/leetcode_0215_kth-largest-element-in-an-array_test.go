@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-// 0215.数组中的第K个最大元素
+// 0215.数组中的第K个最大元素🌟
 // https://leetcode-cn.com/problems/kth-largest-element-in-an-array/
 // 复习巩固：快速排序+堆排序
 
@@ -100,11 +100,11 @@ func TestFindKthLargest_4(t *testing.T) {
 
 type hp []int
 
-func (h hp) Len() int { return len(h) }
+func (h *hp) Len() int { return len(*h) }
 
-func (h hp) Less(i, j int) bool { return h[i] > h[j] } // 大顶堆
+func (h *hp) Less(i, j int) bool { return (*h)[i] > (*h)[j] } // 大顶堆
 
-func (h hp) Swap(i, j int) { h[i], h[j] = h[j], h[i] }
+func (h *hp) Swap(i, j int) { (*h)[i], (*h)[j] = (*h)[j], (*h)[i] }
 
 func (h *hp) Push(x interface{}) {
 	*h = append(*h, x.(int))
