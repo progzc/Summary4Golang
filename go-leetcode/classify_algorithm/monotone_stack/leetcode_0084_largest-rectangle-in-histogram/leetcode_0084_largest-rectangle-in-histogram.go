@@ -1,6 +1,6 @@
 package leetcode_0084_largest_rectangle_in_histogram
 
-// 0084. 柱状图中最大的矩形
+// 0084. 柱状图中最大的矩形🌟
 // https://leetcode.cn/problems/largest-rectangle-in-histogram/
 
 // largestRectangleArea 暴力法（超时）
@@ -29,6 +29,7 @@ func largestRectangleArea(heights []int) int {
 // 时间复杂度: O(n)
 // 空间复杂度: O(n)
 // 思路：单调递增(非严格)栈
+// 特殊示例：输入heights=[2,1,2]，输出 3
 func largestRectangleArea_2(heights []int) int {
 	n := len(heights)
 	if n == 0 {
@@ -64,6 +65,7 @@ func largestRectangleArea_2(heights []int) int {
 // 时间复杂度: O(n)
 // 空间复杂度: O(n)
 // 思路：单调递增(非严格)栈
+// 特殊示例：输入heights=[2,1,2]，输出 3
 func largestRectangleArea_3(heights []int) int {
 	n := len(heights)
 	if n == 0 {
@@ -87,6 +89,37 @@ func largestRectangleArea_3(heights []int) int {
 			stack = stack[:len(stack)-1]
 			curW := i - stack[len(stack)-1] - 1
 			ans = max(ans, curH*curW)
+		}
+		stack = append(stack, i)
+	}
+	return ans
+}
+
+// largestRectangleArea_wrong_1 典型的错误版本，会导致错误。
+// 时间复杂度: O(n)
+// 空间复杂度: O(n)
+// 思路：单调递增(非严格)栈
+// 特殊示例：输入heights=[2,1,2]，输出 3。这种情况下，不能通过
+// 注意
+func largestRectangleArea_wrong_1(heights []int) int {
+	n := len(heights)
+	if n == 0 {
+		return 0
+	}
+	if n == 1 {
+		return heights[0]
+	}
+	newHeights := append([]int{0}, heights...)
+	newHeights = append(newHeights, 0)
+
+	var ans int
+	var stack []int
+	for i := 0; i < len(newHeights); i++ {
+		for len(stack) > 0 && newHeights[i] < newHeights[stack[len(stack)-1]] {
+			h := newHeights[stack[len(stack)-1]]
+			w := i - stack[len(stack)-1] // 行 1。注意这里会产生 bug
+			ans = max(ans, h*w)
+			stack = stack[:len(stack)-1] // 行 2。注意这里会产生 bug
 		}
 		stack = append(stack, i)
 	}
