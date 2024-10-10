@@ -4,5 +4,6 @@ package leetcode_0393_utf_8_validation
 // https://leetcode.cn/problems/utf-8-validation/
 
 func validUtf8(data []int) bool {
-
+	// TODO
+	return false
 }
