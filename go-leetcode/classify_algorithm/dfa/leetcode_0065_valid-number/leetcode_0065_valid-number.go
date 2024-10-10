@@ -4,5 +4,6 @@ package leetcode_0065_valid_number
 // https://leetcode.cn/problems/valid-number/
 
 func isNumber(s string) bool {
-
+	// TODO
+	return false
 }

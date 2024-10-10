@@ -1,6 +1,6 @@
 package leetcode_0005_longest_palindromic_substring
 
-// 0005.最长回文子串
+// 0005.最长回文子串🌟
 // https://leetcode-cn.com/problems/longest-palindromic-substring/
 
 // longestPalindrome 动态规划
@@ -8,10 +8,13 @@ package leetcode_0005_longest_palindromic_substring
 // 空间复杂度: O(n*n)
 // 状态：dp[i][j]表示字符串s的下标范围[i,j]内的字符串是否是回文
 // 边界条件：
+//
 //	a.当0<=i<=j<n，才会有dp[i][j]=true，否则dp[i][j]=false
 //	b.对于任意的0<=i<n,都有dp[i][i]=true
 //	c.
+//
 // 转移方程：
+//
 //	当i+1<=j-1时，dp[i][j]=dp[i+1]dp[j-1] && s[i]==s[j]
 //	当i+1>j-1时，dp[i][j]=s[i]==s[j]
 func longestPalindrome(s string) string {
@@ -36,6 +39,47 @@ func longestPalindrome(s string) string {
 			if dp[i][j] && j-i+1 > maxLen {
 				maxLen = j - i + 1
 				start, end = i, j
+			}
+		}
+	}
+	return s[start : end+1]
+}
+
+// longestPalindrome_2 动态规划
+// 时间复杂度: O(n*n)
+// 空间复杂度: O(n*n)
+// 状态：dp[i][j]表示字符串s的下标范围[i,j]内的字符串是否是回文
+// 边界条件：
+//
+//	a.当0<=i<=j<n，才会有dp[i][j]=true，否则dp[i][j]=false
+//	b.对于任意的0<=i<n,都有dp[i][i]=true
+//	c.
+//
+// 转移方程：
+//
+//	当i+1<=j-1时，dp[i][j]=dp[i+1]dp[j-1] && s[i]==s[j]
+//	当i+1>j-1时，dp[i][j]=s[i]==s[j]
+func longestPalindrome_2(s string) string {
+	n := len(s)
+	if n <= 1 {
+		return s
+	}
+
+	var start, end, ans int
+	dp := make([][]bool, n)
+	for i := 0; i < n; i++ {
+		dp[i] = make([]bool, n)
+	}
+
+	for i := n - 1; i >= 0; i-- {
+		for j := i; j < n; j++ {
+			if j-i <= 1 {
+				dp[i][j] = s[i] == s[j]
+			} else {
+				dp[i][j] = s[i] == s[j] && dp[i+1][j-1]
+			}
+			if dp[i][j] && j-i+1 > ans {
+				start, end, ans = i, j, j-i+1
 			}
 		}
 	}
