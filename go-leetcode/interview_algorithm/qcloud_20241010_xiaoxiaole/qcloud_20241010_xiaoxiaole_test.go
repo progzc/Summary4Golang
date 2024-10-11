@@ -81,7 +81,7 @@ func solve(s string) string {
 	return solve(strings.Join(ans, ""))
 }
 
-// solve2 栈
+// solve2 栈🌟
 // 青云：消消乐，可以重复消除。
 // 例如：输入 abbbdddac，输出 c
 // 例如：输入 ac，输出 ac
