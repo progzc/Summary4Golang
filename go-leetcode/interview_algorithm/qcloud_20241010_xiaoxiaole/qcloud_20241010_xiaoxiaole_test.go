@@ -40,7 +40,7 @@ func TestSolve2(t *testing.T) {
 	fmt.Println(solve2(s)) // ""
 }
 
-// solve
+// solve 递归+双指针
 // 青云：消消乐，可以重复消除。
 // 例如：输入 abbbdddac，输出 c
 // 例如：输入 ac，输出 ac
