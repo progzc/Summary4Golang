@@ -2,7 +2,7 @@ package leetcode_0122_best_time_to_buy_and_sell_stock_ii
 
 import "math"
 
-// 0122.买卖股票的最佳时机 II
+// 0122.买卖股票的最佳时机 II🌟
 // https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/
 
 // maxProfit 贪心法
@@ -25,6 +25,7 @@ func maxProfit(prices []int) int {
 // 时间复杂度：O(n)
 // 空间复杂度：O(n)
 // 思路:
+//
 //	状态: dp[i][j]表示天数 [0,i] 区间里，下标 i 这一天状态为 j 的时候持有的现金数。
 //		 其中, j = 0, 表示当前不持股; j = 1, 表示当前持股。
 //	转移方程:
@@ -61,6 +62,7 @@ func maxProfit_4(prices []int) int {
 // 时间复杂度：O(n)
 // 空间复杂度：O(n)
 // 思路:
+//
 //	状态: dp[i][j]表示天数 [0,i] 区间里，下标 i 这一天状态为 j 的时候持有的现金数。
 //		 其中, j = 0, 表示当前不持股; j = 1, 表示当前持股。
 //	转移方程:
