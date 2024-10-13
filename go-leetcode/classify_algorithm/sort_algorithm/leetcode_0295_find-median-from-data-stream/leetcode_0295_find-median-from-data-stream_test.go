@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-// 0295. 数据流的中位数
+// 0295. 数据流的中位数🌟
 // https://leetcode.cn/problems/find-median-from-data-stream
 
 // MedianFinder 大顶堆+小顶堆
