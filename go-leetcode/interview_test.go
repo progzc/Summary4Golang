@@ -1,0 +1,3 @@
+package go_leetcode
+
+// DO NOT EDIT. THIS FILE IS FOR LOCAL INTERVIEW
