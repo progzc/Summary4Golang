@@ -1,6 +1,6 @@
 package leetcode_0763_partition_labels
 
-// 0763. 划分字母区间
+// 0763. 划分字母区间🌟
 // https://leetcode.cn/problems/partition-labels
 
 // partitionLabels
