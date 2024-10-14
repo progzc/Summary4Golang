@@ -2,7 +2,7 @@ package leetcode_0045_jump_game_ii
 
 import "math"
 
-// 0045. 跳跃游戏 II
+// 0045. 跳跃游戏 II🌟
 // https://leetcode.cn/problems/jump-game-ii
 
 // jump 贪心算法

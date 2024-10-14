@@ -2,7 +2,7 @@ package leetcode_0055_jump_game
 
 import "math"
 
-// 0055. 跳跃游戏
+// 0055. 跳跃游戏🌟
 // https://leetcode.cn/problems/jump-game
 
 // canJump 动态规划
