@@ -16,10 +16,8 @@ func climbStairs(n int) int {
 	}
 
 	f1, f2 := 1, 2
-	ans := 0
 	for i := 3; i <= n; i++ {
-		ans = f1 + f2
-		f1, f2 = f2, ans
+		f1, f2 = f2, f1+f2
 	}
-	return ans
+	return f2
 }
