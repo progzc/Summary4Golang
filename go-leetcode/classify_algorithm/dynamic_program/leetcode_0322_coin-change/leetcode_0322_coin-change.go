@@ -12,10 +12,11 @@ import "math"
 // 时间复杂度：O(S*n)
 // 空间复杂度：O(S)
 // 思路：
-//	状态定义: dp[i][j] 表示：从前 i 种硬币中组成金额 j 所需最少的硬币数量。
-//  转移方程:
-//		优化前: dp[i][j] = min{ dp[i−1][j], dp[i−1][j−k⋅wi]+k} ,0<=k⋅wi<=j,其中k=1,2,3...
-//		优化后: dp[i][j] = min{ dp[i−1][j], dp[i][j−wi]+1} ,0<=k⋅wi<=j
+//
+//		状态定义: dp[i][j] 表示：从前 i 种硬币中组成金额 j 所需最少的硬币数量。
+//	 转移方程:
+//			优化前: dp[i][j] = min{ dp[i−1][j], dp[i−1][j−k⋅wi]+k} ,0<=k⋅wi<=j,其中k=1,2,3...
+//			优化后: dp[i][j] = min{ dp[i−1][j], dp[i][j−wi]+1} ,0<=k⋅wi<=j
 func coinChange_3(coins []int, amount int) int {
 	n := len(coins)
 	dp := make([][]int, n+1)
@@ -54,21 +55,13 @@ func coinChange_3(coins []int, amount int) int {
 // 时间复杂度：O(S*n)
 // 空间复杂度：O(S)
 // 思路：
-//	状态定义: dp[i][j] 表示：从前 i 种硬币中组成金额 j 所需最少的硬币数量。
-//  转移方程:
-//		优化前: dp[i][j] = min{ dp[i−1][j], dp[i−1][j−k⋅wi]+k} ,0<=k⋅wi<=j,其中k=1,2,3...
-//		优化后: dp[i][j] = min{ dp[i−1][j], dp[i][j−wi]+1} ,0<=k⋅wi<=j
+//
+//		状态定义: dp[i][j] 表示：从前 i 种硬币中组成金额 j 所需最少的硬币数量。
+//	 转移方程:
+//			优化前: dp[i][j] = min{ dp[i−1][j], dp[i−1][j−k⋅wi]+k} ,0<=k⋅wi<=j,其中k=1,2,3...
+//			优化后: dp[i][j] = min{ dp[i−1][j], dp[i][j−wi]+1} ,0<=k⋅wi<=j
 func coinChange_4(coins []int, amount int) int {
 	dp := make([]int, amount+1)
-	// 初始化
-	for j := 0; j < amount+1; j++ {
-		if j == 0 {
-			dp[0] = 0
-		} else {
-			dp[j] = math.MaxInt32
-		}
-	}
-
 	// 初始化
 	// 初始化时，不合法的或未定义的状态则可以设置为正无穷或一个不可能取到的较大值
 	// dp[0][0]=0：表示从前 0 种硬币中选出若干个组成金额 0 所对应的最小硬币数目为 0，即「空集合」不选任何硬币即可得到金额 0。
@@ -98,7 +91,8 @@ func coinChange_4(coins []int, amount int) int {
 // 时间复杂度：O(S*n)
 // 空间复杂度：O(S)
 // 思路：假设我们知道F(S)，即组成金额S最少的硬币数，最后一枚硬币的面值是C。
-//		那么由于问题的最优子结构，转移方程应为：F(S)=F(S-C)+1
+//
+//	那么由于问题的最优子结构，转移方程应为：F(S)=F(S-C)+1
 func coinChange(coins []int, amount int) int {
 	if amount < 1 {
 		return 0
