@@ -2,7 +2,7 @@ package leetcode_0279_perfect_squares
 
 import "math"
 
-// 0279.完全平方数
+// 0279.完全平方数🌟
 // https://leetcode-cn.com/problems/perfect-squares/
 
 // numSquares 动态规划(完全背包问题)
