@@ -57,10 +57,8 @@ func mergeKLists_2(lists []*ListNode) *ListNode {
 	if n == 1 {
 		return lists[0]
 	}
-
-	l, r := 0, n-1
-	mid := l + (r-l)>>2
-	return merge(mergeKLists_2(lists[l:mid+1]), mergeKLists_2(lists[mid+1:]))
+	mid := (n - 1) / 2
+	return merge(mergeKLists_2(lists[:mid+1]), mergeKLists_2(lists[mid+1:]))
 }
 
 func merge(list1, list2 *ListNode) *ListNode {
