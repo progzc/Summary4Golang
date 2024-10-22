@@ -5,7 +5,7 @@ import (
 	"math"
 )
 
-// 0023.合并K个升序链表
+// 0023.合并K个升序链表🌟
 // https://leetcode-cn.com/problems/merge-k-sorted-lists/
 
 type ListNode struct {
