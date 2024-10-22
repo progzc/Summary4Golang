@@ -1,6 +1,9 @@
 package leetcode_0023_merge_k_sorted_lists
 
-import "math"
+import (
+	"container/heap"
+	"math"
+)
 
 // 0023.合并K个升序链表
 // https://leetcode-cn.com/problems/merge-k-sorted-lists/
@@ -8,6 +11,54 @@ import "math"
 type ListNode struct {
 	Val  int
 	Next *ListNode
+}
+
+type IHeap []*ListNode
+
+func (h *IHeap) Len() int { return len(*h) }
+
+func (h *IHeap) Swap(i, j int) { (*h)[i], (*h)[j] = (*h)[j], (*h)[i] }
+
+func (h *IHeap) Less(i, j int) bool { return (*h)[i].Val < (*h)[j].Val }
+
+func (h *IHeap) Push(x interface{}) {
+	*h = append(*h, x.(*ListNode))
+}
+
+func (h *IHeap) Pop() interface{} {
+	old := (*h)[len(*h)-1]
+	*h = (*h)[:len(*h)-1]
+	return old
+}
+
+// mergeKLists_3 优先队列
+// 时间复杂度: O(k*n*log(n))
+// 空间复杂度: O(log(k))
+func mergeKLists_3(lists []*ListNode) *ListNode {
+	dummy := &ListNode{}
+	n := len(lists)
+	if n == 0 {
+		return dummy.Next
+	}
+
+	h := IHeap{}
+	heap.Init(&h)
+	for i := 0; i < n; i++ {
+		if lists[i] != nil {
+			heap.Push(&h, lists[i])
+		}
+	}
+
+	head := dummy
+	for h.Len() > 0 {
+		x := heap.Pop(&h).(*ListNode)
+		head.Next = x
+		head = head.Next
+		if x.Next != nil {
+			heap.Push(&h, x.Next)
+		}
+	}
+	return dummy.Next
 }
 
 // mergeKLists 递归
