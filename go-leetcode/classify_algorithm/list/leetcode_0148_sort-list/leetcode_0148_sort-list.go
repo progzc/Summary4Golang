@@ -1,6 +1,6 @@
 package leetcode_0148_sort_list
 
-// 0148.排序链表
+// 0148.排序链表🌟
 // https://leetcode-cn.com/problems/sort-list/
 
 type ListNode struct {
@@ -12,8 +12,9 @@ type ListNode struct {
 // 空间复杂度: O(n*log(n))
 // 时间复杂度: O(log(n))
 // 思路：寻找链表的中点，可以考虑使用快慢指针。
-//		以中点为分界，将链表拆分成两个子链表。寻找链表的中点可以使用快慢指针的做法，快指针每次移动 22 步，慢指针每次移动 11 步，
-//		当快指针到达链表末尾时，慢指针指向的链表节点即为链表的中点。
+//
+//	以中点为分界，将链表拆分成两个子链表。寻找链表的中点可以使用快慢指针的做法，快指针每次移动 22 步，慢指针每次移动 11 步，
+//	当快指针到达链表末尾时，慢指针指向的链表节点即为链表的中点。
 func sortList(head *ListNode) *ListNode {
 	if head == nil || head.Next == nil {
 		return head
@@ -35,8 +36,9 @@ func sortList(head *ListNode) *ListNode {
 // 空间复杂度: O(n*log(n))
 // 时间复杂度: O(1)
 // 思路：寻找链表的中点，可以考虑使用快慢指针。
-//		以中点为分界，将链表拆分成两个子链表。寻找链表的中点可以使用快慢指针的做法，快指针每次移动 22 步，慢指针每次移动 11 步，
-//		当快指针到达链表末尾时，慢指针指向的链表节点即为链表的中点。
+//
+//	以中点为分界，将链表拆分成两个子链表。寻找链表的中点可以使用快慢指针的做法，快指针每次移动 22 步，慢指针每次移动 11 步，
+//	当快指针到达链表末尾时，慢指针指向的链表节点即为链表的中点。
 func sortList_2(head *ListNode) *ListNode {
 	if head == nil || head.Next == nil {
 		return head
@@ -98,25 +100,38 @@ func sortList_2(head *ListNode) *ListNode {
 
 // merge 合并两个有序链表
 // 参考：
+//
 //	0021.合并两个有序链表
 //	https://leetcode-cn.com/problems/merge-two-sorted-lists/
 func merge(list1, list2 *ListNode) *ListNode {
-	prev := new(ListNode)
-	sentry := prev
+	dummy := &ListNode{}
+	head := dummy
 	for list1 != nil && list2 != nil {
 		if list1.Val < list2.Val {
-			prev.Next = list1
+			head.Next = list1
 			list1 = list1.Next
 		} else {
-			prev.Next = list2
+			head.Next = list2
 			list2 = list2.Next
 		}
-		prev = prev.Next
+		head = head.Next
 	}
 	if list1 == nil {
-		prev.Next = list2
+		head.Next = list2
 	} else {
-		prev.Next = list1
+		head.Next = list1
 	}
-	return sentry.Next
+	return dummy.Next
+}
+
+// sortList_3 转化为合并两个链表（会超时）
+// 空间复杂度: O(n*log(n))
+// 时间复杂度: O(log(n))
+func sortList_3(head *ListNode) *ListNode {
+	if head == nil || head.Next == nil {
+		return head
+	}
+	newHead := sortList_3(head.Next)
+	head.Next = nil
+	return merge(head, newHead)
 }
