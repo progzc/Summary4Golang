@@ -32,12 +32,12 @@ func sortList(head *ListNode) *ListNode {
 	return merge(sortList(head), sortList(head2))
 }
 
-// sortList_2 归并排序+迭代（即自底向上归并排序）
+// sortList_2 归并排序+迭代（即自底向上归并排序）🌟
 // 空间复杂度: O(n*log(n))
 // 时间复杂度: O(1)
 // 思路：寻找链表的中点，可以考虑使用快慢指针。
 //
-//	以中点为分界，将链表拆分成两个子链表。寻找链表的中点可以使用快慢指针的做法，快指针每次移动 22 步，慢指针每次移动 11 步，
+//	以中点为分界，将链表拆分成两个子链表。寻找链表的中点可以使用快慢指针的做法，快指针每次移动 2 步，慢指针每次移动 1 步，
 //	当快指针到达链表末尾时，慢指针指向的链表节点即为链表的中点。
 func sortList_2(head *ListNode) *ListNode {
 	if head == nil || head.Next == nil {
