@@ -1,6 +1,5 @@
-package echotech_20241029_unique_paths_ii
+package leetcode_0063_unique_paths_ii
 
-// 回响科技（一面）
 // 0063.不同路径 II
 // https://leetcode.cn/problems/unique-paths-ii
 
