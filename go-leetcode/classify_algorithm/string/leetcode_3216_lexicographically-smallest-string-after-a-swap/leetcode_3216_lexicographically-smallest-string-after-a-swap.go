@@ -12,11 +12,10 @@ func getSmallestString(s string) string {
 	for i := 0; i < len(s)-1; i++ {
 		b := []byte(s)
 		x, y := int(s[i]), int(s[i+1])
-		if (x%2 == 0 && y%2 == 0) || (x%2 == 1 && y%2 == 1) {
+		if x%2 == y%2 && x > y {
 			b[i], b[i+1] = b[i+1], b[i]
-			if string(b) < ans {
-				ans = string(b)
-			}
+			ans = string(b)
+			break
 		}
 	}
 	return ans
