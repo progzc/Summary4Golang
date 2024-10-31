@@ -40,15 +40,15 @@ func TestAddStr(t *testing.T) {
 }
 
 // multiStr 两个字符串相乘
-func multiStr(s1, s2 string) string {
+func multiStr(num1, num2 string) string {
 	var ans string
-	m, n := len(s1), len(s2)
+	m, n := len(num1), len(num2)
 	for j := n - 1; j >= 0; j-- {
 		var tmp string
 		left := 0
 		for i := m - 1; i >= 0; i-- {
-			x := int(s1[i] - '0')
-			y := int(s2[j] - '0')
+			x := int(num1[i] - '0')
+			y := int(num2[j] - '0')
 			mod := (left + x*y) % 10
 			left = (left + x*y) / 10
 			tmp = strconv.Itoa(mod) + tmp
@@ -66,13 +66,13 @@ func multiStr(s1, s2 string) string {
 }
 
 // addStr 两个字符串相加
-func addStr(s1, s2 string) string {
+func addStr(num1, num2 string) string {
 	var ans string
-	m, n := len(s1), len(s2)
+	m, n := len(num1), len(num2)
 	i, j := m-1, n-1
 	left := 0
 	for i >= 0 && j >= 0 {
-		x, y := int(s1[i]-'0'), int(s2[j]-'0')
+		x, y := int(num1[i]-'0'), int(num2[j]-'0')
 		mod := (left + x + y) % 10
 		left = (left + x + y) / 10
 		ans = strconv.Itoa(mod) + ans
@@ -80,14 +80,14 @@ func addStr(s1, s2 string) string {
 		j--
 	}
 	for ; i >= 0; i-- {
-		x := int(s1[i] - '0')
+		x := int(num1[i] - '0')
 		mod := (left + x) % 10
 		left = (left + x) / 10
 		ans = strconv.Itoa(mod) + ans
 	}
 
 	for ; j >= 0; j-- {
-		x := int(s2[j] - '0')
+		x := int(num2[j] - '0')
 		mod := (left + x) % 10
 		left = (left + x) / 10
 		ans = strconv.Itoa(mod) + ans
