@@ -18,13 +18,14 @@ func combine(nums []int) [][]int {
 		ans [][]int
 		dfs func(idx int, output []int)
 	)
-	choose := make([]bool, len(nums))
+	n := len(nums)
+	choose := make([]bool, n)
 	dfs = func(idx int, output []int) {
-		if idx == len(nums) {
+		if idx == n {
 			ans = append(ans, append([]int{}, output...))
 			return
 		}
-		for i := 0; i < len(nums); i++ {
+		for i := 0; i < n; i++ {
 			if choose[i] {
 				continue
 			}
