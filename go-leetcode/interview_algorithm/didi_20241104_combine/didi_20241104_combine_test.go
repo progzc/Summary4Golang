@@ -6,7 +6,7 @@ import (
 )
 
 // 滴滴（一面）
-// 排列组合
+// 排列组合的方式
 
 func TestCombine(t *testing.T) {
 	nums := []int{1, 2, 3, 4}
